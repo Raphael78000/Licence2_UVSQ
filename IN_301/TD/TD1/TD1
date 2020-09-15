@@ -32,7 +32,7 @@ d) exo3.c
 
 e) 10 000 nombres
 
-f) sort -n nombres.data
+f) sort -n  -o nombres_tries.data nombres.data
 
 g) "uniq nombres_tries.data nombres_uniq.data", il y a 1000 nombres différents
 
