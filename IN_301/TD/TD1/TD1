@@ -1,39 +1,13 @@
-Exercice 1:
+TD1:Fichiers-Environnement de programmation
 
-a) On se trouve dans le répertoire principal
-Si appuie sur "w" puis deux fois tab --> toutes les commandes qui commencent par la lettre "w"
-Même chose pour "wh". Pour "whe", le seul mot qui existe est "whereis"
-"whereis" permet de "locate the binary, source, and manual page files for a command
+1,1) Lecture et écriture dans les fichiers 
 
-b) "cd Bureau" puis "cd -", puis "cd "B" et tab"
-
-c) "ls", "mkdir essai", "ls"
-
-d) "cd essai", "geany fic1 &", le répertoire contient 
-
-e) "cp fic2 /home/raphael/Bureau", "mv fic2 fic3", "rm fic2"
-
-f) en 1er nombre de lignes, en 2eme nombre de mots, en 3eme nombre de octets
-
-g,h,i) gcc permet de compiler le programme, -o "nom" permet de donner le nom du programme compilé, 
--Wall permet de donner les erreurs et avertissements lors de la compilation, -lm permet ajout librairie mathématique
-
-Exercice 2:
-
-Vous pouvez également créer un dossier par séance de TD avec la commande: for x in $(seq 1 12); do mkdir "td_$x"; done
-
-Exercice 3: 
-
-a,b) exo3.c
-
-c) gcc exo3.c -o exo3 -Wall -lm
-
-d) exo3.c
-
-e) 10 000 nombres
-
-f) sort -n  -o nombres_tries.data nombres.data
-
-g) "uniq nombres_tries.data nombres_uniq.data", il y a 1000 nombres différents
-
-Exercice 4: Fait 
+	Exercice 1: constantes.h
+	
+	Exercice 2: NOMFIC, genere.c
+	
+	Exercice 3: algos.c, nombres-verif.data
+	
+	Exercice 4: algo.c
+	
+	Exercice 5: wc-c.c 
