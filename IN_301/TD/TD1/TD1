@@ -48,6 +48,14 @@ TD1:Fichiers-Environnement de programmation
 	
 	Exercice 9: Fait
 	
-	Exercice 10: 
+	Exercice 10: a) gcc debug.c -Wall -o debug
+	
+	b) gdb ./debug, run
+	
+	c) gcc debug.c -o debug -Wall -g
+	
+	d) 
+
+
 
 
