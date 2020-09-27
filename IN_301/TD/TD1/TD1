@@ -54,7 +54,7 @@ TD1:Fichiers-Environnement de programmation
 	
 	c) gcc debug.c -o debug -Wall -g
 	
-	d) 
+	d) break 11, "continue", "step"
 
 
 
