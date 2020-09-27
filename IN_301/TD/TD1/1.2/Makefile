@@ -1,8 +1,8 @@
-run: exo8
-	./exo8
+run: exo8 fichier clean
 
 exo8: exo8.c
 	gcc exo8.c -o exo8
+	./exo8
 		
 clean: 
 	rm -f nombres.data

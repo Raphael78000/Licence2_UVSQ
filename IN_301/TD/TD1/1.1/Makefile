@@ -1,12 +1,12 @@
-run: genere algos
-	./genere 
-	./algos
+run: genere algos clean
 	
 genere: genere.c constantes.h
 	gcc genere.c -o genere
+	./genere 
 
 algos: algos.c constantes.h
 	gcc algos.c -o algos
+	./algos
 	
 clean:
 	rm -f genere 
