@@ -11,7 +11,3 @@ algos: algos.c constantes.h
 clean:
 	rm -f genere 
 	rm -f algos 
-	rm -f nombres.data 
-	rm -f nombres-verif.data
-	
-

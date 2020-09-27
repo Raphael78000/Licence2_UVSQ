@@ -4,11 +4,7 @@ exo8: exo8.c
 	gcc exo8.c -o exo8
 	./exo8
 		
-clean: 
-	rm -f nombres.data
-	rm -f nombres_tries.data
-	rm -f nombres_uniq.data
-	rm -f nombres-verif.data
+clean:
 	rm -f exo8
 
 fichier: 
