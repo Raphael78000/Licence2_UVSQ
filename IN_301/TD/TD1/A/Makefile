@@ -59,3 +59,6 @@ exo22:
 	rm exo22
 
 exo23:
+	gcc exo23.c -o exo23
+	./exo23
+	rm exo23

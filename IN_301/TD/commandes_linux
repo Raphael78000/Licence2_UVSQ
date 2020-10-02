@@ -1,0 +1,31 @@
+        ls -l Afficher les informations de manière détaillée
+	ls -a Afficher les fichiers cachés
+	ls -h Afficher la taille des fichiers de facon lisible
+	ls -r Tri inversé
+	ls -t Trier les fichiers par date du plus récent au plus ancien
+	ls -S Trier par taille décroissante
+	ls -la Afficher tous les fichiers y compris les fichiers cachés
+	ls -lhS Afficher les informations des fichiers, avec des tailles lisibles le tout ordonné du plus grand au plus petit
+
+	cd / Permet de se retrouver à la racine du disque
+	cd ~ ou cd Accéder directement au répertoire de l’utilisateur
+	cd /var/www/ Aller dans le répertoire /var/www
+	cd .. Remonter dans le répertoire parent à partir de là où vous êtes
+	cd - Permet de revenir au répertoire précédent
+	pwd Renvoyer le chemin absolu du répertoire courant ce qui est utile puisqu’en général le shell n’affiche que le nom du répertoire courant
+
+	cp foo/bar.txt baz/ Copier le fichier bar.txt dans le répertoire baz
+	cp -r foo/ baz/ Copier des répertoires entiers (note : si baz existe, la cible sera baz/foo/)
+
+	mv foo/bar.txt baz/ Déplacer le fichier bar.txt dans le répertoire baz
+	mv foo_bar.txt foo_baz.txt Renommer le fichier foo_bar.txt en foo_baz.txt
+
+	rm *.txt Supprimer tous les fichiers ayant pour extension txt
+	rm foo.txt bar.txt Supprimer les fichiers foo.txt et bar.txt
+	rm -rf baz/ Supprimer le répertoire baz et tout son contenu
+
+	mkdir -v Retourner des informations lors de la création d'un répertoire
+	mkdir -p Cette option permet de créer une arborescence complète
+	mkdir foo Créer le répertoire foo
+	mkdir -v foo /tmp/bar Créer les répertoires foo et /tmp/bar
+	mkdir -p foo/bar/baz Créer l’arborescence foo/bar/baz

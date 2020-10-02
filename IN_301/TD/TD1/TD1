@@ -15,7 +15,7 @@ TD1:Fichiers-Environnement de programmation
 1,2) Environnement de programmation
 
 	Exercice 6: a) On se trouve dans le répertoire principal
-	Si appuie sur "w" puis deux fois tab --> toutes les commandes qui commencent par la 	lettre "w"
+	Si appuie sur "w" puis deux fois tab --> toutes les commandes qui commencent par la lettre "w"
 	Même chose pour "wh". Pour "whe", le seul mot qui existe est "whereis"
 	"whereis" permet de "locate the binary, source, and manual page files for a command
 
@@ -29,10 +29,10 @@ TD1:Fichiers-Environnement de programmation
 
 	f) en 1er nombre de lignes, en 2eme nombre de mots, en 3eme nombre de octets
 
-	g,h,i) gcc permet de compiler le programme, -o "nom" permet de donner le nom du 		programme compilé, 
-	-Wall permet de donner les erreurs et avertissements lors de la compilation, -lm 		permet ajout librairie mathématique
+	g,h,i) gcc permet de compiler le programme, -o "nom" permet de donner le nom du programme compilé, 
+	-Wall permet de donner les erreurs et avertissements lors de la compilation, -lm permet ajout librairie mathématique
 	
-	Exercice 7: Vous pouvez également créer un dossier par séance de TD avec la commande: 	 for x in $(seq 1 12); do mkdir "td_$x"; done
+	Exercice 7: Vous pouvez également créer un dossier par séance de TD avec la commande: for x in $(seq 1 12); do mkdir "td_$x"; done
 	
 	Exercice 8: a,b) exo3.c
 
