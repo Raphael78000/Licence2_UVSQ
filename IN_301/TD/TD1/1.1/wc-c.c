@@ -3,8 +3,6 @@
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
-		return 1;
 	FILE *f = NULL;
 	int c, n = 0;
 	
@@ -12,7 +10,7 @@ int main(int argc, char **argv)
 	if (! f)
 	{
 		printf("wc: %s: No such file or directory\n", argv[1]);
-		return 2;
+		return 0;
 	}
 	c = fgetc(f);
 	while (c != EOF)
