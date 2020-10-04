@@ -11,3 +11,4 @@ algos: algos.c constantes.h
 clean:
 	rm -f genere 
 	rm -f algos 
+	
