@@ -14,7 +14,6 @@ void tri_bulle_tabint (TABINT T){
 			}
 		}
 }
-struct stat stat_moy (int N, int NbFois){
 	
 	
 	

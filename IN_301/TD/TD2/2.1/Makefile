@@ -41,17 +41,3 @@ zip:
 	zip -r $(ZIPNAME).zip $(ZIPNAME)
 ##	rm -rf ${ZIPNAME}
 	ls -l ${ZIPNAME}*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
