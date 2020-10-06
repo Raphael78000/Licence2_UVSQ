@@ -1,0 +1,12 @@
+TD2:Structures de données, tri et complexité
+
+2,1)Tri d'entiers
+
+	Exercice 11: voir Exercice11.pdf
+	
+	Exercice 12: a) struct contient un entier et un pointeur qui pointe vers un entier, permet l'appel à la struct avec seulement "TABINT"
+	b,c,d,e,f) tabint.c
+	g) non, car on utilise un pointeur dans la fonction tri_bulle_tabint, ce qui change directement les valeurs du tableau à son adresse sans avoir à retourner le tableau
+	
+	Exercice 13: a) stat.h
+	
