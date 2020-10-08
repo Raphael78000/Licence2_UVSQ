@@ -1,21 +1,14 @@
-visu: stat.pdf
+visu: stat.pdf clean
 	evince stat.pdf &
 
 
-stat.pdf: tri_bulle stat.gplt test_tri_bulle.data
-	gnuplot stat.gplt
+stat.pdf:  stat.gplt test_tri
+	gnuplot stat.gplt 
 
-test_tri: tri_bulle tri_fusion
+test_tri: tri_bulle  tri_fusion
 	./tri_bulle
 	./tri_fusion
-
-run: tri_bulle tri_fusion
-	time ./tri_bulle 10000
-	time ./tri_fusion 10000
-	time ./tri_bulle 100000
-	time ./tri_fusion 100000
-	time ./tri_bulle 200000
-	time ./tri_fusion 200000
+	
 	
 tri_bulle: tri_bulle.o tabint.o
 	gcc -Wall -o tri_bulle tri_bulle.o tabint.o
@@ -36,7 +29,7 @@ tabint.o: tabint.c tabint.h
 
 clean:
 	rm -f tabint.o
-	rm -f tri_bulle.o tri_bulle
-	rm -f stat.pdf
-	rm -f test_tri_bulle.data
-	ls -l
+	rm -f tri_bulle.o
+	rm -f tri_fusion.o
+	rm -f tri_bulle
+	rm -f tri_fusion
