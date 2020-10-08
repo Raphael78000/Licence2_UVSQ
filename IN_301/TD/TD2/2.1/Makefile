@@ -5,17 +5,21 @@ visu: stat.pdf
 stat.pdf: tri_bulle stat.gplt test_tri_bulle.data
 	gnuplot stat.gplt
 
-test_tri_bulle.data: tri_bulle
+test_tri: tri_bulle tri_fusion
 	./tri_bulle
-
-
-# Le tri à bulles
+	./tri_fusion
 
 tri_bulle: tri_bulle.o tabint.o
 	gcc -Wall -o tri_bulle tri_bulle.o tabint.o
 
 tri_bulle.o: tri_bulle.c tabint.h stat.h
 	gcc -Wall -c tri_bulle.c
+	
+tri_fusion: tri_fusion.o tabint.o
+	gcc -Wall -o tri_fusion tri_fusion.o tabint.o
+	
+tri_fusion.o: tri_fusion.c tabint.h stat.h
+	gcc -Wall -c tri_fusion.c
 
 
 # La bibliothèque de manipulation de tableaux
@@ -28,16 +32,3 @@ clean:
 	rm -f stat.pdf
 	rm -f test_tri_bulle.data
 	ls -l
-
-
-ZIPNAME=IN301-303_TD_TRI_INT
-zip:
-	rm -rf ${ZIPNAME}
-	mkdir ${ZIPNAME}
-	cp *.c ${ZIPNAME}
-	cp *.h ${ZIPNAME}
-	cp Makefile ${ZIPNAME}
-	cp *.gplt ${ZIPNAME}
-	zip -r $(ZIPNAME).zip $(ZIPNAME)
-##	rm -rf ${ZIPNAME}
-	ls -l ${ZIPNAME}*
