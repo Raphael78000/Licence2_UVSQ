@@ -8,8 +8,9 @@ stat.pdf: tri_bulle stat.gplt test_tri_bulle.data
 test_tri: tri_bulle tri_fusion
 	./tri_bulle
 	./tri_fusion
+
 run: tri_bulle tri_fusion
-	time ./tri_bulle 10000
+	time ./tri_fusion 100000
 
 tri_bulle: tri_bulle.o tabint.o
 	gcc -Wall -o tri_bulle tri_bulle.o tabint.o

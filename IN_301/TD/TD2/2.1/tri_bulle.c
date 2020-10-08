@@ -18,16 +18,13 @@ void tri_bulle_tabint (TABINT T){
 	
 	
 	
-int main() {
+int main(int argc,char **argv) {
 	
 	TABINT T;
 	
-	T=gen_alea_tabint(10,4);
+	int dimension_tab=atoi(argv[1]);
+	T=gen_alea_tabint(dimension_tab,4);
 	tri_bulle_tabint(T);
-	aff_tabint(T);
-	if(verif_si_tableau_croissant(T)){
-		printf("Le tableau trié\n");
-		}
 	desalloue_tabint(T);
 	
 	exit(0);
