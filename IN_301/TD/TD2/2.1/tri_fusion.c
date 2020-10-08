@@ -56,8 +56,6 @@ int main() {
 	TABINT T;
 	
 	T=gen_alea_tabint(10,4);
-	aff_tabint(T);
-	printf("\n\n");
 	tri_fusion_tabint(T);
 	aff_tabint(T);
 	if(verif_si_tableau_croissant(T)){
