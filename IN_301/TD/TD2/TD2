@@ -7,3 +7,49 @@ TD2:Structures de données, tri et complexité
 	Exercice 12: a) struct contient un entier et un pointeur qui pointe vers un entier, permet l'appel à la struct avec seulement "TABINT"
 	b,c,d,e,f) tabint.c
 	g) non, car on utilise un pointeur dans la fonction tri_bulle_tabint, ce qui change directement les valeurs du tableau à son adresse sans avoir à retourner le tableau
+	
+	Exercice 16:
+	
+	TriRapide(T : tableau d’entiers, p : entier, r : entier)
+	p et r sont les indices entre lesquels on veut trier le tableau. On suppose
+	Debut
+	si p < r faire
+	q ← partitionner(T,p,r)
+	TriRapide(T,p,q)
+	TriRapide(T,q+1,r)
+	fin si
+	Fin
+	
+	Partitionner(T : tableau d’entiers, p : entier, r : entier)
+	p et r sont les indices entre lesquels on veut trier le tableau. On suppose
+	Variables locales : i,j,pivot : entiers
+	Debut
+	i ← p ; j ← r ; pivot ← T[p] ;
+	tant que (i < j) faire
+	tant que (T[i] < pivot) faire i ← i + 1 fin tant que
+	tant que (T[j] > pivot) faire j ← j - 1 fin tant que
+	si (i < j) faire
+	T[i] ↔ T[j]
+	i ← i + 1
+	j ← j - 1
+	fin si
+	fin tant que
+	retourner j
+	Fin
+	
+	Exercice 17:
+	
+	a) Un algorithme de tri stable est un algorithme de tri conservant l'ordre initial de deux éléments égaux
+	
+	b) En algorithmique le tri par base, ou tri radix de radix sort en anglais, est un algorithme de tri, utilisé pour ordonner des éléments identifiés par une clef unique. Chaque clef est une chaîne de caractères ou un nombre que le tri par base trie selon l'ordre lexicographique. Cet algorithme a besoin d'être couplé avec un ou plusieurs algorithmes de tri stable. 
+	Le principe de l'algorithme est le suivant :
+
+    On considère le chiffre le moins significatif de chaque clef.
+    On trie la liste des éléments selon ce chiffre avec un algorithme de tri stable. Il y a une conservation de l'ordre des éléments ayant le même chiffre car le tri est stable.
+    On répète l'étape 2 en regardant le chiffre suivant.
+
+Comme on le verra dans les exemples, un chiffre peut être une valeur d'une carte, une couleur d'une carte, un chiffre dans l'écriture décimale d'un nombre, un bit ou un groupe de bits. 
+	
+	c) voir Tri_Denombrement.pdf
+	
+	d) Le principe est simple, on parcourt le tableau et on compte le nombre de fois que chaque élément apparaît. Une fois qu’on a le tableau des effectifs E (avec E[i] le nombre de fois où i apparaît dans le tableau), on peut le parcourir dans le sens croissant (pour un tri croissant), ou décroissant (pour un tri décroissant) et placer dans le tableau trié E[i] fois l’élément i (avec i allant de l’élément minimum du tableau jusqu’à l’élément maximum)
