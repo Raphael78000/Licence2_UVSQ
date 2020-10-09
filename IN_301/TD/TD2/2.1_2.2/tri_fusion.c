@@ -4,53 +4,51 @@
 #include <stdlib.h>
 
 void fusionner (TABINT T, int deb, int mil, int fin){
-	int *temp = malloc(sizeof(int)*(fin -deb));
-	int i = deb;
-	int j = mil;
-	int k = 0;
-	while(k < fin - deb){
-		if(i == mil){
-			for(;j<fin;j++){
-				temp[k] = T.val[j];
-				NBECH++;
-				k++;	
-			}
-			break;
-			NBCOMP++;
-		}
-		if(j == fin){
-			for(;i<mil;i++){
-				temp[k] = T.val[i];
-				NBECH++;
-				k++;	
-			}
-			break;
-			NBCOMP++;
-		}
-		if(T.val[i] < T.val[j]){
-			temp[k] =T.val[i];
+	int *tab=malloc(sizeof(int)*(fin+1));
+	int i,k,j;
+	i=deb;k=deb;j=mil+1;
+	
+	while ((i<=mil) && (j<=fin)){
+		if (T.val[i]<T.val[j]){
+			tab[k]=T.val[i];
+			i=i+1;
 			NBECH++;
-			i++;
-			NBCOMP++;
 		}
 		else{
-			temp[k] = T.val[j];
+			tab[k]=T.val[j];
+			j=j+1;
 			NBECH++;
-			j++;	
 		}
-		k++;
+		k=k+1;
+		NBCOMP++;
 	}
-	for(i = 0; i < fin - deb; i++){
-		T.val[i + deb] = temp[i];
+	while (i<=mil){
+		NBCOMP++;
+		tab[k]=T.val[i];
+		NBECH++;
+		i=i+1;
+		k=k+1;
 	}
-	free(temp);
-}
+	while (j<=fin){
+		tab[k]=T.val[j];
+		NBECH++;
+		j=j+1;
+		k=k+1;
+		NBCOMP++;
+	}
+	 for (int a=0;a<fin;a++){
+		 T.val[a]=tab[a];
+		 NBECH++;
+	 }
+	 free(tab);
+ }
 
 void tri_fusion(TABINT T, int deb, int fin){
-	if((fin - deb) > 1){
-		tri_fusion(T,deb,(fin + deb)/2);
-		tri_fusion(T,(fin + deb)/2,fin);
-		fusionner(T,deb,(fin + deb)/2, fin);
+	if(deb<fin){
+		int mil=((deb+fin)/2);
+		tri_fusion(T,deb,mil);
+		tri_fusion(T,mil+1,fin);
+		fusionner(T,deb,mil, fin);
 	}
 }
 

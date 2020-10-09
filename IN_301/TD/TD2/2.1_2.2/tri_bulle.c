@@ -6,13 +6,13 @@
 void tri_bulle_tabint (TABINT T){
 	int t;
 	for (int i=T.N-2;i>=0;i--){
-		NBCOMP++;
 		for (int j=0;j<=i;j++){
 			if(T.val[j+1]<T.val[j]){
-				NBECH++;
-				t=T.val[j+1];
-				T.val[j+1]=T.val[j];
-				T.val[j]=t;}
+				NBCOMP++;
+				t=T.val[j+1];NBECH++;
+				T.val[j+1]=T.val[j];NBECH++;
+				T.val[j]=t;NBECH++;
+				}
 			}
 		}
 }
