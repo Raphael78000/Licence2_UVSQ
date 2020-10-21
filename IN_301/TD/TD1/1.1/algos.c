@@ -49,6 +49,7 @@ int stat_recherche(int x)
 	
 	while (i < N && T[i] != x)
 		i++;
+		
 	return i + 1;
 }
 
@@ -62,6 +63,7 @@ int main()
 	while (i < N)
 	{
 		c = stat_recherche(rand() % 5 * MAX);
+		printf("%d\n",c);
 		i++;
 	}
 	printf("Moyenne comparaisons = %d\n", c / i);

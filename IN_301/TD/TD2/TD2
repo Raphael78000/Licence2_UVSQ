@@ -1,13 +1,14 @@
-TD2:Structures de données, tri et complexité
+ TD2:Structures de données, tri et complexité
 
-2,1)Tri d'entiers
+2,1/2,2) Tri d'entiers/ Comparaisons de tris
 
 	Exercice 11: voir Exercice11.pdf
 	
 	Exercice 13: a) void tri_bulle_tabint(TABINT)
-Non, car on a effectué le tri bulle avec un pointeur, donc cela va modifier 		directement les valeurs à l'adresse du tableau.
+Non, car on a effectué le tri bulle avec un pointeur, donc cela va modifier directement les valeurs à l'adresse du tableau.
 f) Quand la taille du tableau est multiplié par 10, alors le tri_bulle est multiplié par 100 et le tri fusion est multiplié par une valeur très faible (environ 3).
-	
+
+2,3) Tri de chaînes de caractères	
 	Exercice 16:
 	
 	TriRapide(T : tableau d’entiers, p : entier, r : entier)
@@ -41,15 +42,15 @@ f) Quand la taille du tableau est multiplié par 10, alors le tri_bulle est mult
 	
 	a) Un algorithme de tri stable est un algorithme de tri conservant l'ordre initial de deux éléments égaux
 	
-	b) En algorithmique le tri par base, ou tri radix de radix sort en anglais, est un algorithme de tri, utilisé pour ordonner des éléments identifiés par une clef unique. Chaque clef est une chaîne de caractères ou un nombre que le tri par base trie selon l'ordre lexicographique. Cet algorithme a besoin d'être couplé avec un ou plusieurs algorithmes de tri stable. 
+	b) En algorithmique le tri par base est un algorithme de tri, utilisé pour ordonner des éléments identifiés par une clef unique. Chaque clef est une chaîne de caractères ou un nombre que le tri par base trie selon l'ordre lexicographique. Cet algorithme a besoin d'être couplé avec un ou plusieurs algorithmes de tri stable. 
 	Le principe de l'algorithme est le suivant :
 
     On considère le chiffre le moins significatif de chaque clef.
     On trie la liste des éléments selon ce chiffre avec un algorithme de tri stable. Il y a une conservation de l'ordre des éléments ayant le même chiffre car le tri est stable.
     On répète l'étape 2 en regardant le chiffre suivant.
 
-Comme on le verra dans les exemples, un chiffre peut être une valeur d'une carte, une couleur d'une carte, un chiffre dans l'écriture décimale d'un nombre, un bit ou un groupe de bits. 
-	
-	c) voir Tri_Denombrement.pdf
-	
+	c) voir tri_dénombrements.pdf
+
 	d) Le principe est simple, on parcourt le tableau et on compte le nombre de fois que chaque élément apparaît. Une fois qu’on a le tableau des effectifs E (avec E[i] le nombre de fois où i apparaît dans le tableau), on peut le parcourir dans le sens croissant (pour un tri croissant), ou décroissant (pour un tri décroissant) et placer dans le tableau trié E[i] fois l’élément i (avec i allant de l’élément minimum du tableau jusqu’à l’élément maximum)
+
+	h) Le tri quicksort (rapide) est de 15 millisecondes alors que le tri par base est proche de 0 millisecondes. Ceci s'explique par le fait que le tri rapide à une complexité de O(N log N) alors que le tri par base a une complexité de O(N+M). 

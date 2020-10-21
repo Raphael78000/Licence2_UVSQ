@@ -17,14 +17,14 @@ int main(int argc, char** argv){
 
   chrono_start();
   tri_base(t1);
-  printf("Duree d'execution tri par base: %f millisecondes\n", 1000*chrono_lap());
+  printf("Duree d'execution du tri par base: %f millisecondes\n", 1000*chrono_lap());
   //affiche_tab(t1);
   t1 = libere_tab(t1);
   
   
   chrono_start();
   tri_cmp(t2);
-  printf("Duree d'execution du tri par comparaison: %f millisecondes\n", 1000*chrono_lap());
+  printf("Duree d'execution du tri rapide: %f millisecondes\n", 1000*chrono_lap());
   //affiche_tab(t2);
   t2 = libere_tab(t2);
   
