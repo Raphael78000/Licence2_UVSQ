@@ -1,0 +1,7 @@
+3,1) Exercices de base
+
+	Exercice 19: a) 1er printf donne le nombre d'arguments donner en instruction et les arguments entrées sont stockées dans le tableau. L'argument "!" ne fonctionne pas car "bash provides “history expansion” when you use an exclamation point (!) on the command line"
+	b) La variable de type char permet de créer un pointeur à deux dimensions
+	c) Il faut soit des nombres int soit float
+	
+	Exercice 20: exo18.c

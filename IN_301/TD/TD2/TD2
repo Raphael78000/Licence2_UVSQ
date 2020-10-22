@@ -6,7 +6,7 @@
 	
 	Exercice 13: a) void tri_bulle_tabint(TABINT)
 Non, car on a effectué le tri bulle avec un pointeur, donc cela va modifier directement les valeurs à l'adresse du tableau.
-f) Quand la taille du tableau est multiplié par 10, alors le tri_bulle est multiplié par 100 et le tri fusion est multiplié par une valeur très faible (environ 3).
+	f) Quand la taille du tableau est multiplié par 10, alors le tri_bulle est multiplié par 100 et le tri fusion est multiplié par une valeur très faible (environ 3).
 
 2,3) Tri de chaînes de caractères	
 	Exercice 16:

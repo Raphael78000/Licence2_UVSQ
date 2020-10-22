@@ -56,7 +56,9 @@ int main(int argc,char **argv) {
 	TABINT T;
 	
 	int dimension_tab=atoi(argv[1]);
-	
+	T=gen_alea_tabint(dimension_tab,4);
+	tri_bulle_tabint(T);
+	desalloue_tabint(T);
 	
 	exit(0);
 }
