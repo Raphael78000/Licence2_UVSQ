@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int longueur(char* chaine){
 	int i;
@@ -17,9 +16,9 @@ int recursive_longueur(char* chaine){
 		//déplace le début de la chaîne de une lettre
 	}
 }
-int compare(char* chaine1, char* chaine2){
+int compare(char* chaine1,char* chaine2){
 	int i;
-	for(i=0;i<strlen(chaine1) && strlen(chaine2) && chaine1[i]==chaine2[i];i++){}
+	for(i=0;i<longueur(chaine1) && longueur(chaine2) && chaine1[i]==chaine2[i];i++){}
 	if (chaine1[i]==chaine2[i]){
 		printf("les deux chaînes ont la même longueur par méthode itérative\n");
 		return 0;
@@ -48,10 +47,61 @@ int compar_recursive(char* chaine1,char* chaine2){
 		return 1;
 	}
 }
+int chaine_miroir(char* chaine1,char* chaine2){
+	if(longueur(chaine1)!=longueur(chaine2)){
+		return 0;
+	}
+	else{
+		int j;
+		j=longueur(chaine2);
+		int a,b;
+		a=0;
+		b=j-1;
+		while (a!=b){
+			if (chaine1[a]!=chaine2[b]){
+				return 0;
+			}
+			a++;
+			b--;
+		}
+		return 1;
+	}
+}
+int sous_chaine(char* chaine1, char* chaine2){
+	int i,j;
+	int l=0;
+	i=longueur(chaine1);
+	j=longueur(chaine2);
+	
+	for (int k=0;k<=i;k++){
+		if (chaine1[k]==chaine2[l]){
+			l++;
+		}
+		if (l==j){
+			return 1;
+		}
+	}
+	return 0;
+}
+int palindrome(char* chaine1){
+	int i=-1;
+	int j=0;
+	while (chaine1[j]!='\0'){
+		j++;
+	}
+	while (i<j){
+		i++;
+		j--;
+		if (chaine1[i]!=chaine1[j]){
+			return 0;
+		}
+		return 1;
+	}
+}
 
 int main( int argc, char** argv){
 
-	printf("argv[1]=%d par méthode itérative\n",longueur(argv[1]));
+	/*printf("argv[1]=%d par méthode itérative\n",longueur(argv[1]));
 	printf("argv[1]=%d par méthode récursive\n",recursive_longueur(argv[1]));
 	printf("argv[2]=%d par méthode itérative\n",longueur(argv[2]));
 	printf("argv[2]=%d par méthode récursive\n",recursive_longueur(argv[2]));
@@ -65,8 +115,8 @@ int main( int argc, char** argv){
 		case 1:
 		printf("%s est plus grande que %s par méthode récursive\n",argv[1],argv[2]);
 		break;
-	}
-
+	}*/
+	
 return 0;   
 }
 
