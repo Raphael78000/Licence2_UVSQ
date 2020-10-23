@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <string.h>
+//#include <string.h>
 
 int test_float(char* chaine){
 	int i = 0;
