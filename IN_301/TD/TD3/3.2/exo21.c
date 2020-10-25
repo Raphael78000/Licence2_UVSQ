@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
+int longueur(char* chaine){
+	int i;
+	for(i=0;chaine[i]!='\0'; i++){}
+	return i;
+}
 void majuscule(char* s){
 	int t;
 	
-	for (int a=0;a<strlen(s);a++){
+	for (int a=0;a<longueur(s);a++){
 		t=s[a];
 		if (t>=97 && t<=122){
 			s[a]=t-32;
@@ -16,7 +20,7 @@ void majuscule(char* s){
 void minuscule(char* s){
 	int t;
 	
-	for (int a=0;a<strlen(s);a++){
+	for (int a=0;a<longueur(s);a++){
 		t=s[a];
 		if (t>=65 && t<=90){
 			s[a]=t+32;
@@ -26,16 +30,20 @@ void minuscule(char* s){
 }
 char* duplique(char* s){
 	char* copie;
+	int a;
 	
 	if (s!=NULL){
-		copie=malloc((strlen(s) + 1) * sizeof(char*));//créer un tableau de la taille de la chaîne
-		strcpy(copie, s);//copie la chaîne de s à copie
+		copie=malloc((longueur(s)+1) * sizeof(char*));//créer un tableau de la taille de la chaîne
+		for (a=0;s[a]!='\0';a++){//copie la chaîne de s à copie
+			copie[a]=s[a];
+		}
+		copie[a]='\0';
 	}
 	return copie;//l'utilisation de la fonxtion libère la mémoire automatiquement après utilisation de la fonction
 }
 char *cherche(char *s, char c) {
 	char* occ;
-	for (int a=0;a<strlen(s);a++){
+	for (int a=0;a<longueur(s);a++){
 		if (s[a]==c){
 			occ=&s[a];
 			return occ;
@@ -45,9 +53,17 @@ char *cherche(char *s, char c) {
 }
 char *concatene(char *s1, char *s2){
 	char* c;
+	int a,b;
 
-	c=malloc(sizeof(char*)*(strlen(s1)+strlen(s2)+1));
-	c=strcat(s1,s2);
+	c=malloc(sizeof(char*)*(longueur(s1)+longueur(s2)));
+	for (a=0;s1[a]!='\0';a++){
+		c[a]=s1[a];
+		}
+	for (b=0;s2[b]!='\0';b++,a++){
+		c[a]=s2[b];
+		}
+		c[a]='\0';
+		
 	return c;
  }
 int difference(char *s1, char *s2){
@@ -61,8 +77,8 @@ char *souschaine(char *s1, char *s2){
 	int l=0;
 	char* ss;
 	
-	i=strlen(s1);
-	j=strlen(s2);
+	i=longueur(s1);
+	j=longueur(s2);
 	for (int k=0;k<=i;k++){
 		if (s1[k]==s2[l]){
 			l++;
@@ -74,6 +90,8 @@ char *souschaine(char *s1, char *s2){
 	}
 }
 int main(int argc,char** argv){
-
+char* c;
+c=concatene(argv[1],argv[2]);
+printf("%s\n",c);
 	return 0;
 }
