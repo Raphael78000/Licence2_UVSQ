@@ -11,6 +11,6 @@ principal.o: principal.c ea.h
 	gcc -c principal.c ea.h -Wall
 
 clean: 
-	rm -f ea.o 
-	rm -f principal.o
-	rm -f principal
+	rm  ea.o 
+	rm  principal.o
+	rm  principal

@@ -1,6 +1,7 @@
 struct noeud{
 	int op_ou_val;
 	char op;
+	float val;
 	struct noeud *opg;
 	struct noeud *opd;
 };
