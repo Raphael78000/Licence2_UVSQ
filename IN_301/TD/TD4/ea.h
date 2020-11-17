@@ -5,11 +5,10 @@ struct noeud{
 	struct noeud *opg;
 	struct noeud *opd;
 };
+typedef struct noeud  *EA;
 
-typedef struct noeud  * EA;
+EA ea_creer_valeur(float val);
 
-EA ea_creer_valeur (float val);
+EA ea_creer_operation(char op,EA opg,EA opd);
 
-EA ea_creer_operation (char op, EA opg, EA opd);
-
-float ea_evaluer (EA e);
+float ea_evaluer(EA e);

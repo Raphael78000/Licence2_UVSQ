@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ea.h"
+#include "token.h"
 
 int main(){
 
@@ -8,7 +9,7 @@ int main(){
 	EA f,f1,f2;
 	EA g,g1,g2,g3,g4;
 	EA h,h1,h2,h3,h4,h5,h6,h7,h8;
-	EA k,k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12,k13,k14,k15,k16 ;
+	EA k,k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12,k13,k14,k15,k16;
 	
 e1 = ea_creer_valeur(12.3);
 e2 = ea_creer_valeur(4.56);

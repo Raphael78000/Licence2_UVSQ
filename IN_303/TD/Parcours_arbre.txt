@@ -1,0 +1,30 @@
+Typedef struct Noeud{
+	Element contenu;
+	struct Noeud *filsG;
+	struct Noeud *filsD;
+}*Arbre;
+
+void ParcoursPrefixe(Arbre a){
+	if (a!=NULL){
+		printf("%3d\n",a->contenu);
+		ParcoursPrefixe(a->filsG);
+		ParcoursPrefixe(a->filsD);
+	}
+}
+
+void ParcoursInfixe(Arbre a){
+	if(a!=NULL){
+		ParcoursInfixe(a->filsG);
+		printf("%3d\n",a->contenu);
+		ParcoursInfixe(a->filsD);
+	}
+}
+
+void ParcoursPostfixe(Arbre a){
+	if(a!=NULL){
+		ParcoursPostfixe(a->filsG);
+		ParcoursPostfixe(a->filsD);
+		printf("%3d\n",a->contenu);
+	}
+}
+		
