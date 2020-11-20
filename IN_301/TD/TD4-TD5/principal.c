@@ -4,6 +4,7 @@
 #include "token.h"
 
 int main(){
+//TD4
 
 	EA e,e1,e2;
 	EA f,f1,f2;
@@ -57,6 +58,14 @@ k2=ea_creer_operation('-',k4,k3);
 k1=ea_creer_operation('*',k2,k8);
 k=ea_creer_operation('*',k5,k1);
 printf("%f\n",ea_evaluer(k));
+
+//TD5
+
+TOKEN t = NULL;
+t = token_ajouter_fin_liste (t, 2.3);
+t = token_ajouter_fin_liste (t, 8);
+t = token_ajouter_fin_liste (t, 5.12);
+token_afficher(t);
 
 return 0;
 }
