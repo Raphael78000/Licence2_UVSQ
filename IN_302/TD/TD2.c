@@ -1,3 +1,49 @@
+/*
+  Compilation:
+
+    $ gcc codes_td2.c -o code_td2
+
+    or
+
+    $ clang codes_td2.c -o code_td2
+
+  Execution:
+
+    $ ./codes_td2 100
+
+    affiche_parite v1:
+    4: Pair / even
+    5: Impair / odd
+    --------------------------------------
+
+    affiche_parite_v2:
+    4: Pair / even
+    5: Impair / odd
+    --------------------------------------
+
+    verifie_premier_dernier:
+    164: 0
+    35: 1
+    110: 0
+    --------------------------------------
+
+    get_size_v1:
+    100: 3
+    --------------------------------------
+
+    get_size_v2:
+    100: 3
+    --------------------------------------
+
+    get_size_v3: (Voodo)
+    100: 3
+
+
+    $./codes_td2 ENTER_ANY_NUMBER
+
+*/
+
+//
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -38,7 +84,7 @@ bool verifie_premier_dernier(u32 n)
   //n >> 31 moves the MSB in to the LSB position.
   //n & 1 keeps the LSB only
   //Smash them together with an or and you get the answer
-  
+
   //a = n >> 31, place le bit de poids ford a la position de poids faible
   //b = n & 1 conserve le bit de poids faible
   //Si a ou b est a 1, le resultat est 1
@@ -64,7 +110,7 @@ u8 get_size_v1(u32 n)
       //Move to next bit
       n = n >> 1;
     }
-  
+
   //
   return c;
 }
@@ -90,7 +136,7 @@ u8 get_size_v2(u32 n)
   return c;
 }
 
-//Some Voodo magic! 
+//Some Voodo magic!
 u8 get_size_v3(u32 n)
 {
   if (n)
@@ -106,10 +152,10 @@ int main(int argc, char **argv)
 
   //Get parameter and convert from string to u32
   u32 n = (u32)atol(argv[1]);
-  
+
   //
   puts("affiche_parite v1:");
-  
+
   affiche_parite_v1(4);
   affiche_parite_v1(5);
 
@@ -117,15 +163,15 @@ int main(int argc, char **argv)
 
   //
   puts("affiche_parite_v2:");
-  
+
   affiche_parite_v2(4);
   affiche_parite_v2(5);
 
   __newline__;
-  
+
   //
   puts("verifie_premier_dernier:");
-  
+
   printf("164: %u\n", verifie_premier_dernier(164));
   printf(" 35: %u\n", verifie_premier_dernier(35));
   printf("110: %u\n", verifie_premier_dernier(110));
@@ -134,21 +180,21 @@ int main(int argc, char **argv)
 
   //
   puts("get_size_v1:");
-  
+
   printf("%u: %u\n", n, get_size_v1(n));
 
   __newline__;
-  
+
   //
   puts("get_size_v2:");
-  
+
   printf("%u: %u\n", n, get_size_v2(n));
-  
+
   __newline__;
-  
+
   //
   puts("get_size_v3: (Voodo)");
-  
+
   printf("%u: %u\n", n, get_size_v3(n));
 
   //
