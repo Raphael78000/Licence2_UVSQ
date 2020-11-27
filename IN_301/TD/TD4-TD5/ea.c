@@ -52,7 +52,7 @@ EA ea_creer_operation (char op, EA sag, EA sad)
  */
 float ea_evaluer (EA e)
 {
-	if ( e->op_ou_val == 0 ) 
+	if ( e->op_ou_val == 0 )
 	{
 		printf("%c\n", e->op);
 		switch (e->op)
@@ -65,7 +65,7 @@ float ea_evaluer (EA e)
 					   break;
 			case '/' : return ea_evaluer(e->sag)/ea_evaluer(e->sad);
 					   break;
-			case '(' : 
+			case '(' :
 			case ')' : printf("parenthèses dans l'arbre\n");
 						return -999.99;
 					   break;

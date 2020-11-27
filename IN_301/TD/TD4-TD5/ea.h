@@ -1,5 +1,5 @@
 
-struct Noeud 
+struct Noeud
 {
 	int op_ou_val;
 	char op;
