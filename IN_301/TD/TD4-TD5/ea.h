@@ -1,14 +1,15 @@
-struct noeud{
+
+struct Noeud 
+{
 	int op_ou_val;
 	char op;
 	float val;
-	struct noeud *opg;
-	struct noeud *opd;
+	struct Noeud* sag;
+	struct Noeud* sad;
 };
-typedef struct noeud  *EA;
+typedef struct Noeud* EA;
 
-EA ea_creer_valeur(float val);
-
-EA ea_creer_operation(char op,EA opg,EA opd);
-
-float ea_evaluer(EA e);
+EA ea_creer_valeur (float val);
+EA ea_creer_operation (char op, EA sag, EA sad);
+float ea_evaluer (EA e);
+void afficher_arbre (EA e);

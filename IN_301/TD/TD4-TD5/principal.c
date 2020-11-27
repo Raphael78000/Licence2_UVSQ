@@ -3,73 +3,109 @@
 #include "ea.h"
 #include "token.h"
 
-int main(){
-
-//TD4
-/*
-	EA e,e1,e2;
-	EA f,f1,f2;
-	EA g,g1,g2,g3,g4;
-	EA h,h1,h2,h3,h4,h5,h6,h7,h8;
-	EA k,k1,k2,k3,k4,k5,k6,k7,k8,k9,k10,k11,k12,k13,k14,k15,k16;
+int main ()
+{
+	TOKEN T = NULL;
+	T = token_creer_liste("(2+2)*(3+(2+2))");
+	token_afficher(T);
 	
-e1 = ea_creer_valeur(12.3);
-e2 = ea_creer_valeur(4.56);
-e = ea_creer_operation('+',e1,e2);
-printf("%f\n",ea_evaluer(e));
-
-f1=ea_creer_valeur(1);
-f2=ea_creer_valeur(2);
-f=ea_creer_operation('-',f1,f2);
-printf("%f\n",ea_evaluer(f));
-
-g3=ea_creer_valeur(2);
-g4=ea_creer_valeur(3);
-g2=ea_creer_operation('*',g3,g4);
-g1=ea_creer_valeur(1);
-g=ea_creer_operation('+',g2,g1);
-printf("%f\n",ea_evaluer(g));
-
-h8=ea_creer_valeur(4);
-h7=ea_creer_valeur(3);
-h6=ea_creer_operation('-',h8,h7);
-h5=ea_creer_valeur(5);
-h4=ea_creer_operation('-',h5,h6);
-h3=ea_creer_valeur(1);
-h2=ea_creer_valeur(2);
-h1=ea_creer_operation('+',h2,h3);
-h=ea_creer_operation('*',h1,h4);
-printf("%f\n",ea_evaluer(h));
-
-k16=ea_creer_valeur(6);
-k15=ea_creer_valeur(7);
-k14=ea_creer_operation('+',k16,k15);
-k13=ea_creer_valeur(5);
-k12=ea_creer_operation('+',k13,k14);
-k11=ea_creer_valeur(3);
-k10=ea_creer_valeur(4);
-k9=ea_creer_operation('-',k11,k10);
-k8=ea_creer_operation('*',k9,k12);
-k7=ea_creer_valeur(1);
-k6=ea_creer_valeur(2);
-k5=ea_creer_operation('+',k7,k6);
-k4=ea_creer_valeur(8);
-k3=ea_creer_valeur(9);
-k2=ea_creer_operation('-',k4,k3);
-k1=ea_creer_operation('*',k2,k8);
-k=ea_creer_operation('*',k5,k1);
-printf("%f\n",ea_evaluer(k));
-*/
-
-//TD5
-
-TOKEN t = NULL;
-t = token_ajouter_fin_liste (t, 2.3);
-t = token_ajouter_fin_liste (t, 8);
-t = token_ajouter_fin_liste (t, 5.12);
-t = token_ajouter_fin_liste (t, 10);
-t = token_ajouter_fin_liste (t, 3.58);
-token_afficher(t);
-
-return 0;
+	
+	/*TOKEN t = NULL;
+	t = token_ajouter_fin_liste(t, 2.3);
+	t = token_ajouter_fin_liste(t, 8);
+	t = token_ajouter_fin_liste(t, 5.12);
+	token_afficher(t);*/
+	
+	
+	/*TOKEN T, U, V, W, X, Y; 
+	EA E, F, G, H, I, J;
+	
+	T = token_creer_liste("12.3+4.56");
+	E = token_to_ea(T);
+	
+	U = token_creer_liste("(1+2)");
+	F = token_to_ea(U);
+	
+	V = token_creer_liste("1+(2*3)");
+	G = token_to_ea(V);
+	
+	W = token_creer_liste("1+2*3");
+	H = token_to_ea(W);
+	
+	X = token_creer_liste("(1+2)*(5-(4-3))");
+	I = token_to_ea(X);
+	
+	Y = token_creer_liste("(1+2)*(((3-4)*(5+(6+7)))+(8-9))");
+	J = token_to_ea(Y); */
+	
+	return 0;
 }
+
+/* BLOC 4 
+int main ()
+{
+	// 12.3 + 4.56 = 16.86
+	EA a, a1, a2;
+	a1 = ea_creer_valeur(12.3);
+	a2 = ea_creer_valeur(4.56);
+	a = ea_creer_operation('+', a1, a2);
+	printf("\n%f\n", ea_evaluer(a));
+	free(a);	free(a1);	free(a2);
+	
+	// (1+2) = 3
+	EA b, b1, b2;
+	b1 = ea_creer_valeur(1);
+	b2 = ea_creer_valeur(2);
+	b = ea_creer_operation('+', b1, b2);
+	printf("\n%f\n", ea_evaluer(b));
+	free(b);	free(b1);	free(b2);
+	
+	// 1+(2*3) = 1+2*3 = 7
+	EA c, c1, c2;
+	c1 = ea_creer_valeur(2);
+	c2 = ea_creer_valeur(3);
+	c = ea_creer_operation('*', c1, c2);
+	c1 = ea_creer_valeur(1);
+	c2 = ea_creer_operation('+', c1, c);
+	printf("\n%f\n", ea_evaluer(c2));
+	free(c);	free(c1);	free(c2);
+	
+	// (1+2)*(5-(4-3)) = 12
+	EA d, d1, d2, d3;
+	d1 = ea_creer_valeur(4);
+	d2 = ea_creer_valeur(3);
+	d = ea_creer_operation('-', d1, d2);
+	d1 = ea_creer_valeur(5);
+	d2 = ea_creer_operation('-', d1, d);
+	d1 = ea_creer_valeur(1);
+	d = ea_creer_valeur(2);
+	d3 = ea_creer_operation('+', d1, d);
+	d = ea_creer_operation('*', d3, d2);
+	printf("\n%f\n", ea_evaluer(d));
+	free(d);	free(d1);	free(d2);	free(d3);			
+	
+	// (1+2)*(((3-4)*(5+(6+7)))+(8-9)) = -57
+	EA e, e1, e2, e3;
+	e1 = ea_creer_valeur(6);
+	e2 = ea_creer_valeur(7);
+	e = ea_creer_operation('+', e1, e2);
+	e1 = ea_creer_valeur(5);
+	e2 = ea_creer_operation('+', e1, e);
+	e = ea_creer_valeur(3);
+	e1 = ea_creer_valeur(4);
+	e3 = ea_creer_operation('-', e, e1);
+	e1 = ea_creer_operation('*', e3, e2);
+	e2 = ea_creer_valeur(8);
+	e3 = ea_creer_valeur(9);
+	e = ea_creer_operation('-', e2, e3);
+	e2 = ea_creer_operation('+', e, e1);
+	e = ea_creer_valeur(1);
+	e1 = ea_creer_valeur(2);
+	e3 = ea_creer_operation('+', e, e1);
+	e = ea_creer_operation('*', e3, e2);
+	printf("\n%f\n", ea_evaluer(e));
+	free(e);	free(e1);	free(e2);	free(e3);
+	
+	return 0;
+}
+*/
