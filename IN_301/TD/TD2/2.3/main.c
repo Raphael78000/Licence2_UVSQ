@@ -10,7 +10,7 @@ int main(int argc, char** argv){
     fprintf(stderr, "Format attendu:\n%s fichier\n", argv[0]);
     exit(EXIT_FAILURE);
   }
-
+  
   t1 = init_tab_fic(argv[1]);
   t2 = copy_tab(t1);
 
@@ -20,13 +20,13 @@ int main(int argc, char** argv){
   printf("Duree d'execution du tri par base: %f millisecondes\n", 1000*chrono_lap());
   //affiche_tab(t1);
   t1 = libere_tab(t1);
-  
-  
+
+
   chrono_start();
   tri_cmp(t2);
   printf("Duree d'execution du tri rapide: %f millisecondes\n", 1000*chrono_lap());
   //affiche_tab(t2);
   t2 = libere_tab(t2);
-  
+
   return EXIT_SUCCESS;
 }
