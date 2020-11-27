@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ea.h"
-
 /*
  * allocation de sizeof(struct Noeud) pour V;
  * affectation : op_ou_val = 0;
@@ -22,7 +21,6 @@ EA ea_creer_valeur (float val)
 	printf("%f\n", V->val);
 	return V;
 }
-
 /*
  * allocation sizeof(struct Noeud) pour O;
  * affectation : op_ou_val = 1;
@@ -44,7 +42,6 @@ EA ea_creer_operation (char op, EA sag, EA sad)
 	printf("%c\n", O->op);
 	return O;
 }
-
 /*
  * ea_evaluer peut être utilisé récursivement. La condition de récursivité est si la fonction rencontre
  * un noeud contenant un opérateur (op_ou_val = 1). Cette récursivité nous permet de parcourir l'arbre
