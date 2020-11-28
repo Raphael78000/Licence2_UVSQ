@@ -1,9 +1,9 @@
 
 run : principal clean
-	./principal
 
 principal : principal.o ea.o token.o
 	gcc principal.o ea.o token.o -o principal
+	./principal
 
 principal.o : ea.h principal.c
 	gcc -Wall -c principal.c

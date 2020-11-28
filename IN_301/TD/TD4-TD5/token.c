@@ -1,145 +1,159 @@
-#include <stdio.h>
-#include <stdlib.h> 
-#include "ea.h"
 #include "token.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-/*
- * 1) On vérifie d'abord si le caractère n'est pas un '(' ou un ')'
- * 2) Dans ce cas-là, on dit que le token est de type 1 pour '(' ou
- *    de type 0 pour ')'
- * 3) On vérifie après si le caractère est un opétateur (+, -, *, /, %)
- * 4) Dans ce cas-là, on dit que le token est de type 2 et que la valeur 
- *    op du token est égal au caractère analysé.
- * 5) Finalement, si le caractère est un entier cad 31 <= 'c' <= 39 alors
- * 	  le token est de type 3 et prend comme valeur dans val ATOF ('c')
- * 6) Cas particulier : si le caractère est un espace,  l'ignorer ( 1er 
- * 	  condition ). Si le caractère est autre chose que tout ce qu'on a 
- * 	  demandé, sortir de la fonction avec un message d'erreur ( dernère 
- * 	  condition ).
- * 7) ne pas oublier de faire T2.prec = T1 et T1.suiv = T2
- */
- 
-TOKEN token_creer_val ( float val )
+TOKEN token_creer(int type, char op, float val)
 {
-	TOKEN T;
-	T = malloc(sizeof(struct token));
-	T->type_token = 1;
-	T->val = val;
-	T->suiv = NULL;
-	T->prec = NULL;
-	return T;
-}
+	TOKEN t;
 
-TOKEN token_creer_op ( char op )
-{
-	TOKEN T;
-	T = malloc(sizeof(struct token));
-	T->type_token = 0;
-	T->op = op;
-	T->suiv = NULL;
-	T->prec = NULL;
-	return T;
-}
- 
-TOKEN token_ajouter_fin_liste ( TOKEN t, TOKEN T )
-{
-	TOKEN U;
-	if ( t == NULL ) return T;
-	U = t;
-	while ( U->suiv != NULL )
-	{
-		U = U->suiv;
-	}
-	U->suiv = T;
-	T->prec = U;
+	t = malloc(sizeof(struct token));
+	if (t == NULL) exit(2);
+	t->type_token = type;
+	t->op = op;
+	t->val = val;
+	t->suiv = NULL;
+	t->prec = NULL;
 	return t;
 }
 
-TOKEN token_creer_liste ( char* s )
+TOKEN token_ajouter_fin_liste (TOKEN t, TOKEN nouv)
 {
-	TOKEN t, T;
-	int i;
-	float e, d, dec;
-	t = NULL;
-	for ( i = 0; s[i] != '\0'; i++ ) 
-	{
-		e = 0; d = 0; dec = 0.1;
-		if ( '0' <= s[i] && s[i] <= '9' )
-		{
-			while ( '0' <= s[i] && s[i] <= '9' )
-			{
-				dec = dec*10;
-				e = e*dec + (s[i]-'0');
-				i++;
-				if ( s[i] == 46 ) 
-				{
-					dec = 0.1;
-					i++;
-					while ( '0' <= s[i] && s[i] <= '9' )
-					{
-						d =  d + (s[i]-'0')*dec;
-						dec *= 0.1;
-						i++;
-					}
-				}
-			}
-			i--;
-			T = token_creer_val(e+d);
-			t = token_ajouter_fin_liste ( t, T );
-		}
-		else if ( s[i] == 0x20 ) {}
-		else 
-		{
-			T = token_creer_op(s[i]);
-			t = token_ajouter_fin_liste ( t, T );
-		}
-	}
+	TOKEN  dernier;
+
+
+	// Etape 3 : trouver le dernier élément de la liste
+	if (t == NULL) return nouv;
+
+	dernier = t;
+	while ( dernier->suiv != NULL) dernier = dernier->suiv;
+	// Etape 4 : le suivant du dernier élément est nouv
+	dernier->suiv = nouv;
+	nouv->prec = dernier;
+	// Etape 5: renvoyer la tête de liste
 	return t;
 }
 
-EA token_to_ea ( TOKEN t )
-{
-	EA A = NULL;
-	/*EA A, D = NULL, G = NULL;
-	TOKEN T = t;
-	if ( T->op == '(' ) 
-	{
-		G = token_to_ea(T->suiv);
-		while ( T->op != ')' ) T = T->suiv;
-		T = T->suiv;
-	}
-	else if ( T->type_token == 1 ) G = ea_creer_valeur(T->val);
-	T = T->suiv->suiv;
-	if ( T->op == '(' ) 
-	{
-		D = token_to_ea(T->suiv);
-		while ( T->op != ')' ) T = T->suiv;
-		T = T->suiv;
-	}
-	else if ( T->type_token == 1 ) D = ea_creer_valeur(T->val);
-	T = T->prec;
-	A = ea_creer_operation(T->op, G, D);*/
-	return A;
-}
+//Version itérative
 
-void token_afficher( TOKEN t )
+void token_afficher(TOKEN t)
 {
-	if ( t == NULL ) printf("liste vide\n");
-	TOKEN A = t;
+	TOKEN tmp;
+
+	tmp = t;
+
+	while (tmp != NULL)
+	{
+		if (tmp->type_token == PAR_OUV) printf(" (");
+		if (tmp->type_token == PAR_FER) printf(" )");
+		if (tmp->type_token == OP) printf(" %c",tmp->op);
+		if (tmp->type_token == VAL) printf(" %1.2f ",tmp->val);
+		tmp = tmp->suiv;
+	}
 	printf("\n");
-	while ( A != NULL )
+}
+
+//Version récursive
+
+void token_afficher_rec(TOKEN t)
+{
+	if (t == NULL) printf("\n");
+	else
 	{
-		if ( A->type_token == 0 ) printf("%c ", A->op);
-		else printf("%1.2f ", A->val);
-		A = A->suiv;
+		printf("%1.2f ",t->val);
+		token_afficher_rec(t->suiv);
 	}
-	printf("\n");  printf("\n");
-	
-	/*printf("%1.2f\n", A->val);
-	printf("MIROIR\n");
-	while ( A != NULL )
+}
+
+int est_op(char c)
+{
+	if (c == '+') return 1;
+	if (c == '*') return 1;
+	if (c == '/') return 1;
+	if (c == '-') return 1;
+	return 0;
+}
+
+int est_val(char c)
+{
+	if (c >= '0' && c <='9') return 1;
+	if (c == '.') return 1;
+	return 0;
+}
+
+int est_valide(char c)
+{
+	if (c == '(') return 1;
+	if (c == ')') return 1;
+	if (est_op(c)) return 1;
+	if (est_val(c)) return 1;
+	if (c == ' ') return 1;
+	return 0;
+}
+
+TOKEN token_creer_val(char **s)
+{
+	TOKEN e = token_creer(VAL,0,0.0);
+	float mult = 0.1;
+
+	// Avant le .(décimal)
+	while (**s >= '0' && **s <= '9')
 	{
-		printf("%1.2f\n", A->val);
-		A = A->prec;
-	}*/
+		e->val = 10 * e->val + (**s -'0');
+		(*s)++;
+	}
+	if (**s != '.') return e;
+	// Après le . (décimal)
+	(*s)++;
+	while (**s >= '0' && **s <= '9')
+	{
+		e->val = e->val + mult*(**s - '0');
+		mult = mult * 0.1;
+		(*s)++;
+	}
+	(*s) --; // on a lu le prochain caractère à la fin
+			// de la boucle précédente
+			// et on va aussi dans la fonction creer_liste
+			// lire le prochain caractère donc on risque de
+			// sauter un caractère. Il faut donc revenir en arrière.
+	return e;
+}
+
+
+TOKEN token_creer_liste(char *s)
+{
+	TOKEN t = NULL;
+	TOKEN e;
+
+	while( *s != '\0')
+	{
+		if (!est_valide(*s))
+		{
+			fprintf(stderr,"caractère non valide \n");
+			exit(3);
+		}
+		if (*s == '(')
+		{
+			e = token_creer(PAR_OUV,0,0);
+			t = token_ajouter_fin_liste(t,e);
+		}
+		if (*s == ')')
+		{
+			e = token_creer(PAR_FER,0,0);
+			t = token_ajouter_fin_liste(t,e);
+		}
+		if (est_op(*s))
+		{
+			e = token_creer(OP,*s,0);
+			t = token_ajouter_fin_liste(t,e);
+		}
+		if (est_val(*s))
+		{
+			e = token_creer_val(&s);
+			t = token_ajouter_fin_liste(t,e);
+		}
+
+		s++;
+	}
+
+	return t;
 }
