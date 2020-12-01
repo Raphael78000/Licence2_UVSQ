@@ -27,4 +27,3 @@ void ParcoursPostfixe(Arbre a){
 		printf("%3d\n",a->contenu);
 	}
 }
-		
