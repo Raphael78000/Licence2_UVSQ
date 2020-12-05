@@ -1,0 +1,94 @@
+Pour le projet IN_301:
+
+struct Noeud{								// Je suis d'accord pour la structure 
+char* mot(a allouer a chauqe placement de mot dans ABR)
+int occ(nombre de fois que le mot apparait dans le texte)
+Noeud* sag
+Noeud* sad
+Noeud* pere
+int* liste(liste avec numeros des lignes ou apparait mot)
+};
+typedef struct Noeud* ARBRE; 		//ajout d'un type struct Noeud étoile
+
+-->Possibilité de fiare deux algos different, un qui teste equilibre noeud, l'autre donne les ortations a faire 
+--> Rep : on appelerai les fonctiond de rotations dans la fonction qui rééquilibre ( qui sera appelé dans la fonction insertion )
+
+Equilibre_Rotation_Noeud(a:Noeud):booléen				// stocker hauteur(a.sag)-hauteur(a.sad) dans une variable locale pour éviter d'appeler hauteur 100 fois 
+Debut
+	Si |hauteur(a.sag)-hauteur(a.sad)|<=1 alors
+		return 0
+	Sinon 
+		Si hauteur(a.sag)-hauteur(a.sad)=2 alors		// Pour les appels des rotations, on verra ensemble le tableau des rotations donné en cours 
+			Si hauteur(a.sag.sag)>hauteur(a.sag.sad) alors 
+				rotation_droite(a)
+				return 1
+			Sinon	
+				rotation_gauche(a.sag)
+				rotation_droite(a)
+				return 1
+			Fin Si
+		Sinon (hauteur(a.sag)-hauteur(a.sad)=-2) alors		// Inutile de faire un deuxième si ... == -2 car on aura pas de +/-3 déséquilibre 
+			Si hauteur(a.sag.sag)>hauteur(a.sad.sag) alors
+				rotation_gauche(a)
+				return 1
+			Sinon
+				rotation_droite(a.sad)
+				rotation_gauche(a)
+				return 1
+			Fin Si
+		Fin Si
+	Fin Si
+Fin
+
+rotation_gauche(a:Noeud):vide 	// Pour les fonctions des rotations, on verra ensemble le tableau des rotations donné en cours 
+Variables locale: y:Noeud
+Debut
+	Si a=NIL alors
+		retourner
+	y=a.sad
+	Si a.pere !=NIL alors
+		Si a.pere.sad=a alors
+			a.pere.sad=y
+		Sinon
+			a.pere.sag=y
+		Fin Si
+	Fin Si
+	y.pere=a.pere
+	Si y.sag !=NIL	alors
+		y.sag.pere=a
+	Fin Si
+	a.sad=y.sag
+	a.pere=y
+	y.sag=a
+Fin
+
+rotation_droite(a:Noeud):vide
+Variable locale: x:Noeud
+Debut
+	Si a=NIL alors 
+		retourner
+	x=a.sag	
+	Si a.pere!=NIL alors
+		Si a.pere.sag=a alors
+			a.pere.sag=x
+		Sinon 
+			a.pere.sad=x
+		Fin Si
+	Fin Si
+	x.pere=a.pere
+	Si x.sad!=NIL alors
+		x.sad.pere=a
+	Fin Si
+	a.sag=x.sad
+	a.pere=x
+	x.sad=a
+Fin
+
+hauteur(a:Noeud):entier			// Tout con mais ne pas oublier d'écrire max() dans le programme
+Debut
+	Si a non vide alors 
+		retourner 1+max(hauteur(a.sag),hauteur(a.sad))
+	Sinon 
+		retourner -1
+	Fin Si 
+Fin		
