@@ -1,1 +1,0 @@
-void compadeux2();
