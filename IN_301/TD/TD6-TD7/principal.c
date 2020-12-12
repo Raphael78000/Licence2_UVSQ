@@ -11,31 +11,31 @@
 
 
 int main() {
-	// EXO 39
-//	affn(5);
-	
-//	affnrec(4); printf("\n");
-//	affnrec(5); printf("\n");
-	
-	// EXO 40
-//	afftailletype();
-	
-	// EXO 41
-//	compadeux();
+	printf("-----Exercice 39-----\n");
+	affn(5);
 
-	// EXO 42
-//	compadeux2();
+	affnrec(4); printf("\n");
+	affnrec(5); printf("\n");
 
-	// EXO 43
-//	decalage();
+	printf("-----Exercice 40-----\n");
+	afftailletype();
 
-	// EXO 44-45
-//	bitabit();
+	printf("-----Exercice 41-----\n");
+	compadeux();
 
-	// EXO 46-47
-//	precision();
+	printf("-----Exercice 42-----\n");
+	compadeux2();
 
-	// EXO 48
+	printf("-----Exercice 43-----\n");
+	decalage();
+
+	printf("-----Exercice 44-45-----\n");
+	bitabit();
+
+	printf("-----Exercice 46-47-----\n");
+	precision();
+
+	printf("-----Exercice 48-----\n");
 	macros();
 
 	return 0;

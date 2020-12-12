@@ -5,7 +5,7 @@
 void compadeux() {
 	int a = -1;
 	printf(" a avec %%d : %d\n",a);
-	printf(" a avec %%d : %u\n\n",a);
+	printf(" a avec %%u : %u\n\n",a);
 
 
 	a = 2147483647;

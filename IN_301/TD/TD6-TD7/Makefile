@@ -5,7 +5,7 @@ LDFLAGS = -lm
 CSRC = *.c
 HSRC = *.h
 OBJS = principal.o\
-	exo_39.o exo_41.o exo_41.o exo_42.o\
+	exo_39.o exo_40.o exo_41.o exo_42.o\
 	exo_43.o exo_44-45.o exo_46-47.o\
 	exo_48.o
 
@@ -26,7 +26,7 @@ run: principal
 # $^ : liste des noms de toutes les dépendances.
 principal: $(OBJS)
 	$(CC) -o $@ $^ $(LDFLAGS)
-	
+
 
 principal.o: principal.c $(HSRC)
 	$(CC) $(CFLAGS) $<
@@ -45,19 +45,5 @@ principal.o: principal.c $(HSRC)
 
 .PHONY: clean
 clean:
-	rm -f *.o
-	rm -f principal
-	ls -l
-
-
-DOSSIER = BLOC7-8
-.PHONY: zip
-zip:
-	rm -rf $(DOSSIER)
-	rm -f $(DOSSIER).zip
-	mkdir $(DOSSIER)
-	cp *.c *.h Makefile $(DOSSIER)
-	zip -r $(DOSSIER).zip $(DOSSIER)
-	rm -rf $(DOSSIER)
-	ls -l
-	
+	del  *.o
+	del principal.exe

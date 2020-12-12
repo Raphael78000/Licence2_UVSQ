@@ -1,1 +1,0 @@
-void affbitschar(unsigned char);
