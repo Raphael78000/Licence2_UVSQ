@@ -1,8 +1,8 @@
 all: additionneur
+	./additionneur 0x1 0x1
 
 additionneur: additionneur.c
-	gcc additionneur.c -Wall -o additionneur
+	gcc -o additionneur additionneur.c
 
 clean:
-	rm additionneur
-
+	rm additionneur.exe
