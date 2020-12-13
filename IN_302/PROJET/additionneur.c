@@ -126,7 +126,7 @@ int main(int argc, char** argv){
   //Si l'utilisateur inscrit une seule valeur ou 3,4,5,6,etc valeurs
   if (argc != 3){
     printf("manque de parametre\n");
-    return 1;
+    return 0;
   }
 
   if (convertir_entree(s1,argv[1])==0){
@@ -134,14 +134,14 @@ int main(int argc, char** argv){
      afficher_tab(s1);
    }
    else{
-     return 1;
+     return 0;
    }
   if (convertir_entree(s2,argv[2])==0){
      printf("conversion valeur 2 reussi\n");
      afficher_tab(s2);
    }
    else{
-     return 1;
+     return 0;
    }
 
    over_f = add_16b(s1,s2,s3);
