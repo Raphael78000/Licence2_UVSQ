@@ -25,8 +25,13 @@ int convertir_entree(char* tab,char* strhexa){
   char* ptr;//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
 
   dec = strtol(strhexa,&ptr,16);//va contenir l'héxadécimal au format décimal (base 10)
+
   if (dec > 65535){
-    printf("hexadecimal saisit ne rentre pas sur 16 bits\n");
+    printf("nombre hexadecimal ne tient pas sur 16 bits\n");
+    return 1;
+  }
+  if (ptr[0] != '\0'){
+    printf(" un parametre ne represente pas une valeur hexadecimale\n");
     return 1;
   }
   tab = convert_dec_bin(dec,tab);
@@ -120,28 +125,28 @@ int main(int argc, char** argv){
 
   //Si l'utilisateur inscrit une seule valeur ou 3,4,5,6,etc valeurs
   if (argc != 3){
-    printf("Veuillez entrer 2 valeurs a vouloir additionner\n");
-    return 0;
+    printf("manque de parametre\n");
+    return 1;
   }
 
-   if (convertir_entree(s1,argv[1])==0){
+  if (convertir_entree(s1,argv[1])==0){
      printf("conversion valeur 1 reussi\n");
      afficher_tab(s1);
    }
    else{
-     return 0;
+     return 1;
    }
-   if (convertir_entree(s2,argv[2])==0){
+  if (convertir_entree(s2,argv[2])==0){
      printf("conversion valeur 2 reussi\n");
      afficher_tab(s2);
    }
    else{
-     return 0;
+     return 1;
    }
 
    over_f = add_16b(s1,s2,s3);
 
-   printf("\nLe resultat est %x (base 16), ",convert_bin_dec(s3));
+   printf("\nLe resultat est: 0x%x (base 16), ",convert_bin_dec(s3));
    printf("overflow: %c\n",over_f);
    afficher_tab(s3);
 
