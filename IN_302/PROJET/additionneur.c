@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 //affiche l'écriture binaire héxadécimal dans le terminal
@@ -11,6 +10,7 @@ void afficher_tab(char* s){
   printf("\n");
 }
 
+//convertit un nombre décimal (16bits) en son binaire sotcké dans un tableau (16 bits)
 char* convert_dec_bin(int n,char* tab){
   for (int i = 15; i >= 0; i--){
     if (n % 2) tab[i] = '1';
@@ -20,6 +20,7 @@ char* convert_dec_bin(int n,char* tab){
   return tab;
 }
 
+//permet de convertir les valeurs entrées par l'utilisateur en entrée
 int convertir_entree(char* tab,char* strhexa){
   int dec;
   char* ptr;//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
@@ -38,47 +39,47 @@ int convertir_entree(char* tab,char* strhexa){
   return 0;
 }
 
-//porte universelle logique
+//porte universelle logique NON-ET
 char pl_NAND(char a,char b){
   if (a=='1' && b=='1') return '0';
   else return '1';
 }
 
-//porte universelle logique
+//porte universelle logique NON-OU
 char pl_NOR(char a,char b){
   if (a=='0' && b=='0') return '1';
   else return '0';
 }
 
-//le nombre appelle à la fonction NOR est le même que la fonction NAND, le shcéma est exatcement le même
+//porte logique OU exclusif
 char pl_XOR(char a,char b){
   char c,d,e;
-  c = pl_NAND(a,b);
-  d = pl_NAND(a,c);
-  e = pl_NAND(c,b);
+  c = pl_NAND(a,b);										//le nombre appelle à la fonction NOR est
+  d = pl_NAND(a,c);										//le même que la fonction NAND,
+  e = pl_NAND(c,b);										//le shcéma est exatcement le même
   return pl_NAND(d,e);
 }
 
-//appelle de 2 fois la fonction NAND comparé à 3 fois pour la fonction NOR
+//porte logique ET
 char pl_AND(char a,char b){
-  char c;
-  c = pl_NAND(a,b);
+  char c;															//appelle de 2 fois la fonction NAND 
+  c = pl_NAND(a,b);										//comparé à 3 fois pour la fonction NOR
   return pl_NAND(c,c);
 }
 
-//appelle de 2 fois la fonction NOR comparé à 3 fois pour la fonction NAND
+//porte logique OU
 char pl_OR(char a,char b){
-  char c;
-  c = pl_NOR(a,b);
+  char c;														//appelle de 2 fois la fonction NOR 
+  c = pl_NOR(a,b);									//comparé à 3 fois pour la fonction NAND
   return pl_NOR(c,c);
 }
 
-//même complexité pour l'utilisation des 2 portes logiques universelles
+//porte logique NON
 char pl_NOT(char a){
-  return pl_NOR(a,a);
-}
+  return pl_NOR(a,a);								//même complexité pour l'utilisation
+}																	//des 2 portes logiques universelles
 
-//addition de 2 bits en tenant compte du report précédent
+//addition de 2 bits en tenant compte du report précédent et renvoie l'overflow si il y en a un
 char add_1b(char a,char b,char Cin,char* Cout){
   char c,d,e;
 
@@ -91,7 +92,7 @@ char add_1b(char a,char b,char Cin,char* Cout){
 
   //retourne le nouveau report
   *Cout = pl_OR(e,d); //*Cout car Cout contiendra l'adresse donné en paramètre
-                        //donc mettre valeur pl_OR(e,d) dans l'adresse donné en paramètre nécessite '*' devant Cout
+										//donc mettre valeur pl_OR(e,d) dans l'adresse donné en paramètre nécessite '*' devant Cout
   return pl_XOR(c,Cin);//retourne la somme des 3 bits -> a + b + Cin (le report de l'addition précédente)
 }
 
@@ -105,6 +106,7 @@ char add_16b(char* a,char* b,char* sum){
   return over;
 }
 
+//convertit un nombre représenté sous sa forme binaire sotcké dans un tableau en sa valeur decimal
 int convert_bin_dec(char* s){
   int dec = 0;
   int n;
@@ -126,28 +128,29 @@ int main(int argc, char** argv){
   //Si l'utilisateur inscrit une seule valeur ou 3,4,5,6,etc valeurs
   if (argc != 3){
     printf("manque de parametre\n");
-    return 0;
+    return 1;
   }
 
   if (convertir_entree(s1,argv[1])==0){
-     printf("conversion valeur 1 reussi\n");
+     printf("binaire valeur 1 : ");
      afficher_tab(s1);
    }
    else{
-     return 0;
+     return 1;
    }
   if (convertir_entree(s2,argv[2])==0){
-     printf("conversion valeur 2 reussi\n");
+     printf("binaire valeur 2 : ");
      afficher_tab(s2);
    }
    else{
-     return 0;
+     return 1;
    }
 
    over_f = add_16b(s1,s2,s3);
 
-   printf("\nLe resultat est: 0x%x (base 16), ",convert_bin_dec(s3));
-   printf("overflow: %c\n",over_f);
+   printf("\nLe resultat de l addition sous forme hexadecimal est: 0x%x\n",convert_bin_dec(s3));
+   printf("son overflow est : %c\n",over_f);
+   printf("son resultat en binaire est : ");
    afficher_tab(s3);
 
   return 0;
