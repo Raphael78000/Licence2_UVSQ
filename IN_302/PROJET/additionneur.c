@@ -11,64 +11,26 @@ void afficher_tab(char* s){
   printf("\n");
 }
 
-//convertit un héxadécimal en son binaire sur 4 bits
-char* hex_to_bin(char c){
-
-  switch (c){
-    case '0': return  "0000"; case '1': return  "0001";
-    case '2': return  "0010"; case '3': return  "0011";
-    case '4': return  "0100"; case '5': return  "0101";
-    case '6': return  "0110"; case '7': return  "0111";
-    case '8': return  "1000"; case '9': return  "1001";
-    case 'a': return  "1010"; case 'b': return  "1011";
-    case 'c': return  "1100"; case 'd': return  "1101";
-    case 'e': return  "1110"; case 'f': return  "1111";
+char* convert_dec_bin(int n,char* tab){
+  for (int i = 15; i >= 0; i--){
+    if (n % 2) tab[i] = '1';
+    else tab[i] = '0';
+    n = n / 2;
   }
+  return tab;
 }
 
-//fonction qui test si la valeur entrée est un hexadecimal et si l'hexadecimal rentre dans 16bits
-int est_hexadecimal_16bit(char* valeur){
-  if (valeur[0] != '0' && valeur[1] != 'x'){
-    printf("Vous avez pas entre un nombre hexadecimal\n");
-    return 0;
-  }
-  if (strlen(valeur+2) > 4){
-    printf("le nombre hexadecimal saisit ne peut pas etre represente sur 16 bits");
-    return 0;
-  }
-  return 1; //(valeur+2) permet d'enlever la notation "0x" et de tenir compte que du nombre hexadecimal
-}
-
-//il nous faut obtenir une chaîne à 4 valeurs afin d'éviter les erreurs d'écriture
-char* pb_lecture_hexa(char* s){
-  char* z;//va contenir le nombre hexadecimal corrigé à la fini
-  int j = 0;
-
-  for (int i = 0; i < (4 - strlen(s)); i++) z[i] = '0';         //nous permet de placer des '0' si besoin avant la chaîne s si besoin
-  for (int i = (4 - strlen(s)); i < 4; i++) z[i] = s[j]; j++;  //pour atteindre une chaîne à 4 valeurs en fin fonction
-  return z;//retourne le nombre hexadécimal coorect pour que la suite de sa conversion puisse fonctionner
-}
-
-//fonction qui convertit l'héxadecimal en binaaire stocké dans un tableau
 int convertir_entree(char* tab,char* strhexa){
-  if (est_hexadecimal_16bit(strhexa)){
-    return 0;
-}
-  char* s = strhexa + 2; //permet d'avoir le nombre hexadecimal sans la notation "0x"
-  if (strlen(s) < 4){
-    s = pb_lecture_hexa(s);
-  }
-  char* z; //permet de stocker temporairement la conversion d'une valeur hexadecimal en binaire
-  int count = 0;
+  int dec;
+  char* ptr;//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
 
-  for (int i = 0; i < 4; i++){
-  z = hex_to_bin(s[i]);
-    for (int j = 0; j < 4; j++){
-      tab[count] = z[j];
-      count++;
-    }
+  dec = strtol(strhexa,&ptr,16);//va contenir l'héxadécimal au format décimal (base 10)
+  if (dec > 65535){
+    printf("hexadecimal saisit ne rentre pas sur 16 bits\n");
+    return 1;
   }
-  return 1;
+  tab = convert_dec_bin(dec,tab);
+  return 0;
 }
 
 //porte universelle logique
@@ -138,7 +100,7 @@ char add_16b(char* a,char* b,char* sum){
   return over;
 }
 
-int convert(char* s){
+int convert_bin_dec(char* s){
   int dec = 0;
   int n;
   int count = 0;
@@ -156,25 +118,32 @@ int main(int argc, char** argv){
   char s3[16];//contient le résultat de l'addition des 2 nombres
   char over_f;//contient '0' si pas d'overflow et contient '1' si overflow
 
-
   //Si l'utilisateur inscrit une seule valeur ou 3,4,5,6,etc valeurs
   if (argc != 3){
     printf("Veuillez entrer 2 valeurs a vouloir additionner\n");
-    //return 0;
+    return 0;
   }
-  if (convertir_entree(s1,argv[1])){
-    printf("conversion reussi pour valeur 1\n");
-    afficher_tab(s1);
-  }
-  if (convertir_entree(s2,argv[2])){
-    printf("conversion reussi pour valeur 2\n");
-    afficher_tab(s2);
-  }
-  over_f = add_16b(s1,s2,s3);
-  printf("overflow : %c\n",over_f);
 
-  printf("Le resultat vaut : 0x%x\n",convert(s3));
-  afficher_tab(s3);
+   if (convertir_entree(s1,argv[1])==0){
+     printf("conversion valeur 1 reussi\n");
+     afficher_tab(s1);
+   }
+   else{
+     return 0;
+   }
+   if (convertir_entree(s2,argv[2])==0){
+     printf("conversion valeur 2 reussi\n");
+     afficher_tab(s2);
+   }
+   else{
+     return 0;
+   }
+
+   over_f = add_16b(s1,s2,s3);
+
+   printf("\nLe resultat est %x (base 16), ",convert_bin_dec(s3));
+   printf("overflow: %c\n",over_f);
+   afficher_tab(s3);
 
   return 0;
 }
