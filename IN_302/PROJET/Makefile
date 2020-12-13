@@ -1,7 +1,7 @@
 all: additionneur
 
 additionneur: additionneur.c
-	gcc -o additionneur additionneur.c -lm
+	gcc -o additionneur additionneur.c -lm -Wall
 
 clean:
 	rm -f additionneur
