@@ -1,0 +1,890 @@
+
+
+#########	 Le traitement du texte pg31469.txt a mis 6.719112 millisecondes
+
+
+#########	 La construction de l'arbre AVL a pris 660.529852 millisecondes
+
+
+
+>>>>>>>>>    Résultats des recherches :
+
+
+-------->    'a' apparaît 314 fois sur les lignes  :   
+
+(    40 )     _A posthumous story of immense power, written by a master of weird
+
+(    41 )       fiction--a tale of a revolting horror in the cellar of an old
+
+(    50 )        weird fiction. His ability to create and sustain a mood of brooding
+
+(    58 )    latter sort is splendidly exemplified by a case in the ancient city of
+
+(    66 )    gravestones had for him a peculiar fascination.
+
+(    70 )    particular house on the eastern side of the street; a dingy, antiquated
+
+(    71 )    structure perched on the abruptly rising side hill, with a great unkempt
+
+(    72 )    yard dating from a time when the region was partly open country. It does
+
+(    77 )    stands starkly leering as a symbol of all that is unutterably hideous.
+
+(    79 )    The house was--and for that matter still is--of a kind to attract the
+
+(    80 )    attention of the curious. Originally a farm or semi-farm building, it
+
+(    87 )    construction, over a century and a half ago, had followed the grading
+
+(    89 )    Street--at first called Back Street--was laid out as a lane winding
+
+(    95 )    precipitous lawn from the roadway; but a widening of the street at about
+
+(    97 )    exposing the foundations so that a brick basement wall had to be made,
+
+(    98 )    giving the deep cellar a street frontage with door and one window above
+
+(   100 )    laid out a century ago the last of the intervening space was removed;
+
+(   101 )    and Poe in his walks must have seen only a sheer ascent of dull gray
+
+(   102 )    brick flush with the sidewalk and surmounted at a height of ten feet by
+
+(   111 )    a terrace bounded by a high bank wall of damp, mossy stone pierced by a
+
+(   112 )    steep flight of narrow steps which led inward between canyon-like
+
+(   132 )    forgotten when Providence grew to be a metropolis with a shifting modern
+
+(   140 )    dispute is that a frightful proportion of persons died there; or more
+
+(   147 )    in varying degree a type of anemia or consumption, and sometimes a
+
+(   148 )    decline of the mental faculties, which spoke ill for the salubriousness
+
+(   161 )    windows were largely broken, and a nameless air of desolation hung round
+
+(   166 )    the ladder to the attic, a vast raftered length lighted only by small
+
+(   167 )    blinking windows in the gable ends, and filled with a massed wreckage
+
+(   174 )    only a thin door and window-pierced brick wall to separate it from the
+
+(   190 )    also a subtler thing we often thought we detected--a very strange thing
+
+(   191 )    which was, however, merely suggestive at most. I refer to a sort of
+
+(   192 )    cloudy whitish pattern on the dirt floor--a vague, shifting deposit of
+
+(   195 )    Once in a while it struck us that this patch bore an uncanny resemblance
+
+(   196 )    to a doubled-up human figure, though generally no such kinship existed,
+
+(   199 )    On a certain rainy afternoon when this illusion seemed phenomenally
+
+(   200 )    strong, and when, in addition, I had fancied I glimpsed a kind of thin,
+
+(   204 )    reminiscence. Later I heard that a similar notion entered into some of
+
+(   205 )    the wild ancient tales of the common folk--a notion likewise alluding to
+
+(   215 )    a sane, conservative physician of the old school, and for all his
+
+(   217 )    the abnormal. His own view, postulating simply a building and location
+
+(   220 )    interest would in a boy's fanciful mind take on all manner of gruesome
+
+(   223 )    The doctor was a bachelor; a white-haired, clean-shaven, old-fashioned
+
+(   224 )    gentleman, and a local historian of note, who had often broken a lance
+
+(   226 )    Thomas W. Bicknell. He lived with one man-servant in a Georgian
+
+(   229 )    colony house where his grandfather--a cousin of that celebrated
+
+(   241 )    my uncle the hoarded lore I sought, there lay before me a strange enough
+
+(   243 )    of the matter was, there ran through it a continuous thread of brooding,
+
+(   247 )    hideous possibilities. A new and burning curiosity grew in me, compared
+
+(   253 )    after a certain night in that house he did not come away with me. I am
+
+(   256 )    marble urn to his memory in St. John's churchyard--the place that Poe
+
+(   261 )    The history of the house, opening amidst a maze of dates, revealed no
+
+(   263 )    prosperous and honorable family who built it. Yet from the first a taint
+
+(   270 )    in 1761. Harris was a substantial merchant and seaman in the West India
+
+(   277 )    The site he had chosen--a recently straightened part of the new and
+
+(   281 )    afford, and Harris hastened to move in before the birth of a fifth child
+
+(   282 )    which the family expected. That child, a boy, came in December; but was
+
+(   284 )    century and a half.
+
+(   289 )    mere wasting-away or decline. It seemed, in any event, to be contagious;
+
+(   293 )    for a sudden attachment for Mehitabel Pierce, who was hired to succeed
+
+(   294 )    Hannah. He died the next year--a sad year indeed, since it marked the
+
+(   301 )    final blow to her reason. In 1768 she fell victim to a mild form of
+
+(   304 )    the family. Mercy was a plain, raw-boned woman of great strength; but
+
+(   307 )    only surviving nephew William, who from a sturdy infant had become a
+
+(   308 )    sickly, spindling lad. In this year the servant Mehitabel died, and the
+
+(   310 )    least, with only some wild tales and a complaint that he disliked the
+
+(   311 )    smell of the place. For a time Mercy could secure no more help, since
+
+(   315 )    out of town; Ann White, a morose woman from that part of North Kingstown
+
+(   316 )    now set off as the township of Exeter, and a capable Boston man named
+
+(   324 )    now, a seat of the most uncomfortable superstitions. As lately as 1892
+
+(   325 )    an Exeter community exhumed a dead body and ceremoniously burnt its
+
+(   329 )    few months Mercy discharged her, filling her place with a faithful and
+
+(   342 )    it sounds absurd to hear that a woman educated only in the rudiments of
+
+(   343 )    French often shouted for hours in a coarse and idiomatic form of that
+
+(   345 )    of a staring thing which bit and chewed at her. In 1772 the servant
+
+(   346 )    Zenas died, and when Mrs. Harris heard of it she laughed with a shocking
+
+(   353 )    time on enjoyed a steady rise in health and prestige. In 1780, as a
+
+(   354 )    captain in the Rhode Island forces in New Jersey under Colonel Angell,
+
+(   358 )    The young soldier's return was not a thing of unmitigated happiness. The
+
+(   361 )    Mercy Dexter's once robust frame had undergone a sad and curious decay,
+
+(   362 )    so that she was now a stooped and pathetic figure with hollow voice and
+
+(   363 )    disconcerting pallor--qualities shared to a singular degree by the one
+
+(   365 )    to a still-born daughter, and on the fifteenth of the next May Mercy
+
+(   366 )    Dexter took leave of a useful, austere, and virtuous life.
+
+(   372 )    of a new and finer house in Westminster Street, in the growing part of
+
+(   381 )    Rathbone was a practical man, and rented the Benefit Street house
+
+(   390 )    They said the place had a febrile smell.
+
+(   393 )    privateersman, and served with distinction on the _Vigilant_ under
+
+(   395 )    1814, and became a father on that memorable night of September 23, 1815,
+
+(   396 )    when a great gale drove the waters of the bay over half the town, and
+
+(   397 )    floated a tall sloop well up Westminster Street so that its masts almost
+
+(   399 )    Welcome, was a seaman's son.
+
+(   403 )    shunned house as other than a nuisance almost impossible to
+
+(   405 )    age. Indeed, it never was rented after a series of deaths culminating in
+
+(   407 )    Carrington Harris, last of the male line, knew it only as a deserted and
+
+(   419 )    persistent evil beyond anything in nature as I had known it; an evil
+
+(   425 )    tireless antiquarian and very deeply interested in the shunned house;
+
+(   429 )    and malodorous _cellar_ of the house a vast supremacy in evil influence.
+
+(   443 )    abroad by night. To destroy a vampire one must, the grandmothers say,
+
+(   444 )    exhume it and burn its heart, or at least drive a stake through that
+
+(   445 )    organ; and Ann's dogged insistence on a search under the cellar had been
+
+(   448 )    Her tales, however, commanded a wide audience, and were the more readily
+
+(   458 )    glassy-eyed, half-visible presence.
+
+(   461 )    me an odd sensation, which was intensified by a pair of widely separated
+
+(   467 )    person, in 1815 a gentle old lady named Stafford and in 1845 a
+
+(   468 )    schoolteacher of middle age named Eleazar Durfee, became transfigured in
+
+(   469 )    a horrible way, glaring glassily and attempting to bite the throat of
+
+(   471 )    which put an end to the renting of the house--a series of anemia deaths
+
+(   480 )    maledictions in French, a language they could not possibly have studied
+
+(   481 )    to any extent. It made one think of poor Rhoby Harris nearly a century
+
+(   503 )    might have shed a little light. The old seaman, who had survived his son
+
+(   506 )    seemed darkly aware of something that might have lent a weird
+
+(   511 )    somewhat peculiar circumstance in Mercy's last moments, but he had soon
+
+(   522 )    zeal more penetrating than that which my uncle had occasionally shown in
+
+(   523 )    the same work. What I wished was a comprehensive history of the site
+
+(   529 )    line roughly corresponding with the modern Hope Street. The Throckmorton
+
+(   537 )    Then suddenly I came--by a rare piece of chance, since it was not in the
+
+(   540 )    the queerest phases of the affair. It was the record of a lease, in
+
+(   541 )    1697, of a small tract of ground to an Etienne Roulet and wife. At last
+
+(   548 )    laid out their graveyard behind a one-story and attic cottage, and that
+
+(   551 )    Historical Society and Shepley Library before I could find a local door
+
+(   554 )    at once to examine the cellar of the shunned house itself with a new and
+
+(   568 )    the strangers had been granted a haven; and the swarthy Etienne Roulet,
+
+(   570 )    diagrams, was given a clerical post in the warehouse at Pardon
+
+(   572 )    a riot of some sort later on--perhaps forty years later, after old
+
+(   575 )    For a century and more, it appeared, the Roulets had been well
+
+(   577 )    life of a New England seaport. Etienne's son Paul, a surly fellow whose
+
+(   579 )    family, was particularly a source of speculation; and though Providence
+
+(   590 )    condemned to death as a demoniac but afterward saved from the stake by
+
+(   591 )    the Paris parliament and shut in a madhouse. He had been found covered
+
+(   592 )    with blood and shreds of flesh in a wood, shortly after the killing and
+
+(   593 )    rending of a boy by a pair of wolves. One wolf was seen to lope away
+
+(   594 )    unhurt. Surely a pretty hearthside tale, with a queer significance as to
+
+(   606 )    Finally, with Carrington Harris's permission, I fitted a key to the
+
+(   608 )    preferring to have a more immediate access to the outside world than the
+
+(   612 )    above-ground windows, and a sense of security glowed from the unlocked
+
+(   613 )    door which placed me only a few feet from the placid sidewalk outside.
+
+(   619 )    At length, upon a suggestion of my uncle's, I decided to try the spot
+
+(   624 )    the whitish deposits a particularly sharp definition of the "huddled
+
+(   631 )    subtle, sickish, almost luminous vapor which as it hung trembling in the
+
+(   634 )    blackness of the great chimney with a fetor in its wake. It was truly
+
+(   638 )    When I told my uncle about it he was greatly aroused; and after a tense
+
+(   639 )    hour of reflection, arrived at a definite and drastic decision. Weighing
+
+(   642 )    destroy--the horror of the house by a joint night or nights of
+
+(   648 )    On Wednesday, June 25, 1919, after a proper notification of Carrington
+
+(   650 )    uncle and I conveyed to the shunned house two camp chairs and a folding
+
+(   655 )    having a key to the outside cellar door, were prepared to leave our
+
+(   664 )    instinctively assumed direction of our venture, was a marvelous
+
+(   665 )    commentary on the potential vitality and resilience of a man of
+
+(   667 )    had preached as a physician, and but for what happened later would be
+
+(   685 )    vampires or werewolves would be a carelessly inclusive statement. Rather
+
+(   691 )    manifestations which we, for lack of a proper vantage-point, may never
+
+(   706 )    original lines of force determined by a frantic hatred of the
+
+(   709 )    Such a thing was surely not a physical or biochemical impossibility in
+
+(   710 )    the light of a newer science which includes the theories of relativity
+
+(   717 )    self-preservation. In any case such a monster must of necessity be in
+
+(   719 )    a primary duty with every man not an enemy to the world's life, health,
+
+(   724 )    felt it definitely. It might be pure energy--a form ethereal and outside
+
+(   730 )    tales, all argued at least a remote and reminiscent connection with the
+
+(   736 )    We had devised two weapons to fight it; a large and specially fitted
+
+(   739 )    opposable only by vigorously destructive ether radiations, and a pair of
+
+(   749 )    a moment I half doubted that I had ever seen it in the more definitely
+
+(   753 )    continued we found no promise of pertinent developments. A weak,
+
+(   754 )    filtered glow from the rain-harassed street-lamps outside, and a feeble
+
+(   764 )    of hooks, andirons, spit, crane, and a door to the Dutch oven--these
+
+(   769 )    unlocked; so that a direct and practical path of escape might lie open
+
+(   785 )    alone--I say alone, for one who sits by a sleeper is indeed alone;
+
+(   802 )    occasionally heaving a sigh which held more than a few of the qualities
+
+(   803 )    of a choking moan.
+
+(   815 )    well-bred calm, whereas now a variety of emotions seemed struggling
+
+(   819 )    many men, and suggested a curious quality of alienage from himself.
+
+(   825 )    and then--with a tremendous start--I recognized something about them
+
+(   833 )    Suddenly a perspiration broke out on the sleeper's forehead, and he
+
+(   834 )    leaped abruptly up, half awake. The jumble of French changed to a cry in
+
+(   836 )    Then the awakening became complete, and with a subsidence of facial
+
+(   838 )    relate a dream whose nucleus of significance I could only surmise with a
+
+(   839 )    kind of awe.
+
+(   841 )    He had, he said, floated off from a very ordinary series of
+
+(   842 )    dream-pictures into a scene whose strangeness was related to nothing he
+
+(   843 )    had ever read. It was of this world, and yet not of it--a shadowy
+
+(   845 )    in most unfamiliar and perturbing combinations. There was a suggestion
+
+(   852 )    Once my uncle thought he lay in a carelessly dug open pit, with a crowd
+
+(   855 )    house--an old house, apparently--but the details and inhabitants were
+
+(   858 )    just as great a state of flux as the presumably more mobile objects. It
+
+(   862 )    all the while there was a personal sensation of choking, as if some
+
+(   880 )    most disturbing kind. I felt, in my visions, a cosmic and abysmal
+
+(   886 )    pleasant sleep, and for a second I was not sorry for the echoing shriek
+
+(   887 )    which clove through the barriers of dream and flung me to a sharp and
+
+(   897 )    all photographed with morbid vividness on my brain in a light brighter
+
+(   899 )    not a strong or even a fairly strong light; certainly not nearly strong
+
+(   900 )    enough to read an average book by. But it cast a shadow of myself and
+
+(   901 )    the cot on the floor, and had a yellowish, penetrating force that hinted
+
+(   916 )    Out of the fungus-ridden earth steamed up a vaporous corpse-light,
+
+(   917 )    yellow and diseased, which bubbled and lapped to a gigantic height in
+
+(   920 )    mocking--and the rugose insect-like head dissolved at the top to a thin
+
+(   924 )    form. At the time, it was to me only a seething, dimly phosphorescent
+
+(   932 )    It was a sense of routine which kept me from going mad. I had drilled
+
+(   939 )    of nature. There was a bluish haze and a frenzied sputtering, and the
+
+(   944 )    Then, in the midst of that demoniac spectacle, I saw a fresh horror
+
+(   949 )    of my uncle had commenced a nauseous liquefaction whose essence eludes
+
+(   952 )    devil and a multitude, a charnel-house and a pageant. Lit by the mixed
+
+(   953 )    and uncertain beams, that gelatinous face assumed a dozen--a score--a
+
+(   954 )    hundred--aspects; grinning, as it sank to the ground on a body that
+
+(   960 )    familiar and unfamiliar. For a second there flashed a degraded
+
+(   961 )    counterfeit of a miniature of poor mad Rhoby Harris that I had seen in
+
+(   963 )    raw-boned image of Mercy Dexter as I recalled her from a painting in
+
+(   965 )    the last, when a curious blend of servant and baby visages flickered
+
+(   966 )    close to the fungous floor where a pool of greenish grease was
+
+(   970 )    to bid me farewell. It seems to me I hiccupped a farewell from my own
+
+(   971 )    parched throat as I lurched out into the street; a thin stream of grease
+
+(  1007 )    home, where I bathed, ate, and gave by telephone an order for a pickax,
+
+(  1008 )    a spade, a military gas-mask, and six carboys of sulfuric acid, all to
+
+(  1014 )    At eleven a. m. the next day I commenced digging. It was sunny weather,
+
+(  1020 )    fireplace, my spade causing a viscous yellow ichor to ooze from the
+
+(  1025 )    My hand shook perceptibly, but still I delved; after a while standing in
+
+(  1029 )    the house for over a century and a half. I wondered what it would look
+
+(  1037 )    nameless thing at the bottom of a pit.
+
+(  1040 )    made a motion as if to climb out of the hole, which was now as deep as
+
+(  1043 )    fishy and glassy--a kind of semi-putrid congealed jelly with suggestions
+
+(  1045 )    a rift where a part of the substance was folded over. The exposed area
+
+(  1046 )    was huge and roughly cylindrical; like a mammoth soft blue-white
+
+(  1069 )    after a time I felt it safe to shovel the earth back into the pit. It
+
+(  1072 )    kind of harmless grayish powder which blew ash-like along the floor. One
+
+(  1074 )    hell, it had received at last the demon soul of an unhallowed thing. And
+
+(  1082 )    me, and I shall find mixed with my relief a queer regret when it is torn
+
+(  1083 )    down to make way for a tawdry shop or vulgar apartment building. The
+
+(  1120 )    one owns a United States copyright in these works, so the Foundation
+
+(  1126 )    Gutenberg is a registered trademark, and may not be used if you
+
+(  1154 )    1.A.  By reading or using any part of this Project Gutenberg-tm
+
+(  1160 )    If you paid a fee for obtaining a copy of or access to a Project
+
+(  1162 )    terms of this agreement, you may obtain a refund from the person or
+
+(  1165 )    1.B.  "Project Gutenberg" is a registered trademark.  It may only be
+
+(  1167 )    agree to be bound by the terms of this agreement.  There are a few
+
+(  1170 )    paragraph 1.C below.  There are a lot of things you can do with Project
+
+(  1176 )    or PGLAF), owns a compilation copyright in the collection of Project
+
+(  1180 )    located in the United States, we do not claim a right to prevent you from
+
+(  1193 )    a constant state of change.  If you are outside the United States, check
+
+(  1205 )    whenever any copy of a Project Gutenberg-tm work (any work on which the
+
+(  1216 )    from the public domain (does not contain a notice indicating that it is
+
+(  1219 )    or charges.  If you are redistributing or providing access to a work
+
+(  1234 )    License terms from this work, or any files containing a part of this
+
+(  1246 )    distribute copies of a Project Gutenberg-tm work in a format other than
+
+(  1250 )    copy, a means of exporting a copy, or a means of obtaining a copy upon
+
+(  1255 )    1.E.7.  Do not charge a fee for access to, viewing, displaying,
+
+(  1259 )    1.E.8.  You may charge a reasonable fee for copies of or providing
+
+(  1263 )    - You pay a royalty fee of 20% of the gross profits you derive from
+
+(  1276 )    - You provide a full refund of any money paid by a user who notifies
+
+(  1279 )         License.  You must require such a user to return or
+
+(  1280 )         destroy all copies of the works possessed in a physical medium
+
+(  1284 )    - You provide, in accordance with paragraph 1.F.3, a full refund of any
+
+(  1285 )         money paid for a work or a replacement copy, if a defect in the
+
+(  1292 )    1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
+
+(  1307 )    corrupt data, transcription errors, a copyright or other intellectual
+
+(  1308 )    property infringement, a defective or damaged disk or other medium, a
+
+(  1309 )    computer virus, or computer codes that damage or cannot be read by
+
+(  1315 )    Gutenberg-tm trademark, and any other party distributing a Project
+
+(  1327 )    defect in this electronic work within 90 days of receiving it, you can
+
+(  1328 )    receive a refund of the money (if any) you paid for it by sending a
+
+(  1329 )    written explanation to the person you received the work from.  If you
+
+(  1330 )    received the work on a physical medium, you must return the medium with
+
+(  1332 )    the defective work may elect to provide a replacement copy in lieu of a
+
+(  1333 )    refund.  If you received the work electronically, the person or entity
+
+(  1334 )    providing it to you may choose to give you a second opportunity to
+
+(  1335 )    receive the work electronically in lieu of a refund.  If the second copy
+
+(  1336 )    is also defective, you may demand a refund in writing without further
+
+(  1359 )    or cause to occur: (a) distribution of this or any Project Gutenberg-tm
+
+(  1376 )    Gutenberg Literary Archive Foundation was created to provide a secure
+
+(  1386 )    The Project Gutenberg Literary Archive Foundation is a non profit
+
+(  1423 )    considerable effort, much paperwork and many fees to meet and keep up
+
+(  1439 )    methods and addresses.  Donations are accepted in a number of other
+
+(  1448 )    concept of a library of electronic works that could be freely shared
+
+(  1450 )    Gutenberg-tm eBooks with only a loose network of volunteer support.
+
+(  1455 )    unless a copyright notice is included.  Thus, we do not necessarily
+
+
+
+( Temps )    La recherche du mot 'a' a pris 0.167131 millisecondes
+
+
+
+
+-------->    Le mot mot n'a pas été trouvé dans le texte
+
+( Temps )    La recherche du mot 'mot' a pris 0.006199 millisecondes
+
+
+
+
+-------->    Le mot lol n'a pas été trouvé dans le texte
+
+( Temps )    La recherche du mot 'lol' a pris 0.005007 millisecondes
+
+
+
+
+-------->    'i' apparaît 177 fois sur les lignes  :   
+
+(   105 )    [Illustration: "That awful door in Benefit Street which I had left
+
+(   121 )    What I heard in my youth about the shunned house was merely that people
+
+(   122 )    died there in alarmingly great numbers. That, I was told, was why the
+
+(   128 )    whom I knew. Only the notebooks of my antiquarian uncle, Doctor Elihu
+
+(   152 )    This much I knew before my insistent questioning led my uncle to show me
+
+(   157 )    to overrun the place, and I can still recall my youthful terror not only
+
+(   191 )    which was, however, merely suggestive at most. I refer to a sort of
+
+(   200 )    strong, and when, in addition, I had fancied I glimpsed a kind of thin,
+
+(   202 )    the yawning fireplace, I spoke to my uncle about the matter. He smiled
+
+(   204 )    reminiscence. Later I heard that a similar notion entered into some of
+
+(   241 )    my uncle the hoarded lore I sought, there lay before me a strange enough
+
+(   252 )    the last my uncle insisted on joining the search I had commenced, and
+
+(   253 )    after a certain night in that house he did not come away with me. I am
+
+(   255 )    honor, virtue, good taste, benevolence, and learning. I have reared a
+
+(   408 )    somewhat picturesque center of legend until I told him my experience. He
+
+(   417 )    It may well be imagined how powerfully I was affected by the annals of
+
+(   419 )    persistent evil beyond anything in nature as I had known it; an evil
+
+(   424 )    the like. All of this material I cannot hope to give, for my uncle was a
+
+(   426 )    but I may refer to several dominant points which earn notice by their
+
+(   434 )    profoundly, on account of what I had seen in my boyhood, but I felt that
+
+(   460 )    Free from unwarranted superstition though I am, these things produced in
+
+(   485 )    Indeed, I could see that my uncle had thought deeply on the subject, and
+
+(   493 )    For my part, I was disposed to take the whole subject with profound
+
+(   495 )    accumulate as much more as I could. I talked with the elderly Archer
+
+(   499 )    When, however, I asked them what connection with France or its language
+
+(   501 )    ignorant as I. Archer knew nothing, and all that Miss Harris could say
+
+(   515 )    son Carrington, the present owner, with whom I talked after my
+
+(   521 )    furnish, I turned my attention to early town records and deeds with a
+
+(   523 )    the same work. What I wished was a comprehensive history of the site
+
+(   525 )    Indian legend could be unearthed to supply the data. I found, at the
+
+(   530 )    lot had later, of course, been much subdivided; and I became very
+
+(   533 )    graveyard; but as I examined the records more carefully, I found that
+
+(   537 )    Then suddenly I came--by a rare piece of chance, since it was not in the
+
+(   544 )    and heterogeneous reading--and I feverishly studied the platting of the
+
+(   546 )    straightening of Back Street between 1747 and 1758. I found what I had
+
+(   550 )    in much confusion; and I was forced to ransack both the Rhode Island
+
+(   551 )    Historical Society and Shepley Library before I could find a local door
+
+(   552 )    which the name of Etienne Roulet would unlock. In the end I did find
+
+(   553 )    something; something of such vague but monstrous import that I set about
+
+(   586 )    could determine. I wondered how many of those who had known the legends
+
+(   595 )    name and place; but I decided that the Providence gossips could not have
+
+(   603 )    I now visited the accursed place with increased frequency; studying the
+
+(   606 )    Finally, with Carrington Harris's permission, I fitted a key to the
+
+(   610 )    morbidity lurked most thickly, I searched and poked during long
+
+(   616 )    floor--and I fancy that many pedestrians must have watched me curiously
+
+(   619 )    At length, upon a suggestion of my uncle's, I decided to try the spot
+
+(   623 )    evening, and I was almost prepared when I saw--or thought I saw--amidst
+
+(   625 )    form" I had suspected from boyhood. Its clearness was astonishing and
+
+(   626 )    unprecedented--and as I watched I seemed to see again the thin,
+
+(   635 )    horrible, and the more so to me because of what I knew of the spot.
+
+(   636 )    Refusing to flee, I watched it fade--and as I watched I felt that it was
+
+(   638 )    When I told my uncle about it he was greatly aroused; and after a tense
+
+(   650 )    uncle and I conveyed to the shunned house two camp chairs and a folding
+
+(   669 )    happen--Carrington Harris and myself. I had to tell Harris because he
+
+(   671 )    we had spoken to him in advance of our quest; and I felt after my
+
+(   678 )    have said, in any sense childishly superstitious, but scientific study
+
+(   749 )    a moment I half doubted that I had ever seen it in the more definitely
+
+(   750 )    limned form--but then I thought of the legends.
+
+(   784 )    Something like fear chilled me as I sat there in the small hours
+
+(   785 )    alone--I say alone, for one who sits by a sleeper is indeed alone;
+
+(   790 )    this storm positively swamp-like. I studied the loose, antique masonry
+
+(   793 )    atmosphere of the place seemed about to sicken me, I opened the door and
+
+(   796 )    watching; and I yawned repeatedly, fatigue getting the better of
+
+(   805 )    I turned my electric flashlight on him and found his face averted; so
+
+(   806 )    rising and crossing to the other side of the cot, I again flashed the
+
+(   807 )    light to see if he seemed in any pain. What I saw unnerved me most
+
+(   816 )    within him. I think, on the whole, that it was this _variety_ which
+
+(   823 )    All at once he commenced to mutter, and I did not like the look of his
+
+(   825 )    and then--with a tremendous start--I recognized something about them
+
+(   826 )    which filled me with icy fear till I recalled the breadth of my uncle's
+
+(   830 )    phrases I could distinguish seemed connected with the darkest myths he
+
+(   838 )    relate a dream whose nucleus of significance I could only surmise with a
+
+(   866 )    I shuddered at the thought of those vital processes, worn as they were
+
+(   875 )    in time I yielded to my yawns and took my turn at slumber. My uncle
+
+(   879 )    Sleep seized me quickly, and I was at once haunted with dreams of the
+
+(   880 )    most disturbing kind. I felt, in my visions, a cosmic and abysmal
+
+(   882 )    lay confined. I seemed bound and gagged, and taunted by the echoing
+
+(   885 )    recall many futile struggles and attempts to scream. It was not a
+
+(   886 )    pleasant sleep, and for a second I was not sorry for the echoing shriek
+
+(   894 )    I had been lying with my face away from my uncle's chair, so that in
+
+(   895 )    this sudden flash of awakening I saw only the door to the street, the
+
+(   902 )    at things more potent than luminosity. This I perceived with unhealthy
+
+(   907 )    almost automatically I leaped up and turned about to grasp the
+
+(   909 )    before the fireplace. As I turned, I dreaded what I was to see; for the
+
+(   910 )    scream had been in my uncle's voice, and I knew not against what menace
+
+(   911 )    I should have to defend him and myself.
+
+(   913 )    Yet after all, the sight was worse than I had dreaded. There are horrors
+
+(   918 )    vague outlines half human and half monstrous, through which I could see
+
+(   922 )    chimney. I say that I saw this thing, but it is only in conscious
+
+(   923 )    retrospection that I ever definitely traced its damnable approach to
+
+(   932 )    It was a sense of routine which kept me from going mad. I had drilled
+
+(   936 )    loomed on my left, I threw on the current of the Crookes tube apparatus,
+
+(   940 )    yellowish phosphorescence grew dimmer to my eyes. But I saw the dimness
+
+(   944 )    Then, in the midst of that demoniac spectacle, I saw a fresh horror
+
+(   947 )    terrors I loosed upon the world, or what thoughts or judgments of men I
+
+(   948 )    brought down upon my head. In that dim blend of blue and yellow the form
+
+(   958 )    I saw the features of the Harris line, masculine and feminine, adult and
+
+(   961 )    counterfeit of a miniature of poor mad Rhoby Harris that I had seen in
+
+(   962 )    the School of Design museum, and another time I thought I caught the
+
+(   963 )    raw-boned image of Mercy Dexter as I recalled her from a painting in
+
+(   969 )    face. I like to think that he existed at that moment, and that he tried
+
+(   970 )    to bid me farewell. It seems to me I hiccupped a farewell from my own
+
+(   971 )    parched throat as I lurched out into the street; a thin stream of grease
+
+(   977 )    street, and in all the world there was no one I dared tell. I walked
+
+(   984 )    end I went, wet, hatless, and dazed in the morning light, and entered
+
+(   985 )    that awful door in Benefit Street which I had left ajar, and which still
+
+(   987 )    dared not speak.
+
+(   991 )    I looked at the cot, the chairs, the instruments, my neglected hat, and
+
+(   992 )    the yellowed straw hat of my uncle. Dazedness was uppermost, and I could
+
+(   994 )    trickled back, and I knew that I had witnessed things more horrible than
+
+(   995 )    I had dreamed.
+
+(   997 )    Sitting down, I tried to conjecture as nearly as sanity would let me
+
+(   998 )    just what had happened, and how I might end the horror, if indeed it had
+
+(  1002 )    certain churchyards? This I felt was the clue, and again I looked at the
+
+(  1006 )    In ten minutes my mind was made up, and taking my hat I set out for
+
+(  1007 )    home, where I bathed, ate, and gave by telephone an order for a pickax,
+
+(  1010 )    Benefit Street. After that I tried to sleep; and failing, passed the
+
+(  1014 )    At eleven a. m. the next day I commenced digging. It was sunny weather,
+
+(  1015 )    and I was glad of that. I was still alone, for as much as I feared the
+
+(  1016 )    unknown horror I sought, there was more fear in the thought of telling
+
+(  1017 )    anybody. Later I told Harris only through sheer necessity, and because
+
+(  1019 )    toward belief. As I turned up the stinking black earth in front of the
+
+(  1021 )    white fungi which it severed, I trembled at the dubious thoughts of what
+
+(  1022 )    I might uncover. Some secrets of inner earth are not good for mankind,
+
+(  1025 )    My hand shook perceptibly, but still I delved; after a while standing in
+
+(  1026 )    the large hole I had made. With the deepening of the hole, which was
+
+(  1027 )    about six feet square, the evil smell increased; and I lost all doubt of
+
+(  1029 )    the house for over a century and a half. I wondered what it would look
+
+(  1031 )    waxed through long ages of life-sucking. At length I climbed out of the
+
+(  1033 )    of acid around and near two sides, so that when necessary I might empty
+
+(  1034 )    them all down the aperture in quick succession. After that I dumped
+
+(  1036 )    gas-mask as the smell grew. I was nearly unnerved at my proximity to a
+
+(  1039 )    Suddenly my spade struck something softer than earth. I shuddered, and
+
+(  1041 )    my neck. Then courage returned, and I scraped away more dirt in the
+
+(  1042 )    light of the electric torch I had provided. The surface I uncovered was
+
+(  1044 )    of translucency. I scraped further, and saw that it had form. There was
+
+(  1048 )    Still more I scraped, and then abruptly I leaped out of the hole and
+
+(  1052 )    _elbow_ I had seen.
+
+(  1060 )    the Providence River, but I know how mistaken they are as to the source.
+
+(  1062 )    some disordered water-pipe or gas main underground--but again I could
+
+(  1063 )    correct them if I dared. It was unspeakably shocking, and I do not see
+
+(  1064 )    how I lived through it. I did faint after emptying the fourth carboy,
+
+(  1065 )    which I had to handle after the fumes had begun to penetrate my mask;
+
+(  1066 )    but when I recovered I saw that the hole was emitting no fresh vapors.
+
+(  1068 )    The two remaining carboys I emptied down without particular result, and
+
+(  1069 )    after a time I felt it safe to shovel the earth back into the pit. It
+
+(  1070 )    was twilight before I was done, but fear had gone out of the place. The
+
+(  1075 )    as I patted down the last spadeful of mold, I shed the first of the many
+
+(  1076 )    tears with which I have paid unaffected tribute to my beloved uncle's
+
+(  1082 )    me, and I shall find mixed with my relief a queer regret when it is torn
+
+
+
+( Temps )    La recherche du mot 'i' a pris 0.077963 millisecondes
+
+
+
+
+========>    L'éxecution du programme a duré 668.170452 millisecondes 
+
