@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "tableaux.h"
-#include "ABR.h"
-#include "AVL.h"
-#include "recherche.h"
-#include "chrono.h"
+#include "./Library/tableaux/tableaux.h"
+#include "./Library/ABR/ABR.h"
+#include "./Library/AVL/AVL.h"
+#include "./Library/recherche/recherche.h"
+#include "./Library/chrono/chrono.h"
 
 int main ( int argc, char** argv )
 {
@@ -26,7 +26,6 @@ int main ( int argc, char** argv )
 	}
 	fprintf(f, "========>    L'éxecution du programme a duré %f millisecondes \n\n", temps);
 	fclose(f);
+	
 	return 0; 
 }
-
-

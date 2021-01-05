@@ -1,20 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "tableaux.h"
-#include "chrono.h"
-
-#define alphabet(x) (('a' <= (x) && (x) <= 'z')||( 'A' <= (x) && (x) <= 'Z' ))?1:0
-// Ce que remplace la macro alphabet(x) renvoie VRAI si la variable est une lettre soit minuscule soit
-// majuscule de l'alphabet latin dans la table ASCII, faux sinon
-
-#define minuscule(x) ( 'A' <= (x) && (x) <= 'Z' )?( (x) + 0x20 ):(x)
-// Ce que remplace la macro minuscule(x) renvoie la version minuscule de la lettre si elle est en majuscule,
-// renvoie la lettre intacte sinon. Pour bien fonctionner, il faut que la variable renvoie VRAI quand elle
-// est mise en argument de la macro alphabet(x)
-
-#define scan(x) fscanf(f,"%c",&(x)) != EOF
-// Ce que remplace la macro scan(x) est une condition qui est égale à FAUX quand on a atteint la fin du texte à scanner
-
+#include "./../chrono/chrono.h"
 
 // La fonction get_valeurs renvoie une variable de type TAB où sont stockées les sous-variables taille_char, nb_mots, nb_lignes et max_mot.
 // En argument est le nom du fichier sous la forme d'une chaîne de caractères que l'on souhaite stocker dans les tableaux par la suite.
@@ -247,3 +234,4 @@ void afficher_tableaux_MC ( TAB E )
 	
 	fclose(f); 													// On ferme le fichier MC.txt ouvert en début de fonction 
 }
+

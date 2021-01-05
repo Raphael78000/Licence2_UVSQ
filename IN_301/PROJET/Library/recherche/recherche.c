@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tableaux.h"
-#include "ABR.h"
-#include "AVL.h"
+#include "./../tableaux/tableaux.h"
+#include "./../ABR/ABR.h"
+#include "./../AVL/AVL.h"
 #include "recherche.h"
-#include "chrono.h"
+#include "./../chrono/chrono.h"
 
 // La fonction afficher_recherche affiche le résultat d'une recherche 
 void afficher_recherche ( ARBRE A, char* mot, TAB T )

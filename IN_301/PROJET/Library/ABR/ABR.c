@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tableaux.h"
+#include "./../tableaux/tableaux.h"
 #include "ABR.h"
-#include "AVL.h"
-#include "chrono.h"
+#include "./../AVL/AVL.h"
+#include "./../chrono/chrono.h"
 
 // La fonction init_liste initialise un élément de type liste avec la valeur mise en argument, qui est le numéro de ligne 
 LISTE init_liste ( int ligne )

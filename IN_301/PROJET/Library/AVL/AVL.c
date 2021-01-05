@@ -1,25 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "tableaux.h"
-#include "ABR.h"
+#include "./../tableaux/tableaux.h"
+#include "./../ABR/ABR.h"
 #include "AVL.h"
-
-
-// Remarque : l'utilisation d'un opérateur ternaire inclu dans une macro imitant le comportement de la fonction max
-// 			  rend 80 fois plus lent le programme ( 6,4 secondes contre 8 minutes et 32 secondes
-
-// La fonction max renvoie la plus grande valeur des deux mises en argument
-int max ( int a, int b)
-{
-	if ( a <= b ) return b;
-	else return a;
-}
 
 
 // La fonction hauteur renvoie la hauteur d'un arbre mis en arguement
 int hauteur (ARBRE A)
 {
-	if (A) return 1 + max (hauteur (A->sag), hauteur (A->sad));		
+	if (A) 
+	{
+		char a = hauteur (A->sag);
+		char b = hauteur (A->sad);
+		return 1 + max(a, b);	
+	}	
 	else return -1;													
 }
 

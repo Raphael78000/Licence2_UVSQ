@@ -12,4 +12,3 @@ void free_liste( LISTE L );
 void free_arbre ( ARBRE A );
 
 void free_all ( TAB T, ARBRE A, double* temps);
-

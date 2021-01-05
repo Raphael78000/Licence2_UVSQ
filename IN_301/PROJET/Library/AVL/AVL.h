@@ -1,8 +1,12 @@
 
 
+// Voici la macro utilisée dans le fichier AVL.c
+
+#define max(x,y) (((x)<=(y))?(y):(x))
+//La fonction max renvoie la plus grande valeur des deux mises en argument
+
+
 // Voici les déclarations des fonctions contenues dans le fichier AVL.c
-// #define max(x,y) (((x)<=(y))?(y):(x))
-int max ( int a, int b);
 
 int hauteur ( ARBRE A );	
 
