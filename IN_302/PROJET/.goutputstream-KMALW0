@@ -27,12 +27,12 @@ char* convert_dec_bin(int n,char* tab){
 																																			//permet de convertir les valeurs entrées par l'utilisateur en leur représentation binaire
 int convertir_entree(char* tab,char* strhexa){
   
-	long dec;																														//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
+	int dec;																															//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
 	char* ptr;																														//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
 
 	dec = strtol(strhexa,&ptr,16);																					//renvoie le nombre présent dans une chaine caractere et stock une chaine char saisite dans ptr 
 
-	if (dec > 0xffff){																											//retourne -1 dans le cas où l'héxadécimal ne tient pas sur 16 bits 
+	if (dec > 65535){																										//retourne -1 dans le cas où l'héxadécimal ne tient pas sur 16 bits 
 		return -1;
 		}
 	
@@ -114,8 +114,8 @@ char add_16b(char* a,char* b,char* sum){															//la fonction renvoie '1'
 }
 
 																																			//convertit un nombre représenté sous sa forme binaire dans un tableau en sa valeur decimal
-long convert_bin_dec(char* s){
-	long dec = 0; 																												//Initialise le nombre à 0
+int convert_bin_dec(char* s){
+	int dec = 0; 																													//Initialise le nombre à 0
 	int n; 																																// retranscrit int = 1 si valeur '1' croisée ou int =0 si valeur '0' croisée
 	int count = 0;																												//va nous permettre de savoir à quelle puissance élevé le bit lors du parcours du tableau
   
@@ -140,33 +140,36 @@ int main(int argc, char** argv){
 		return 1;
 		}
 
-	conv1 = convertir_entree(s1,argv[1]);																	//ecrit le nombre hexadecimal sous sa forme binaire,retourne 0 si la 
-	conv2 = convertir_entree(s2,argv[2]);																	//conversion s'est bien pasée, retourne 1 dans le cas contraire
+
+	conv1 = convertir_entree(s1,argv[1]);																//ecrit le nombre hexadecimal sous sa forme binaire,retourne 0 si la 
+	conv2 = convertir_entree(s2,argv[2]);																//conversion s'est bien pasée, retourne 1 dans le cas contraire
 	
-	if ((conv1 == 0) && (conv2 ==0)){																		//affiche la valeur en binaire de l'héxadécimal de chacun des paramètres 
-		printf("binaire valeur 1 : ");																					//si la conversion s'est bien passée
+	if ((conv1 == 0) && (conv2 ==0)){																	//affiche la valeur en binaire de l'hécadécimal si la conversion s'est bien passée
+		printf("binaire valeur 1 : ");
 		afficher_tab(s1);
 		printf("binaire valeur 2 : ");
 		afficher_tab(s2);
-		}
-
+	}
+	
 	if ((conv1== -1) || (conv2 == -1)){
 		printf("un parametre n est pas representable sur 16 bits\n");
 		return 1;
-		}
+	}
 	
 	if ((conv1== 1) || (conv2 == 1)){
-		printf("un parametre ne represente pas une valeur hexadecimale\n");
+		printf(" un parametre ne represente pas une valeur hexadecimale\n");
 		return 1;
-		}
+	}
 
-	over_f = add_16b(s1,s2,s3);																					//addition des deux nombres binaires rentrées en paramètres et renvoie overflow
+	over_f = add_16b(s1,s2,s3);																					//calcul l'addition des deux nombres binaires rentrées en paramètres et renvoie overflow
    
 																																			//donne l'affichage du résultat de l'addition des deux nombres sous forme héxadécimal et sous forme binaire
-	printf("\nLe resultat sous forme hexadecimal est : 0x%lx\n",convert_bin_dec(s3));
+	printf("\nLe resultat sous forme hexadecimal est : 0x%x\n",convert_bin_dec(s3));
 	printf("son overflow est : %c\n",over_f);
 	printf("son resultat en ecriture binaire sur 16 bits est :\n");
 	afficher_tab(s3);
 
-	return 0;																														//le code renvoie 0 si les conversions se sont bien passées
-}																																			//retourne 1 dans le cas où les conversions des deux nombres se sont pas passées correctement 
+																																			//le code renvoie 0 si les conversions se sont bien passées
+																																			//retourne 1 dans le cas où les conversions des deux nombres se sont pas passées correctement 
+	return 0;
+}

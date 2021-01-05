@@ -1,11 +1,14 @@
-all: additionneur
+CC = gcc
+OPT = -Wall -o 
+LDFLAGS = -lm
 
+all: additionneur
+		
 additionneur: additionneur.c
-	gcc -o additionneur additionneur.c -lm -Wall
+	$(CC) $(OPT) $@ $< $(LDFLAGS) 
 
 clean:
 	rm -f additionneur
-
 
 FILE = LAZZARI-ARMOUR_Raphael	
 zip:
