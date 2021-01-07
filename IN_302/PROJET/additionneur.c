@@ -27,7 +27,7 @@ char* convert_dec_bin(int n,char* tab){
 																																			//permet de convertir les valeurs entrées par l'utilisateur en leur représentation binaire
 int convertir_entree(char* tab,char* strhexa){
   
-	long dec;																														//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
+	unsigned long long dec;																											//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
 	char* ptr;																														//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
 
 	dec = strtol(strhexa,&ptr,16);																					//renvoie le nombre présent dans une chaine caractere et stock une chaine char saisite dans ptr 
