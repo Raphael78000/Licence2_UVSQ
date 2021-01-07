@@ -35,10 +35,7 @@ recherche.o: $(PTL)recherche/recherche.c $(PTL)recherche/recherche.h
 	
 chrono.o: $(PTL)chrono/chrono.c $(PTL)chrono/chrono.h
 	$(CC) $(OPT) $<
-
-#J'attends un mail de la prof pour faire la cible %.o
-#En attendant, on met chaque cible o
-
+	
 clean: 
 	rm -f *.o
 	rm -f dico
