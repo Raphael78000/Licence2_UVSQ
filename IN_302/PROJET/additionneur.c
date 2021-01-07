@@ -15,7 +15,7 @@ void afficher_tab(char* s){
 }
 
 																																			//convertit un nombre décimal (16bits) en son binaire sotcké dans un tableau (16 bits)
-char* convert_dec_bin(int n,char* tab){
+char* convert_dec_bin(unsigned int n,char* tab){
   
 	for (int i = 15; i >= 0; i--){																						//commence la conversion en convertissant du bit le plus faible au bit le plus fort 
 		(n % 2) ? (tab[i] = '1') 	: 	(tab[i] = '0');																//pour se faire, l'écriture dans le tableau va commencer de l'indice 15 et redescent à l'indice 0
@@ -26,8 +26,8 @@ char* convert_dec_bin(int n,char* tab){
 
 																																			//permet de convertir les valeurs entrées par l'utilisateur en leur représentation binaire
 int convertir_entree(char* tab,char* strhexa){
-  
-	unsigned long long dec;																											//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
+																																			//ici j'ai fait le choix du 'double' comme ça on évite au maximum un overflow si l'utilisateur rentre un grand nombre
+	double dec;																													//contiendra la valeur en décimal du nombre héxadécimal entré par l'utilisateur
 	char* ptr;																														//contient la chaîne de caractère si elle a été saisie par l'utilisateur(ne prends pas "0x")
 
 	dec = strtol(strhexa,&ptr,16);																					//renvoie le nombre présent dans une chaine caractere et stock une chaine char saisite dans ptr 
