@@ -148,7 +148,6 @@ ARBRE TAB_to_ARBRE (TAB T, double* temps)
 	}
 	n = chrono_lap()*1000;
 	fprintf(f, "#########	 La construction de l'arbre AVL a pris %f millisecondes\n\n\n\n", n);
-	fprintf(f, ">>>>>>>>>    Résultats des recherches :\n\n\n");
 	*temps += n;
 	fclose(f);
 	

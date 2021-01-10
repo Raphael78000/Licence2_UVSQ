@@ -17,7 +17,7 @@ void afficher_recherche ( ARBRE A, char* mot, TAB T )
 	}
 	
 	fprintf(f, "-------->    ");
-	if ( !A ) fprintf(f, "Le mot %s n'a pas été trouvé dans le texte\n\n", mot );						// Si A est NULL, alors le mot recherché n'a pas été trouvé
+	if ( !A ) fprintf(f, "Le mot '%s' n'a pas été trouvé dans le texte\n\n", mot );						// Si A est NULL, alors le mot recherché n'a pas été trouvé
 	else 
 	{																															
 		if ( A->occ-1 ) fprintf(f, "'%s' apparaît %d fois sur les lignes  :   ", A->mot, A->occ);	// Ce que contient else ressemble fortement à la fonction afficher_noeud()
@@ -59,6 +59,14 @@ void mode_recherche ( ARBRE A, TAB T, int argc, char** argv, double* temps)
 	// S'il y a des mots à rechercher dans la ligne de commandes, on ne recherche qu'eux
 	if ( argc-2 ) 
 	{
+		FILE* f = fopen ("Resultat.txt", "a");
+		if ( !f )
+		{
+			printf("Il y a eu un problème avec l'ouverture du fichier Resultat.txt\n");
+			exit(1);
+		}
+		fprintf(f, ">>>>>>>>>    Résultats des recherches :\n\n\n\n");
+		fclose(f);
 		for ( int k = 2; k < argc; k++ ) 
 		{
 			chrono_reset();
@@ -83,7 +91,7 @@ void mode_recherche ( ARBRE A, TAB T, int argc, char** argv, double* temps)
 		for ( int j = 0; j < 1000; j++ )
 		{
 			r = (random()%(T->nb_mots));
-			if ( T->M[r] ) afficher_recherche ( recherche ( A, T->M[r]), T->M[r], T);
+			if ( T->M[r] ) recherche ( A, T->M[r]);
 			else j--;
 		}	
 		FILE* f = fopen ("Resultat.txt", "a");
@@ -93,7 +101,7 @@ void mode_recherche ( ARBRE A, TAB T, int argc, char** argv, double* temps)
 			exit(1);
 		}
 		o = chrono_lap()*1000;
-		fprintf(f, "\n-------->    La recherche de 1000 mots aléatoires s'est terminé après %f millisecondes\n\n\n\n", o);
+		fprintf(f, "-------->    La recherche de 1000 mots aléatoires s'est terminé après %f millisecondes\n\n\n\n", o);
 		*temps += o;
 		fclose(f);
 	}

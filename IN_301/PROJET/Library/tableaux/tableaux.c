@@ -175,7 +175,7 @@ TAB remplir_tableaux(char* fichier, double* temps)
 		exit(1);
 	}
 	m = chrono_lap()*1000;
-	fprintf(g, "\n\n#########	 Le traitement du texte %s a mis %f millisecondes\n\n\n", fichier, m);
+	fprintf(g, "\n\n#########	 Le traitement du texte %s a mis %f millisecondes\n\n\n\n", fichier, m);
 	*temps = *temps + m;
 	fclose(g);                                        
 	return C; 			// On renvoie la variable C avec toutes les bonnes valeurs stockées dans les tableaux T, L, M et C

@@ -4,16 +4,20 @@ LDFLAGS = -lm
 PTL = ./Library/
 HFILES = $(PTL)tableaux/tableaux.h $(PTL)ABR/ABR.h $(PTL)AVL/AVL.h $(PTL)recherche/recherche.h $(PTL)chrono/chrono.h
 OFILES = main.o tableaux.o ABR.o AVL.o recherche.o chrono.o
-TXTFILES = TL.txt MC.txt Contenu_Arbre.txt Contenue_Noeud.txt Resultat_ciblé.txt Resultat_aléatoire.txt
+TXTFILES = TL.txt MC.txt Contenu_Arbre.txt Contenue_Noeud.txt Résultat_ciblé.txt Résultat_aléatoire.txt
 
 .PHONY : run
 run: dico 
 	./dico pg31469.txt 
-	mv Resultat.txt Resultat_aléatoire.txt
-	./dico pg31469.txt a mot lol i 
-	mv Resultat.txt Resultat_ciblé.txt
-	geany Resultat_ciblé.txt
-	geany Resultat_aléatoire.txt
+	mv Resultat.txt Résultat_aléatoire.txt
+	./dico pg31469.txt a mot i zieiiz
+	# "a" est le déterminant le plus utilisé dans la langue anglaise. Il y a de forte chance qu'il apparaisse dans le texte.
+	# "mot" n'existe pas dans la langue anglaise. Il ne devrait pas apparaître dans le texte.
+	# "i" est le pronom personnel de la 1er personne du singulier en anglais. Il y a de forte chance qu'il apparaisse dans le texte.
+	# "zieiiz" n'est pas un mot qui existe. Il ne devrait pas apparaître dans le texte.
+	mv Resultat.txt Résultat_ciblé.txt
+	geany Résultat_ciblé.txt
+	geany Résultat_aléatoire.txt
 
 dico: $(OFILES)
 	$(CC) -o $@ $^
