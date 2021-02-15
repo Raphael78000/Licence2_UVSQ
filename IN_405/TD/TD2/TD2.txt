@@ -1,0 +1,50 @@
+Exercice 2.1: 
+
+1)	cat: La commande cat permet différentes fonctions dont la concaténation et l’affichage de contenu de fichiers. Elle ne dispose pas de beaucoup d’options, son affichage est brut.
+	Ex: afficher contenu -> cat monfichier 
+	concaténer: cat fichier1 fichier2  fichier3
+
+	cd: La navigation d’un répertoire à un autre s’effectue avec la commande cd succédée du nom du répertoire.
+
+	cp: Pour créer une copie d’un fichier, on utilise la commande cp.
+
+	diff: La commande diff permet de voir la différence entre deux fichiers.
+
+	echo: La commande echo permet simplement d'afficher une ligne.
+
+	gcc: Permet de compiler un programme écrit en C 
+
+	gdb: Permet de lancer un programme en déboggage
+
+	ls: La commande ls permet d'afficher le contenu d'un répertoire.
+
+	make: Permet d'éxécuter un Makefile
+
+	man: Permet de consulter le manuel d'utilisation d'une commande ou d'une fonction 
+	
+	mkdir: Pour créer un répertoire il suffit d’utiliser la commande mkdir.
+
+	mv: Déplacer un fichier est aussi simple que de le copier, pour cela il faut utiliser la commande mv.
+
+	rm: Pour effacer un fichier ou un répertoire on utilise la commande rm.
+
+	rmdir: La commande rmdir permet de supprimer un dossier si il est vide.
+
+	sudo: sudo est une commande permettant à l'administrateur système d'accorder à certains utilisateurs la possibilité de lancer une commande en tant qu'administrateur.
+
+	tar: Que ce soit pour compresser ou décompresser des fichiers ou des dossiers, cela se fait avec la commande tar.
+
+	time: La commande time permet de déterminer la durée d’un processus, elle utilise le temps d’horloge du système.
+
+	touch: La commande Touch permet de modifier la date d'accés ou de modification d'un fichier.
+
+	vi: Permet d'ouvrir un éditeur de texte en mode texte plein écran.
+
+2)	./bin 
+
+3) 	.. : le répertoire parent à partir de là où vous êtes.
+	~: répertoire de l’utilisateur.
+
+Exercice 2.2: 
+
+4)5) 	
