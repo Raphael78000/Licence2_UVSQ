@@ -45,6 +45,3 @@ Exercice 2.1:
 3) 	.. : le répertoire parent à partir de là où vous êtes.
 	~: répertoire de l’utilisateur.
 
-Exercice 2.2: 
-
-4)5) 	
