@@ -13,14 +13,14 @@ import java.util.Iterator;
 
 public class Database {
 
-    private ArrayList<Person> persons;
+    private ArrayList persons;
 
     /**
      * Create a new, empty person database.
      */
     public Database() 
     {
-        persons = new ArrayList<Person>();
+        persons = new ArrayList();
     }
 
     /**

@@ -1,7 +1,7 @@
-Exercice 2.1: 
+Exercice 2.1:
 
 1)	cat: La commande cat permet différentes fonctions dont la concaténation et l’affichage de contenu de fichiers. Elle ne dispose pas de beaucoup d’options, son affichage est brut.
-	Ex: afficher contenu -> cat monfichier 
+	Ex: afficher contenu -> cat monfichier
 	concaténer: cat fichier1 fichier2  fichier3
 
 	cd: La navigation d’un répertoire à un autre s’effectue avec la commande cd succédée du nom du répertoire.
@@ -12,7 +12,7 @@ Exercice 2.1:
 
 	echo: La commande echo permet simplement d'afficher une ligne.
 
-	gcc: Permet de compiler un programme écrit en C 
+	gcc: Permet de compiler un programme écrit en C
 
 	gdb: Permet de lancer un programme en déboggage
 
@@ -20,8 +20,8 @@ Exercice 2.1:
 
 	make: Permet d'éxécuter un Makefile
 
-	man: Permet de consulter le manuel d'utilisation d'une commande ou d'une fonction 
-	
+	man: Permet de consulter le manuel d'utilisation d'une commande ou d'une fonction
+
 	mkdir: Pour créer un répertoire il suffit d’utiliser la commande mkdir.
 
 	mv: Déplacer un fichier est aussi simple que de le copier, pour cela il faut utiliser la commande mv.
@@ -40,8 +40,7 @@ Exercice 2.1:
 
 	vi: Permet d'ouvrir un éditeur de texte en mode texte plein écran.
 
-2)	./bin 
+2)	./bin
 
 3) 	.. : le répertoire parent à partir de là où vous êtes.
-	~: répertoire de l’utilisateur.
-
+		~: répertoire de l’utilisateur.

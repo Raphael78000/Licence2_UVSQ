@@ -3,8 +3,6 @@
  *
  * @author  Michael Kölling
  * @version 1.0, January 1999
- * 
- * Slt je m'incruste.
  */
 
 class Staff extends Person
@@ -12,7 +10,7 @@ class Staff extends Person
     private String room;
 
     /**
-     * Create a staff member with default settings for detail information.
+     * Create a staff member with default settings for detail information. ZBZUB ZBEUB
      */
     Staff()
     {
