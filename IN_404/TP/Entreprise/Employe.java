@@ -19,6 +19,7 @@ public class Employe {
      * 
      * @param prenom le prénom de l'employé
      * @param nom    le nom de l'employé
+     * @param age    l'age de l'employé
      */
     public Employe(final String prenom, final String nom, final int age) {
         this.prenom = prenom;

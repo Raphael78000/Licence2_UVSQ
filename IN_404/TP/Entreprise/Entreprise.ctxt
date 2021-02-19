@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Entreprise
+comment0.text=\r\n\ La\ classe\ <code>Entreprise</code>\ repr\u00E9sente\ une\ entreprise.\r\n\ La\ seule\ fonctionnalit\u00E9\ de\ cette\ classe\ est\ d'embaucher\ des\ employ\u00E9s.\r\n\ \r\n\ @author\ St\u00E9phane\ Lopes\r\n\ @version\ jan.\ 2015\r\n
+comment1.params=nom
+comment1.target=Entreprise(java.lang.String)
+comment1.text=\r\n\ Initialise\ l'entreprise\ avec\ son\ nom.\r\n\ \r\n\ @param\ nom\ le\ nom\ de\ l'entreprise\r\n
+comment2.params=emp
+comment2.target=void\ embauche(Employe)
+comment2.text=\r\n\ L'entreprise\ embauche\ un\ nouvel\ employ\u00E9.\r\n\ \r\n\ @param\ \ emp\ l'employ\u00E9\ \u00E0\ embaucher\r\n
+comment3.params=
+comment3.target=java.lang.String\ toString()
+comment3.text=\r\n\ Retourne\ une\ cha\u00EEne\ de\ caract\u00E8res\ repr\u00E9sentant\ le\ nom\ de\ l'entreprise\r\n\ et\ la\ liste\ de\ ses\ employ\u00E9s.\r\n\ Le\ format\ utilis\u00E9\ est\ "nomEntreprise\ employe1\ employe2...\ employeN".\r\n\ \r\n\ @return\ retourne\ une\ cha\u00EEne\ de\ caract\u00E8res\ contenant\ le\ nom\ de\ l'entreprise\r\n\ et\ la\ liste\ de\ ses\ employ\u00E9s\r\n
+numComments=4
