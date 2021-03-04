@@ -1,10 +1,9 @@
-#include <errno.h> /* est l'en-tête de la bibliothèque standard du C, du langage C, qui contient les définitions des macros
-et des constantes utilisées pour signaler une erreur, ou vérifier s'il y en a une qui s'est produite. */
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include <sys/types.h> // Cette bibliothèque renferme les définitions de types et de temps pour Unix.
-#include <sys/stat.h> // data returned by the stat() function
-#include <fcntl.h> // file control options
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
@@ -14,38 +13,37 @@ et des constantes utilisées pour signaler une erreur, ou vérifier s'il y en a 
 IO_FILE IO_open(const char *path,int access){
 	IO_FILE file;
 
-	// if(acces & O_CREAT || acces & O_TMPFILE)
-	if (access & O_CREAT){
-		file.desc = open(path,access,0644);
+	if (access & O_CREAT){ 																												//vérifie si le fichier existe ou pas
+		file.desc = open(path,access,0644);																					//autorise l'utilisateur a écrire et modifier le ficher et les groupes et autres à lire seulement
 	}
 	else{
-		file.desc = open(path,access);
+		file.desc = open(path,access);																							//ouvre le fichier déjà existant
 	}
-	if (file.desc == -1){
+	if (file.desc == -1){																													//affiche un message d'erreur dans le cas où l'ouverture de fichier n'a pas correctement été éxécutée
 		printf("error openning %s : %s\n",path,strerror(errno));
 		return file;
 	}
 
-	file.path = malloc((strlen(path)+1)*sizeof(char*));
-	strcpy(file.path,path);
-	file.access = access;
+	file.path = malloc((strlen(path)+1)*sizeof(char*));														//alloue la mémoire dynamiquement de la variable path de la structure IO_FILE
+	strcpy(file.path,path);																												//copie le chemin d'accès au fichier de path à la variable path de la structure IO_FILE
+	file.access = access;																													//accordre les autorisations accordées en paramètre à la nouvelle structure de IO_FILE
 
-	return file;
+	return file;																																	//Un nouveau fichier a été crée avec son chemin d'accès et ses permissions. Données qui sont stockées en paramètre
 }
 
 int IO_close(IO_FILE file){
 	int closing;
 
-	closing = close(file.desc);
+	closing = close(file.desc);																										// ferme le descripteur file.desc, de manière à ce qu'il ne référence plus aucun fichier
 
 	if (closing == -1){
-		printf("error closing %s : %s\n",file.path,strerror(errno));
-		return -1;
+		printf("error closing %s : %s\n",file.path,strerror(errno));								//affiche un message d'erreur dans le cas où la fermeture de fichier ne sait pas correctement effectuée
+		return -1;																																	//retourne -1 dans le cas où la fermeture du fichier ne s'est pas correctement effectuée
 	}
 
-	free(file.path);
+	free(file.path);																															//libère la mémoire de la variable alloué dynamiquement file.path
 
-	return 0;
+	return 0;																																			//retourne 0 dans le cas où la fermeture de fichier s'est correctement effectuée
 }
 
 int IO_remove(const char *path){
