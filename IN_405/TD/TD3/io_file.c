@@ -14,7 +14,7 @@ IO_FILE IO_open(const char *path,int access){
 	IO_FILE file;
 
 	if (access & O_CREAT){ 																												//vérifie si le fichier existe ou pas
-		file.desc = open(path,access,0644);																					//autorise l'utilisateur a écrire et modifier le ficher et les groupes et autres à lire seulement
+		file.desc = open(path,access,00644);																				//autorise l'utilisateur a écrire et modifier le ficher et les groupes et autres à lire seulement
 	}
 	else{
 		file.desc = open(path,access);																							//ouvre le fichier déjà existant
@@ -49,62 +49,63 @@ int IO_close(IO_FILE file){
 int IO_remove(const char *path){
 	int supp;
 
-	supp = unlink(path);
+	supp = unlink(path);																													//variable qui vaut -1 si la suppression du fichier a échoué
 
-	if (supp == -1){
+	if (supp == -1){																															//affiche un message d'erreur dans le cas où la suppression du fichier a échoué
 		printf("error deletion %s : %s\n",path,strerror(errno));
-		return -1;
+		return -1;																																	//fonction retourne -1 si suppression fichier échoué
 	}
 
-	return 0;
+	return 0;																																			//fonction retourne 0 si suppression effectué avec succès
 }
 
 int IO_char_read(IO_FILE file,char *c){
 	int back;
+//fonction retourne un message d'erreur si le fichier contient pas les permissions suivantes
+	if (!(file.access == O_RDONLY || file.access & O_RDONLY || file.access & O_RDWR)){			//O_RDONLY vaut 0 //O_RDWR vaut 2 //O_WRONLY vaut 1
+		printf("error reading %s -> file doesn't have reading permission\n",file.path);
+		return -1;																																	//fonction retourne -1 dans le cas ou on dispose pas des permissions nécessaires
+	}
 
-	if (!(file.access == O_RDONLY || file.access & O_RDONLY || file.access & O_RDWR)){
-		printf("error reading %s -> file not oppened with reading access\n",file.path);
+	back = read(file.desc,c,1);																										//effectue la lecture du char passé en argument
+
+	if (back == -1){
+		printf("error reading %s : %s\n",file.path,strerror(errno));								//fonction retourne -1 dans le cas où la lecture du char a échouée
 		return -1;
 	}
 
-	back = read(file.desc,c,1);
-
-	if (back == -1){
-		printf("error reading %s : %s\n",file.path,strerror(errno));
-	}
-
-	return back;
+	return 0;																																			//fonction retourne 0 si la lecture du char a été réalisée avec succès
 }
 
 int IO_char_write(IO_FILE file,const char c){
 	int back;
 
-	if (!(file.access & O_WRONLY || file.access & O_RDWR)){
-		printf("error writting %s : file not openned with write mode\n",file.path);
-		return -1;
+	if (!(file.access & O_WRONLY || file.access & O_RDWR)){												//vérification si on a les permissions pour écrire
+		printf("error writting %s : file doesn't have writting permission\n",file.path);
+		return -1;																																	//retourne -1 dans le cas où on a pas les permissions d'écriture
 	}
 
-	back = write(file.desc,&c,1);
+	back = write(file.desc,&c,1);																									//effectue l'écriture du char dans le document
 
-	if (back == -1){
+	if (back == -1){																															//fonction renvoie -1 dans le cas où l'écriture a échouée
 		printf("error writting %s : %s\n",file.path,strerror(errno));
 	}
 
-	return back;
+	return back;																																	//retourne 0 dans le cas où l'écriture s'est effectuée correctement
 }
 
 int IO_string_read(IO_FILE file,char *string,int maxSize){
 	int a = 0;
 	int back, a1;
-
+//vérifie si on dispose des permissions nécessaires pour lire le fichier
 	if (!(file.access == O_RDONLY || file.access & O_RDONLY || file.access & O_RDWR)){
 		printf("error reading %s : the file did not open with an reading access\n",file.path);
-		return -1;
+		return -1;																																	//retourne -1 dans le cas où l'on ne dispose pas des permissions nécessaires de lecture
 	}
 
 	do{
-		a1 = read(file.desc,string+a,1);
-		back = back+a1;
+		a1 = read(file.desc,string+a,1);																						//lit le caractère à la position
+		back = back+a1;																															//back incrémenter de 0 si la lecture s'effectue correctement
 		a++;
 	}
 	while (a1>0 && a<maxSize);
@@ -114,13 +115,13 @@ int IO_string_read(IO_FILE file,char *string,int maxSize){
 		return a1;
 	}
 
-	string[a] = '\0';
+	string[a] = '\0';																															//stocke la chaîne lue dans la variable passée en argument "string"
 
-	return back;
+	return back;																																	//retourne 0 dans le cas où la lecture s'est effectuée correctement
 }
 
 int IO_string_write(IO_FILE file,const char *string,int size){
-	int a = 0;
+	int a = 0;																																		//Meme commentaires que la partie précèdente mais avec quelques changements
 	int a1,back;
 
 	if (!(file.access & O_WRONLY [[ file.access & O_RDWR)){
@@ -129,7 +130,7 @@ int IO_string_write(IO_FILE file,const char *string,int size){
 	}
 
 	do{
-		a1 = read(file.desc,string+a,1);
+		a1 = write(file.desc,string+a,1);
 		back = back+a1;
 		a++;
 	}
@@ -146,21 +147,22 @@ int IO_string_write(IO_FILE file,const char *string,int size){
 int IO_int_read(IO_FILE file,int *n){
 	char c;
 	int back = 0,a1,wrong = 0;
-
-	if (!(file.access == O_RDONLY || file.access == O_RDONLY || file.access & O_RDWR)){
+//fonction retourne un message d'erreur si le fichier contient pas les permissions suivantes
+	if (!(file.access == O_RDONLY || file.access &  O_RDONLY || file.access & O_RDWR)){
 		printf("error reading %s : file did not openned with reading access\n",file.path);
-		return -1;
+		return -1;																																	//retourne -1 dans le cas où on ne dispose pas des autorisations nécessaires
 	}
 
-	*n = 0;
+	*n = 0;																																				//initialisation
 
 	do{
 		a1 = read(file.desc,&c,1);
-		back = back+a1;
+		back = back+a1;																															//back vaut -1 dans le cas où la lecture a échouée
 		if (a1 == -1){
 			printf("error reading %s : %s\n",file.path,strerror(errno));
-			return a1;
+			return a1;																																//retourne -1 dans le cas où la lecture ne s'est pas effectuée correctement
 		}
+	}
 		while (isspace(c));
 
 		if (c == '-'){
@@ -194,20 +196,17 @@ int IO_int_read(IO_FILE file,int *n){
 		return back;
 	}
 
-
-}
-
 int IO_int_write(IO_FILE file,const int n){
 	char* amor;
 	int entier = n, a = 0;
 	int a1,back = 0;
-
+//vérification des permissions d'écriture
 	if (!(file.access & O_WRONLY || file.access & O_RDWR)){
 		printf("error writting %s : file did not openned with write acess\n",file.path);
 		return -1;
 	}
 
-	amor = malloc(12*sizeof(char*));
+	amor = malloc(12*sizeof(char*));																							//allocation dynamique de la mémoire de la variable "amor"
 
 	if (entier<0) entier = -entier;
 
@@ -216,7 +215,7 @@ int IO_int_write(IO_FILE file,const int n){
 		entier = entier/10;
 		a++;
 	}
-	while (entier != 0);
+	while (entier!=0);
 
 	if (n<0){
 		a1 = write(file.desc,'-',1);
