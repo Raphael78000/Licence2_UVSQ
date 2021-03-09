@@ -8,4 +8,4 @@ IN_303: Structure de données et algorithmique
 
 IN_310: Mathématiques pour l'informatique
 
-Culture général: Musculation et renforcement musculaire 
+Culture générale: Musculation et renforcement musculaire 
