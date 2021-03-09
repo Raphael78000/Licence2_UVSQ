@@ -8,8 +8,6 @@
 #include <dirent.h>
 #include <errno.h>
 
-#include "stat.h"
-
 int print_type_file(const char *path){
   // test if path is null
   if (!path){
@@ -142,19 +140,28 @@ int read_dir(const char *path){
   // Read in the directory
   struct dirent *_dirent = NULL;
   while ((_dirent = readdir(dir))){
-    if ((strcmp(_dirent->d_name, ".") != 0) && (strcmp(_dirent->d_name, "..") != 0)) {
+    if ((strcmp(_dirent->d_name, ".") != 0) && (strcmp(_dirent->d_name, "..") != 0)){
 
       // Print information of the file
-      print_type_file(_dirent->d_name, 2);
-      print_perm_file(_dirent->d_name, 2);
-      print_ID_owner(_dirent->d_name, 2);
-      print_size_file(_dirent->d_name, 2);
-      printf("%s ", _dirent->d_name);
-      printf("\n");
+      print_type_file(_dirent->d_name);
+      print_perm_file(_dirent->d_name);
+      print_ID_owner(_dirent->d_name);
+      print_size_file(_dirent->d_name);
+      printf("%s\n", _dirent->d_name);
     }
   }
-  printf("\n");
 
   // Return value of closedir
   return closedir(dir);
+}
+
+int main(int argc,char **argv){
+  if (argc != 2){
+    printf("Usage:~: ./ls dir_name\n");
+    return 1;
+  }
+
+  read_dir(argv[1]);
+
+  return 0;
 }
