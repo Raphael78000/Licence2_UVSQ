@@ -11,3 +11,7 @@ main_f.o: main_f.c internals.h
 	
 phantom: internals.o main_f.o
 	gcc -g -o $@ $^ 
+	
+clean: 
+	rm -f internals.o
+	rm -f main_f.c

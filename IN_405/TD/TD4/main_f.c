@@ -12,7 +12,8 @@
 #include <errno.h>
 
 int main(int argc, char **argv){
-  struct file *f;
+  struct file f;
+  printf("adresse mémoire f: %p\n",&f);
 
   /*if (argc != 3){
     printf("Bad usage: %s src dest\n"
@@ -20,9 +21,9 @@ int main(int argc, char **argv){
            "   - dest: phantom directory\n", argv[0]);
     return EXIT_FAILURE;
   }*/
-  capture_file(argv[1],f);
-  //browse_directory(argv[1],&f);
-  //print_file(f);
+  capture_file(argv[1],&f);
+  printf("adresse mémoire f: %p\n",&f);
+  printf("parent->mode: %s\n",f.name);
 
-    return EXIT_SUCCESS;
+    return 0;
 }

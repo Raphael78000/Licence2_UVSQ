@@ -94,6 +94,4 @@ int create_directory(const char *path, const struct file *directory);
  */
 int create_link(const char *path, const struct file *link);
 
-void print_file(const struct file* panther);
-
 #endif
