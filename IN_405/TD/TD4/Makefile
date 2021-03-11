@@ -1,6 +1,13 @@
-CC=gcc
-PROG=phantom
-SRC=main.c api.c internals.c
 
-$(PROG): $(SRC)
-	$(CC) -o $@ $^
+
+ls: stat.c
+	gcc -o $@ $^
+
+internals.o: internals.c internals.h
+	gcc -g -c $^ 
+	
+main_f.o: main_f.c internals.h
+	gcc -g -c $^ 
+	
+phantom: internals.o main_f.o
+	gcc -g -o $@ $^ 

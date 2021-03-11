@@ -6,162 +6,134 @@
 #include <string.h>
 #include <pwd.h>
 #include <dirent.h>
-#include <errno.h>
 
-int print_type_file(const char *path){
-  // test if path is null
-  if (!path){
-    printf("Error openning %s : %s\n",path,strerror(errno));
-    return -1;
-  }
+void print_filetype(const char * path){
+	struct stat buf;
+	lstat(path, &buf);
 
-  // Creat the struct stat
-  struct stat stat_view;
-  //Remplissage de la struct stat_view
-  int success_stat=stat(path, &stat_view);
+  printf("%s ---> type:  ",path);
 
-  // test stat open
-  if (!success_stat){
-    // File exist and haven't errors with open file.
-    char type_file[SIZE_BUF];
-
-    // Use a mask a compare with value of special type
-    // Use S_IFMT for see all file type
-    switch (stat_view.st_mode & S_IFMT){
-      case S_IFSOCK: strcpy(type_file, "Sock       ");     break;
-      case S_IFREG:  strcpy(type_file, "File       ");     break;
-      case S_IFBLK:  strcpy(type_file, "Device     ");     break;
-      case S_IFDIR:  strcpy(type_file, "Diry       ");     break;
-      case S_IFIFO:  strcpy(type_file, "FIFO       ");     break;
-      default:       strcpy(type_file, "Unknown    ");     break;
-    }
-
-    // test if file is a symlink
-    lstat(path, &stat_view);
-    if (S_ISLNK(stat_view.st_mode))
-      strcpy(type_file, "Symlink");
-
-      printf("Type of '%s' is: %s.\n", path, type_file);
-    }
-
-  return success_stat;
+	if (S_ISSOCK(buf.st_mode) )
+		printf("sock");
+	else if (S_ISLNK(buf.st_mode) )
+		printf("link");
+	else if (S_ISREG(buf.st_mode) )
+		printf("file");
+	else if (S_ISBLK(buf.st_mode) || S_ISCHR(buf.st_mode) )
+		printf("devc");
+	else if (S_ISDIR(buf.st_mode) )
+		printf("repy");
+	else if (S_ISFIFO(buf.st_mode) )
+		printf("fifo");
+	else
+		printf("und.");
 }
 
-int print_perm_file(const char *path){
-  // test if path is null
-  if (!path){
-    printf("Error openning %s : %s\n",path,strerror(errno));
-    return -1;
-  }
+void print_mode(const char * path){
+	struct stat buf;
+	lstat(path, &buf);
 
-  // Creat the struct stat
-  struct stat stat_view;
-  int success_stat = stat(path,&stat_view);
-
-  // test stat
-  if (!success_stat){
-    // File exist and haven't errors with open file.
-
-    printf("User permission : ");
-    (stat_view.st_mode & S_IRUSR)? printf("r"): printf("-");
-    (stat_view.st_mode & S_IWUSR)? printf("w"): printf("-");
-    (stat_view.st_mode & S_IXUSR)? printf("x"): printf("-");
-
-    printf("Group permission : ");
-    (stat_view.st_mode & S_IRGRP)? printf("r"): printf("-");
-    (stat_view.st_mode & S_IWGRP)? printf("w"): printf("-");
-    (stat_view.st_mode & S_IXGRP)? printf("x"): printf("-");
-
-    printf("Others permission : ");
-    (stat_view.st_mode & S_IROTH)? printf("r"): printf("-");
-    (stat_view.st_mode & S_IWOTH)? printf("w"): printf("-");
-    (stat_view.st_mode & S_IXOTH)? printf("x"): printf("-");
-  }
-
-  return success_stat;
+	printf(" mode:%c%c%c%c%c%c%c%c%c",
+		(S_IRUSR & buf.st_mode) ? 'r' : '-',
+		(S_IWUSR & buf.st_mode) ? 'w' : '-',
+		(S_IXUSR & buf.st_mode) ? 'x' : '-',
+		(S_IRGRP & buf.st_mode) ? 'r' : '-',
+		(S_IWGRP & buf.st_mode) ? 'w' : '-',
+		(S_IXGRP & buf.st_mode) ? 'x' : '-',
+		(S_IROTH & buf.st_mode) ? 'r' : '-',
+		(S_IWOTH & buf.st_mode) ? 'w' : '-',
+		(S_IXOTH & buf.st_mode) ? 'x' : '-');
 }
 
-int print_ID_owner(const char *path){
-  // test if path is null
-  if (!path){
-    printf("Error openning %s : %s\n",path,strerror(errno));
-    return -1;
-  }
+void print_owner(const char * path){
+	struct stat buf;
+	struct passwd * pwd;
+	lstat(path, &buf);
+	pwd = getpwuid(buf.st_uid);
 
-  // Creat the struct stat
-  struct stat stat_view;
-  int success_stat = stat(path, &stat_view);
-
-  // test stat
-  if (!success_stat) {
-    // File exist and haven't errors with open file.
-
-    printf("Ownership: UID=%ld, GID=%ld\n", (long) stat_view.st_uid, (long) stat_view.st_gid);
-  }
-
-  return success_stat;
+	printf(" owner: %s", pwd->pw_name);
 }
 
-int print_size_file(const char *path){
-  // test if path is null
-  if (!path){
-    printf("Error openning %s : %s\n",path,strerror(errno));
-    return -1;
-  }
+void print_filesize(const char * path){
+	struct stat buf;
+	lstat(path, &buf);
 
-  // Creat the struct stat
-  struct stat stat_view;
-  int success_stat = stat(path, &stat_view);
-
-  // Test stat
-  if (!success_stat){
-    // File exist and haven't errors with open file.
-
-    printf("File size: %lld bytes\n", (long long) stat_view.st_size);
-  }
-
-  return success_stat;
+	printf(" size: %ld", buf.st_size);
 }
 
-int read_dir(const char *path){
-  // Init directory
-  DIR *dir = NULL;
-  dir = opendir(path);
-
-  // Test open directory
-  if (!dir){
-    printf("Error : %s reading %s\n",strerror(errno),path);
-    return -1;
-  }
-
-  // Print
-  printf("ls: %s\n\n", path);
-
-  // Read in the directory
-  struct dirent *_dirent = NULL;
-  while ((_dirent = readdir(dir))){
-    if ((strcmp(_dirent->d_name, ".") != 0) && (strcmp(_dirent->d_name, "..") != 0)){
-
-      // Print information of the file
-      print_type_file(_dirent->d_name);
-      print_perm_file(_dirent->d_name);
-      print_ID_owner(_dirent->d_name);
-      print_size_file(_dirent->d_name);
-      printf("%s\n", _dirent->d_name);
-    }
-  }
-
-  // Return value of closedir
-  return closedir(dir);
+int is_directory(const char * path){
+	struct stat buf;
+	lstat(path, &buf);
+	return S_ISDIR (buf.st_mode);
 }
 
-int main(int argc,char **argv){
-  if (argc != 2){
-    printf("Usage:~: ./ls dir_name\n");
-    return 1;
-  }
+void ls(const char * path){
+	DIR * rep;
+	struct dirent * entry;
 
-  read_dir(argv[1]);
+	if (! is_directory(path)){
+		printf("'%s' is not a directory\n", path);
+		return;
+	}
 
-  return 0;
+	rep = opendir(path);
+
+	while (entry = readdir(rep)){
+		if (entry->d_name [0] != '.')
+			printf("%s ", entry->d_name);
+	}
+
+	printf("\n");
+
+	closedir(rep);
+}
+
+void ls_detailed(const char *path) {
+	DIR * rep;
+	struct dirent * entry;
+
+	if (! is_directory(path) ) {
+		printf("'%s' is not a directory\n", path);
+		return;
+	}
+
+	rep = opendir(path);
+
+	while (entry = readdir(rep))
+		if (entry->d_name [0] != '.') {
+			// "directory" + "/" + "file"
+			char *ent_name = calloc(strlen(entry->d_name)
+									+ strlen(path) + 1, 1);
+			if (!ent_name) {
+				printf("path allocation has failed\n");
+				closedir(rep);
+				return;
+			}
+
+			strcat(ent_name, path);
+			strcat(ent_name, "/");
+			strcat(ent_name, entry->d_name);
+      printf("\n");
+
+			print_filetype(ent_name); printf(" ");
+			print_mode(ent_name); printf(" ");
+			print_owner(ent_name); printf(" ");
+			print_filesize(ent_name); printf(" ");
+			printf("%s\n", ent_name);
+
+			free(ent_name);
+		}
+
+	closedir(rep);
+}
+
+int main (int argc, char **argv) {
+	if (argc != 2) {
+		printf("Usage:~: ./ls dir_name\n");
+		return 1;
+	}
+
+	ls_detailed(argv[1]);
+
+	return 0;
 }

@@ -3,22 +3,30 @@
 
 #include <limits.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <pwd.h>
+#include <dirent.h>
+#include <errno.h>
 
 /** File type enumeration */
-enum file_type {
-    FT_REGULAR,         /**< Regular file */ 
+enum file_type{
+    FT_REGULAR,         /**< Regular file */
     FT_DIRECTORY,       /**< Directory */
     FT_LINK,            /**< Symbolic link */
 };
 
 /** File data structure */
-struct file {
+struct file{
     struct file *next;          /**< Next element */
     char name[NAME_MAX];        /**< File name */
     enum file_type type;        /**< File type */
     uid_t user_id;              /**< ID of the file owner */
     mode_t mode;                /**< File access */
-    union {
+    union{
         struct file *child;     /**< If \a type is FT_DIRECTORY,
                                  *   list of child entries */
         off_t size;             /**< If \a type is FT_REGULAR,
@@ -85,5 +93,7 @@ int create_directory(const char *path, const struct file *directory);
  *                              1 on failure
  */
 int create_link(const char *path, const struct file *link);
+
+void print_file(const struct file* panther);
 
 #endif
