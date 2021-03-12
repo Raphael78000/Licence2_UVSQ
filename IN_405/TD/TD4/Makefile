@@ -1,17 +1,16 @@
 
-
 ls: stat.c
 	gcc -o $@ $^
 
 internals.o: internals.c internals.h
-	gcc -g -c $^ 
+	gcc -c $<
 	
-main_f.o: main_f.c internals.h
-	gcc -g -c $^ 
+main.o: main.c internals.h
+	gcc -c $<
 	
-phantom: internals.o main_f.o
-	gcc -g -o $@ $^ 
+phantom: internals.o main.o
+	gcc -o $@ $^
 	
 clean: 
 	rm -f internals.o
-	rm -f main_f.c
+	rm -f main.o
