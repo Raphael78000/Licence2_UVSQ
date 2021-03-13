@@ -14,9 +14,7 @@ int main(int argc, char **argv){
   struct file* origin;
   
   origin = malloc(sizeof(struct file));
-  printf("adresse mémoire origin:   %p\n",origin);
-
-
+  
   /*if (argc != 3){
     printf("Bad usage: %s src dest\n"
            "   - src : source directory\n"
@@ -24,6 +22,8 @@ int main(int argc, char **argv){
     return EXIT_FAILURE;
   }*/
  browse_directory(argv[1],&origin);
+ printf("%s\n",(*origin).name);
+
 
     return 0;
 }

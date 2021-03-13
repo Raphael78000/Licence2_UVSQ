@@ -9,8 +9,6 @@ int capture_file(const char* path, struct file* parent){
 		printf("error %s : %s is invalid\n",strerror(errno),path);
 		return 1;
 	}
-  
-	printf("adresse mémoire parent: %p\n",parent);
 
 	if		(S_ISLNK(stat_view.st_mode))		parent->type = FT_LINK;
 	else if (S_ISREG(stat_view.st_mode))		parent->type = FT_REGULAR;
@@ -21,7 +19,7 @@ int capture_file(const char* path, struct file* parent){
 
 	parent->user_id = stat_view.st_uid;                                           
 
-	strcpy(parent->name,1 + strrchr(path,'/'));                                  
+	strcpy(parent->name,1 + strrchr(path,'/')); printf("%s\n",parent->name);                               
 
 	parent->next = NULL;
 
@@ -37,8 +35,6 @@ int browse_directory(const char *path, struct file **current){
 	struct dirent* dir;
 	int check;
 
-	printf("adresse mémoire current : %p\n",*current);
-
 	dirp = opendir(path); 
 	if (!dirp){
 		printf("error %s : %s did not open correctly\n",strerror(errno),path);
@@ -50,9 +46,17 @@ int browse_directory(const char *path, struct file **current){
 			
 			char* name = malloc(sizeof(char)*NAME_MAX);
 			strcpy(name,path); strcat(name,"/"); strcat(name,dir->d_name);
-			printf("%s\n\n",name);
+			capture_file(name,(*current));
+			
+			if (dir->d_type == DT_DIR){
+				((*current)->attribute.child) = malloc(sizeof(struct file));
+				browse_directory(name,&((*current)->attribute.child));
+			}
 			free(name);
 		}
+		(*current) = ((*current)->next);
+		(*current) = malloc(sizeof(struct file));
+		
 	}
 	check = closedir(dirp);
 	if (check){
