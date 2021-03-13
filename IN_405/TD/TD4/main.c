@@ -12,7 +12,8 @@
 
 int main(int argc, char **argv){
   struct file* origin;
-  printf("adresse mémoire origin:  %p\n",origin);
+
+  origin = malloc(sizeof(struct file));
 
 
 
@@ -23,7 +24,7 @@ int main(int argc, char **argv){
     return EXIT_FAILURE;
   }*/
   browse_directory(argv[1],&origin);
-  printf("parent->name %s\n",origin->name);
+
 
     return 0;
 }

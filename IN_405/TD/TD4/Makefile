@@ -8,9 +8,10 @@ internals.o: internals.c internals.h
 main.o: main.c internals.h
 	gcc -c $<
 	
-phantom: internals.o main.o
+phantom: internals.o main.o 
 	gcc -o $@ $^
 	
 clean: 
 	rm -f internals.o
 	rm -f main.o
+
