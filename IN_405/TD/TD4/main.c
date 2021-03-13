@@ -12,9 +12,9 @@
 
 int main(int argc, char **argv){
   struct file* origin;
-
+  
   origin = malloc(sizeof(struct file));
-
+  printf("adresse mémoire origin:   %p\n",origin);
 
 
   /*if (argc != 3){
@@ -23,8 +23,7 @@ int main(int argc, char **argv){
            "   - dest: phantom directory\n", argv[0]);
     return EXIT_FAILURE;
   }*/
-  browse_directory(argv[1],&origin);
-
+ browse_directory(argv[1],&origin);
 
     return 0;
 }
