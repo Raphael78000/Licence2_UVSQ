@@ -19,7 +19,7 @@ int capture_file(const char* path, struct file* parent){
 
 	parent->user_id = stat_view.st_uid;                                           
 
-	strcpy(parent->name,1 + strrchr(path,'/')); printf("%s\n",parent->name);                               
+	strcpy(parent->name,1 + strrchr(path,'/'));                             
 
 	parent->next = NULL;
 
@@ -34,6 +34,10 @@ int browse_directory(const char *path, struct file **current){
 	DIR* dirp;
 	struct dirent* dir;
 	int check;
+	struct file* fichier;
+	
+	fichier = malloc(sizeof(struct file));
+	*current = fichier;
 
 	dirp = opendir(path); 
 	if (!dirp){
@@ -46,18 +50,19 @@ int browse_directory(const char *path, struct file **current){
 			
 			char* name = malloc(sizeof(char)*NAME_MAX);
 			strcpy(name,path); strcat(name,"/"); strcat(name,dir->d_name);
-			capture_file(name,(*current));
+			capture_file(name,(fichier));
 			
 			if (dir->d_type == DT_DIR){
-				((*current)->attribute.child) = malloc(sizeof(struct file));
-				browse_directory(name,&((*current)->attribute.child));
+				//((fichier)->attribute.child) = malloc(sizeof(struct file));
+				browse_directory(name,&((fichier)->attribute.child));
 			}
 			free(name);
+			(fichier->next) = malloc(sizeof(struct file));
+			(fichier) = ((fichier)->next);
 		}
-		(*current) = ((*current)->next);
-		(*current) = malloc(sizeof(struct file));
-		
 	}
+	free(fichier);
+	
 	check = closedir(dirp);
 	if (check){
 		printf("error %s closing directory\n",strerror(errno));
