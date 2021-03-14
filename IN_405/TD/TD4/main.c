@@ -9,11 +9,12 @@
 #include <pwd.h>
 #include <dirent.h>
 #include <errno.h>
+#include <fcntl.h>
 
 
 
 void print_file(const struct file* fichier){
-	struct file* navig;
+	const struct file* navig;
 	
 	navig = fichier;
 	
@@ -22,19 +23,16 @@ void print_file(const struct file* fichier){
 		return;
 	}
 	
-	while (navig != NULL){
-	
+	while (navig->next != NULL){
 	printf("navig->name = %s\n",navig->name);
-	
-	navig = navig->next;printf("1\n");
+	navig = navig->next;
 	}
-
 }
 
 int main(int argc, char **argv){
   struct file** origin;
   
-  origin = malloc(sizeof(struct file*));
+  //origin = malloc(sizeof(struct file*));
   
   /*if (argc != 3){
     printf("Bad usage: %s src dest\n"
@@ -44,6 +42,8 @@ int main(int argc, char **argv){
   }*/
 
  browse_directory(argv[1],origin);
+ 
+ //create_regular(argv[2],*origin);
 
 print_file(*origin);
   

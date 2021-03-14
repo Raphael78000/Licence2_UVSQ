@@ -1,15 +1,15 @@
 #ifndef _H_INTERNALS_
 #define _H_INTERNALS_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <limits.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <pwd.h>
+#include <fcntl.h>
 #include <dirent.h>
+#include <string.h>
 #include <errno.h>
 
 /** File type enumeration */
