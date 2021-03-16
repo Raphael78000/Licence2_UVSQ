@@ -1,11 +1,16 @@
 #BlueJ class context
-comment0.params=
-comment0.target=Bibliotheque()
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Bibliotheque\n
+comment0.target=Bibliotheque
+comment0.text=\r\n\ A\ very\ simple\ library\ of\ Documents\ to\ illustrate\ exercise\ 3.12.3.\ \r\n\ This\ class\ simply\ stores\ several\ Documents\ and,\ at\ request,\ finds\ a\ \r\n\ Document\ by\ his\ title\ or\ finds\ Documents\ who\ have\ the\ same\ references\ on\ \r\n\ standard\ output.\r\n\ \r\n\ @author\ Raphael\ LAZZARI-ARMOUR\ \r\n\ @version\ 15/03/2021\r\n
 comment1.params=
-comment1.target=java.util.ArrayList\ getListeDocuments()
-comment2.params=doc
-comment2.target=void\ ajoutDocument(Document)
-comment3.params=doc
-comment3.target=boolean\ rechercheDocument(Document)
-numComments=4
+comment1.target=Bibliotheque()
+comment1.text=\r\n\ Create\ a\ Library.\r\n
+comment2.params=file
+comment2.target=void\ addDocument(Document)
+comment2.text=\r\n\ Add\ a\ Document\ to\ the\ Library.\r\n
+comment3.params=title
+comment3.target=boolean\ searchDocbyTitle(java.lang.String)
+comment3.text=\r\n\ Search\ by\ title\ if\ the\ Document\ is\ in\ the\ Library.\r\n
+comment4.params=name
+comment4.target=java.lang.String\ searchDocbyRef(java.lang.String)
+comment4.text=\r\n\ Search\ Documents\ in\ Library\ having\ the\ reference\ entered.\r\n
+numComments=5

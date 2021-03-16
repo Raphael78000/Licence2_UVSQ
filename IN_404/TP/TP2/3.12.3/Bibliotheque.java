@@ -1,36 +1,60 @@
 import java.util.ArrayList;
-import java.util.List;
+
 /**
- * Write a description of class Bibliotheque here.
+ * A very simple library of Documents to illustrate exercise 3.12.3. 
+ * This class simply stores several Documents and, at request, finds a 
+ * Document by his title or finds Documents who have the same references on 
+ * standard output.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Raphael LAZZARI-ARMOUR 
+ * @version 15/03/2021
  */
-public class Bibliotheque
-{
-    // instance variables - replace the example below with your own
+public class Bibliotheque{
     private ArrayList <Document> listeDocuments;
 
     /**
-     * Constructor for objects of class Bibliotheque
+     * Create a Library.
      */
-    public Bibliotheque()
-    {
-        this.listeDocuments=new ArrayList <Document> ();
-    }
-
-    public ArrayList <Document> getListeDocuments(){
-        return this.listeDocuments;
+    private Bibliotheque(){
+        this.listeDocuments = new ArrayList <Document> ();
     }
     
-    public void ajoutDocument(Document doc){
-        this.listeDocuments.add(doc);
+    /**
+     * Add a Document to the Library.
+     */
+    private void addDocument(Document file){
+        this.listeDocuments.add(file);
     }
     
-    public boolean rechercheDocument(Document doc){
+    /**
+     * Search by title if the Document is in the Library.
+     */
+    private boolean searchDocbyTitle(String title){
+        
         for(int i=0;i<this.listeDocuments.size();i++){
-            if(this.listeDocuments.get(i)==doc) return true;
+            
+            if(this.listeDocuments.get(i).title == title){
+                return true;
+            }
         }
         return false;
+    }
+    
+    /**
+     * Search Documents in Library having the reference entered.
+     */
+    private String searchDocbyRef(String name){
+        String show = "";
+        
+        for (Document doc : listeDocuments){
+            
+            for (Document ref : doc.references){
+                
+                if (ref.title.compareTo(name) == 0){
+                  show = show + "->" + doc.getTitle() + "," + doc.getAuthor(); 
+                }
+            }
+        }
+        return show;
     }
 }

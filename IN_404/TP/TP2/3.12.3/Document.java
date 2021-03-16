@@ -1,55 +1,68 @@
 import java.util.ArrayList;
-import java.util.List;
 /**
- * Write a description of class Document here.
+ * A Document class for "the aggregation and composition" exercice(3.12.3) in 
+ * object-oriented programming course.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Raphael LAZZARI-ARMOUR 
+ * @version 15/03/2021
  */
-public class Document
-{
-    // instance variables - replace the example below with your own
-    String titre;
-    String auteur;
-    int date;
-    private ArrayList <Document> references;
+public class Document{
+    public String title;
+    public String author;
+    public int year;
+    public ArrayList <Document> references;
+    
+    /**
+     * Create a Document with his title, his author and his year.
+     */
+    public Document(String title,String author,int year){
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.references = new ArrayList <Document>();
+    }
 
     /**
-     * Constructor for objects of class Document
+     * Return the title of the Document.
      */
-    public Document(String titre,String auteur,int annee)
-    {
-        this.titre=titre;
-        this.auteur=auteur;
-        this.date=annee;
-        this.references=new ArrayList <Document>();
-    }
-
-    public String getTitre(){
-        return this.titre;
+    public String getTitle(){
+        return this.title;
     }
     
-    public String getAuteur(){
-        return this.auteur;
+    /**
+     * Return the author of the Document.
+     */
+    public String getAuthor(){
+        return this.author;
     }
     
-    public int getDate(){
-        return this.date;
+    /**
+     * Return the year of the Document.
+     */
+    public int getYear(){
+        return this.year;
     }
     
-    public ArrayList <Document> getReferences(){
-        return this.references;
+    /**
+     * Add a Reference to the Document.
+     */
+    public void addReference(Document file){
+        this.references.add(file);
     }
     
-    public void ajoutReference(Document doc){
-        this.references.add(doc);
-    }
-    
-    public String affichage(){
-        String s=this.getTitre()+" "+this.getAuteur()+" "+this.getDate();
-        for(int i=0;i<this.references.size();i++){
-            s+=this.references.get(i)+" ";
+    /**
+     * Return Informations of the Document: title, author, year and its 
+     * references.
+     */
+    private String showDocumentInfos(){
+        String show = this.getTitle()+", "+this.getAuthor()+", "+this.getYear();
+        
+        if (this.references.size() > 0) show = show + " References:";
+        
+        for( int i=0 ; i < this.references.size() ; i++ ){
+            show = show + " ->" + this.references.get(i).getTitle() + "," + 
+            this.references.get(i).getAuthor();
         }
-        return s;
+        return show;
     }
 }
