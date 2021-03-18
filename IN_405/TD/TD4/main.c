@@ -59,7 +59,7 @@ int main(int argc, char **argv){
 		return 1;
 	}
 	
-	free_structfile(*origin);
+	free(origin);
 	
 	return 0;
 }

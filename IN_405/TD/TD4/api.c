@@ -14,6 +14,7 @@ int capture_tree(const char *path, struct file **phantom){
 
 int create_phantom(const char *path, struct file *phantom){
 	struct file* create;
+	struct file* transfert;
 	int check;
 	
 	create = phantom;
@@ -42,23 +43,12 @@ int create_phantom(const char *path, struct file *phantom){
 				printf("error with create_link function in create_phantom\n");							
 				return 1;
 			}
-		}
+		}transfert = create;
 		create = create->next;
+		free(transfert);
 	}
+	free(create);
 	
 	return 0;
 }
 
-void free_structfile(struct file* phantom){
-	struct file* origin;
-	
-	origin = phantom;
-	
-	while (origin != NULL){
-		if ((origin->type == FT_REGULAR) || (origin->type == FT_LINK)) free(origin);
-		
-		else if (origin->type == FT_DIRECTORY) free_structfile(origin->attribute.child);
-		
-		origin = origin->next;
-	}
-}
