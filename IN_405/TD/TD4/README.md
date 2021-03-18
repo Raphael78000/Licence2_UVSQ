@@ -14,10 +14,11 @@ Cette archive est constituée des fichiers suivants :
   pour récupérer le contenu de la hiérarchie à "copier", et un second pour
   créer un répertoire "phantom", copiant les méta-données de la hiérarchie
   "copiée" ;
--api.c : fichier source contenant les fonctions définies dans le fichier api.h;
+  
+- api.c : fichier source contenant les fonctions définies dans le fichier api.h;
 - internals.h : fichier d'en-tête décrivant les appels de base utilisés par
   l'API qui seront testés unitairement;
--internals.c: fichier source contenant les fonctions définies dans le fichier 
+- internals.c: fichier source contenant les fonctions définies dans le fichier 
  internals.h;
 - Makefile : matériel de compilation basique
 
