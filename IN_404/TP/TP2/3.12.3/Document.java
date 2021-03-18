@@ -54,14 +54,14 @@ public class Document{
      * Return Informations of the Document: title, author, year and its 
      * references.
      */
-    private String showDocumentInfos(){
+    public String showDocumentInfos(){
         String show = this.getTitle()+", "+this.getAuthor()+", "+this.getYear();
         
         if (this.references.size() > 0) show = show + " References:";
         
-        for( int i=0 ; i < this.references.size() ; i++ ){
-            show = show + " ->" + this.references.get(i).getTitle() + "," + 
-            this.references.get(i).getAuthor();
+        for(Document ref : references){
+            show = show + " ->" + ref.getTitle() + "," + 
+            ref.getAuthor();
         }
         return show;
     }

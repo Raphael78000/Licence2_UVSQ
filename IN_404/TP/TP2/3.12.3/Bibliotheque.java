@@ -15,25 +15,25 @@ public class Bibliotheque{
     /**
      * Create a Library.
      */
-    private Bibliotheque(){
+    public Bibliotheque(){
         this.listeDocuments = new ArrayList <Document> ();
     }
     
     /**
      * Add a Document to the Library.
      */
-    private void addDocument(Document file){
+    public void addDocument(Document file){
         this.listeDocuments.add(file);
     }
     
     /**
      * Search by title if the Document is in the Library.
      */
-    private boolean searchDocbyTitle(String title){
+    public boolean searchDocbyTitle(String title){
         
-        for(int i=0;i<this.listeDocuments.size();i++){
+        for (Document doc : listeDocuments){
             
-            if(this.listeDocuments.get(i).title == title){
+            if(doc.title == title){
                 return true;
             }
         }
@@ -43,14 +43,14 @@ public class Bibliotheque{
     /**
      * Search Documents in Library having the reference entered.
      */
-    private String searchDocbyRef(String name){
+    public String searchDocbyRef(String name){
         String show = "";
         
         for (Document doc : listeDocuments){
             
             for (Document ref : doc.references){
                 
-                if (ref.title.compareTo(name) == 0){
+                if (ref.title == name){
                   show = show + "->" + doc.getTitle() + "," + doc.getAuthor(); 
                 }
             }
