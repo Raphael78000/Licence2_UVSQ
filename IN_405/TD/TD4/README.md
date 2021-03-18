@@ -1,12 +1,8 @@
 % IN405 TD4 -- Systèmes d'exploitation
 % Protocole Phantom
 
-# Modalités de soumission
-Ce TD est à faire en monôme, et à rendre au plus tard le 21 mars 2021,
-23:59 (France métropolitaine) sur moodle, dans l'espace dédié. Il est à
-rendre dans une archive .tar, contenant les fichiers sources et d'en-tête,
-le matériel de compilation nécessaire et un fichier README.md dans lequel
-vous mettrez votre nom, prénom et numéro d'étudiant.
+@author Raphael LAZZARI-ARMOUR 21920123
+@version 18/03/2021
 
 # Contenu de l'archive
 Cette archive est constituée des fichiers suivants :
@@ -18,24 +14,49 @@ Cette archive est constituée des fichiers suivants :
   pour récupérer le contenu de la hiérarchie à "copier", et un second pour
   créer un répertoire "phantom", copiant les méta-données de la hiérarchie
   "copiée" ;
+-api.c : fichier source contenant les fonctions définies dans le fichier api.h;
 - internals.h : fichier d'en-tête décrivant les appels de base utilisés par
-  l'API qui seront testés unitairement.
+  l'API qui seront testés unitairement;
+-internals.c: fichier source contenant les fonctions définies dans le fichier 
+ internals.h;
 - Makefile : matériel de compilation basique
 
-# Quelques informations
-Le code fourni est censé être immuable :
+# Instructions d'utilisation
+Pour compiler le code, l'utilisateur devra rentrer la commande "make" dans le terminal,
+un éxécutable "phantom" sera crée.
 
-- aucune structure de donnée ne peut être modifiée ;
-- aucun prototype de fonction donné ne peut être modifié ;
-- le code de la fonction main() dans main.c peut évidemment être modifié,
-  mais l'usage du programme (à savoir qu'il prend deux chemins en argument)
-  ne doit lui pas être modifié ;
-- vous pouvez rajouter n'importe quel nombre de fonctions dans les fichiers
-  main.c, api.c et internals.c, et même d'autres fichiers -- vous n'êtes pas
-  bloqués aux seuls prototypes fournis dans cette archive ;
-- vous pouvez modifier le Makefile fourni.
+Afin d'éxécuter le programme, l'utilisateur devra rentrer dans le terminal la ligne
+de commande suivante: ./phantom  répertoire_source répertoire_destination
+
+-> Uniquement les fichiers réguliers, les répertoires et liens symboliques seront prit 
+   en compte dans le répertoire source afin d'en faire une copie "phantom"
+
+Le programme effectue donc une copie parfaite en apparence du répertoire source
+dans le répertoire destination. La copie ne sera pas parfaitement identique au répertoire
+source puisque les fichiers réguliers copiés seront identiques en apparence mais pas 
+en leur contenu. 
+
+Afin que la taille des fichiers réguliers soit identique, le programme remplit le fichier 
+du char 'a' jusqu'à obtenir la même taille que le fichier souhaité dans le répertoire source
+Le choix de l'écriture d'un char s'est fait car un char occupe une place de un octet, donc cela 
+permet d'écrire jusqu'à obtenir la taille identique que le fichier souhaité. Ce qui n'est pas possible
+avec un int qui occupe 2 octets (processeur 16bits) ou 4 octets (processeur 32bits) suivant le 
+processeur utilisé par l'ordinateur.
+
+Pour effectuer la supression des fichiers de compilation (*.o), l'utilisateur devra rentrer la commande 
+"make clean"
+
+La commande "make tar" permet d'effectuer une archive au format .tar comprenant l'ensemble des fichiers
+à extension .c .h ainsi que le README.md (fichier actuel) et le Makefile
 
 # Remontée de bugs
-N'hésitez pas à remonter tout problème d'implémentation majeur (soupçon
-d'erreur dans un prototype, erreur dans la documentation, matériel de
-compilation bugué, etc.) à l'adresse pro.seb.gougeaud@gmail.com
+Lors de la réalisation du TD, j'ai effectué l'allocation de mémoire de l'élèment suivant de la struct file 
+avant d'accéder au prochain élèment. Ceci a pour effet que lorsque le programme arrive sur le dernier élèment
+d'un répertoire, la mémoire de l'élèment suivant est allouée par défaut. Cela a pour conséquence que la liste
+chaînée occupe une taille de plus que le nombre d'élèement présent dans le répertoire. Pour remédier à cela, 
+j'ai crée une fonction "organize_struct(struct file* fichier)" qui permet de supprimer le dernier élèment de la 
+liste chaînée qui ne contient aucune donnée, car il s'agit d'une zone mémoire allouée mais non remplit et donc 
+que l'on n'utilise pas. 
+
+Cela a pour conséquence de rajouter une compléxité de l'ordre O(n) à chaque parcours de la fonction 
+"browse_directory(const char *path, struct file **current)".

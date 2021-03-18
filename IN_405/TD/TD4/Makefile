@@ -21,10 +21,10 @@ NOM= LAZZARI-ARMOUR_Raphael_TD04B
 .PHONY: tar
 tar: $(NOM).tar clean
 
-$(NOM).tar: *.c *.h Makefile 
+$(NOM).tar: *.c *.h Makefile README.md
 	rm -rf $(NOM)
 	mkdir $(NOM)
-	cp *.c *.h Makefile $(NOM)
+	cp *.c *.h Makefile README.md $(NOM)
 	tar -zcvf $@ $(NOM)
 	rm -rf $(NOM)
 

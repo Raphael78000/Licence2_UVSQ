@@ -23,6 +23,10 @@ void show_file(const struct file* fichier){
 	
 	while (navig != NULL){
 	printf("navig->name = %s\n",navig->name);
+	printf("navig->mode = %u\n",navig->mode);
+	printf("navig->user_id = %u\n",navig->user_id);
+	
+	if (navig->type == FT_LINK) printf("navig->attribute.target = %s\n",navig->attribute.target);
 	
 	if (navig->type == FT_DIRECTORY){
 		printf("	file in %s:\n",navig->name);
