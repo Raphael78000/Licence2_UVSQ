@@ -1,4 +1,4 @@
-#include "internals.h"
+#include "api.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -11,44 +11,55 @@
 #include <errno.h>
 #include <fcntl.h>
 
-
-
-void print_file(const struct file* fichier){
+void show_file(const struct file* fichier){
 	const struct file* navig;
 	
 	navig = fichier;
 	
 	if (!navig){
-		printf("error %s\n",strerror(errno));
+		printf("error %s in show_file\n",strerror(errno));
 		return;
 	}
 	
-	while (navig->next != NULL){
+	while (navig != NULL){
 	printf("navig->name = %s\n",navig->name);
+	
+	if (navig->type == FT_DIRECTORY){
+		printf("	file in %s:\n",navig->name);
+		struct file* spdirect; spdirect = navig->attribute.child;
+		show_file(spdirect);
+		printf("end of %s directory\n",navig->name);
+		}
 	navig = navig->next;
 	}
 }
 
 int main(int argc, char **argv){
-  struct file** origin;
-  
-  //origin = malloc(sizeof(struct file*));
-  
-  /*if (argc != 3){
-    printf("Bad usage: %s src dest\n"
-           "   - src : source directory\n"
-           "   - dest: phantom directory\n", argv[0]);
-    return EXIT_FAILURE;
-  }*/
+	struct file** origin = malloc(sizeof(struct file*));
+	int check;
 
- browse_directory(argv[1],origin);
- 
- //create_regular(argv[2],*origin);
+	if (argc != 3){
+		printf("Bad usage: %s src dest\n"
+			"   - src : source directory\n"
+			"   - dest: phantom directory\n", argv[0]);
+		return EXIT_FAILURE;
+	}
 
-print_file(*origin);
-  
-  
-
-
-    return 0;
+	//remplissage de la struct origin à partir du path souhaité
+	check = capture_tree(argv[1],origin);
+	if (check){
+		printf("error with capture_tree function in main\n");
+		return 1;
+	}
+	
+	//création du répertoire phantom
+	check = create_phantom(argv[2],*origin);
+	if (check){
+		printf("error with create_phantom function in main\n");
+		return 1;
+	}
+	
+	free_structfile(*origin);
+	
+	return 0;
 }
