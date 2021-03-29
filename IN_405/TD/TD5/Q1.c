@@ -17,9 +17,9 @@ void question2(){
 	pid_t a = fork();
 
 	if (a){
-		printf"Mon PID est %d et celui de mon fils est %d !\n",getpid(),a);
+		printf("Mon PID est %d et celui de mon fils est %d !\n",getpid(),a);
 		wait(NULL);
-	} 
+	}
 	else{
 		printf("Mon PID est %d et celui de mon pere est %d !\n",getpid(),getppid());
 		exit (0);
@@ -34,11 +34,11 @@ void question3(){
 		wait(&status);
 
 		printf("Valeur choisie par mon fils: %d.\n",WEXITSTATUS(status));
-	} 
+	}
 	else{
-		int a = 1 + (rand () % 50);
+		int a = 1+(rand()%50);
 		printf("Valeur choisie aleatoirement: %d.\n",a);
-		exit (a);
+		exit(a);
 	}
 }
 
