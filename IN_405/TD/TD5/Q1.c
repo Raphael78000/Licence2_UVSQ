@@ -28,17 +28,18 @@ void question2(){
 
 void question3(){
 	srand(time(NULL));
+	pid_t a = fork();
 
-	if (fork()){
+	if (a){
 		int status;
 		wait(&status);
 
 		printf("Valeur choisie par mon fils: %d.\n",WEXITSTATUS(status));
 	}
 	else{
-		int a = 1+(rand()%50);
-		printf("Valeur choisie aleatoirement: %d.\n",a);
-		exit(a);
+		int valeur = 1+(rand()%50);
+		printf("Valeur choisie aleatoirement: %d.\n",valeur);
+		exit(valeur);
 	}
 }
 
