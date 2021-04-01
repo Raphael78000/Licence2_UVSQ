@@ -10,131 +10,140 @@
 
 #define BUFFER_SIZE 16
 
-void q1Anonymous () {
-	int pipefd [2];
-	char buf [BUFFER_SIZE];
+void q1Anonymous(){
+	int pipefd[2];
+	char buf[BUFFER_SIZE];
 
-	pipe (pipefd);
+	pipe(pipefd);
 
-	if (fork ()) {
-		strcpy (buf, "Hello world!");
+	if (fork()){
+		strcpy(buf,"Hello world!");
 
-		write (pipefd [1], buf, BUFFER_SIZE);
+		write(pipefd[1],buf,BUFFER_SIZE);
 
-		close (pipefd [0]); close (pipefd [1]);
+		close(pipefd[0]);
+		close(pipefd[1]);
 
-		wait (NULL);
-	} else {
-		read (pipefd [0], buf, BUFFER_SIZE);
+		wait(NULL);
+	}
 
-		printf ("%s\n", buf);
+	else{
+		read(pipefd[0],buf,BUFFER_SIZE);
 
-		close (pipefd [0]); close (pipefd [1]);
+		printf("%s\n",buf);
 
-		exit (0);
+		close(pipefd[0]);
+		close(pipefd[1]);
+
+		exit(0);
 	}
 }
 
-void q1Named () {
+void q1Named(){
 	int fd;
-	char buf [BUFFER_SIZE];
+	char buf[BUFFER_SIZE];
 
-	mkfifo ("/tmp/tube", 0600);
+	mkfifo("/tmp/tube",0600);
 
-	if (fork ()) {
-		fd = open ("/tmp/tube", O_WRONLY);
+	if (fork()){
+		fd = open("/tmp/tube",O_WRONLY);
 
-		strcpy (buf, "Here is Brian!");
+		strcpy(buf,"Here is Brian!");
 
-		write (fd, buf, BUFFER_SIZE);
+		write(fd,buf,BUFFER_SIZE);
 
-		close (fd);
+		close(fd);
 
-		wait (NULL);
-	} else {
-		fd = open ("/tmp/tube", O_RDONLY);
+		wait(NULL);
+	}
+	else{
+		fd = open("/tmp/tube",O_RDONLY);
 
-		read (fd, buf, BUFFER_SIZE);
+		read(fd,buf,BUFFER_SIZE);
 
-		printf ("%s\n", buf);
+		printf("%s\n",buf);
 
-		close (fd);
+		close(fd);
 
-		exit (0);
+		exit(0);
 	}
 
-	unlink ("/tmp/tube");
+	unlink("/tmp/tube");
 }
 
-void q2Anonymous () {
-	int pipefd [2], number1, number2;
+void q2Anonymous(){
+	int pipefd[2],number1,number2;
 
-	pipe (pipefd);
+	pipe(pipefd);
 
-	if (fork ()) {
-		number1 = rand () % 1000;
-		number2 = rand () % 10;
+	if (fork ()){
+		number1 = rand() % 1000;
+		number2 = rand() % 10;
 
-		write (pipefd [1], &number1, sizeof (int) );
-		write (pipefd [1], &number2, sizeof (int) );
+		write(pipefd[1],&number1,sizeof(int));
+		write(pipefd[1],&number2,sizeof(int));
 
-		close (pipefd [0]); close (pipefd [1]);
+		close(pipefd[0]);
+		close(pipefd[1]);
 
-		wait (NULL);
-	} else {
-		read (pipefd [0], &number1, sizeof (int) );
-		read (pipefd [0], &number2, sizeof (int) );
+		wait(NULL);
+	}
+	else{
+		read(pipefd[0],&number1,sizeof(int));
+		read(pipefd[0],&number2,sizeof(int));
 
-		printf ("(%d, %d)\n", number1, number2);
+		printf("(%d, %d)\n",number1,number2);
 
-		close (pipefd [0]); close (pipefd [1]);
+		close(pipefd[0]);
+		close(pipefd[1]);
 
-		exit (0);
+		exit(0);
 	}
 }
 
-void q2Named () {
-	int fd, number1, number2;
-	char buf [BUFFER_SIZE];
+void q2Named(){
+	int fd,number1,number2;
+	char buf[BUFFER_SIZE];
 
-	mkfifo ("/tmp/tube", 0600);
+	mkfifo("/tmp/tube",0600);
 
-	if (fork ()) {
-		fd = open ("/tmp/tube", O_WRONLY);
+	if (fork()){
+		fd = open("/tmp/tube",O_WRONLY);
 
-		number1 = rand () % 1000;
-		number2 = rand () % 10;
+		number1 = rand() % 1000;
+		number2 = rand() % 10;
 
-		write (fd, &number1, sizeof (int) );
-		write (fd, &number2, sizeof (int) );
+		write(fd,&number1,sizeof(int));
+		write(fd,&number2,sizeof(int));
 
-		close (fd);
+		close(fd);
 
-		wait (NULL);
-	} else {
-		fd = open ("/tmp/tube", O_RDONLY);
+		wait(NULL);
+	}
+	else{
+		fd = open("/tmp/tube",O_RDONLY);
 
-		read (fd, &number1, sizeof (int) );
-		read (fd, &number2, sizeof (int) );
+		read(fd,&number1,sizeof(int));
+		read(fd,&number2,sizeof(int));
 
-		printf ("(%d, %d)\n", number1, number2);
+		printf("(%d, %d)\n",number1,number2);
 
-		close (fd);
+		close(fd);
 
-		exit (0);
+		exit(0);
 	}
 
-	unlink ("/tmp/tube");
+	unlink("/tmp/tube");
 }
 
-int main (int argc, char ** argv) {
-	srand (time (NULL) );
+int main(int argc,char ** argv){
+	srand(time(NULL));
 
-	q1Anonymous ();
-	q2Anonymous ();
+	q1Anonymous();
+	q2Anonymous();
 
-	q1Named ();
-	q2Named ();
+	q1Named();
+	q2Named();
 
 	return 0;
 }

@@ -38,7 +38,7 @@ void fils(){
 	exit(0);
 }
 
-int main(int argc, char ** argv){
+int main(int argc,char ** argv){
 	pid_t a;
 	if (a = fork()) pere(a);
 	else fils();
