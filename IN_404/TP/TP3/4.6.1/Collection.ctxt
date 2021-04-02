@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Collection
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Collection\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Collection()
+comment2.params=doc
+comment2.target=void\ ajouterDoc(Document)
+comment3.params=
+comment3.target=java.lang.String\ listCollection()
+comment4.params=name
+comment4.target=java.lang.String\ DocFound(java.lang.String)
+numComments=5

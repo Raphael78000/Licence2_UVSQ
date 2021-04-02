@@ -1,8 +1,12 @@
 #BlueJ class context
-comment0.params=titre\ artiste\ titres
-comment0.target=Cd(java.lang.String,\ java.lang.String,\ int)
-comment0.text=\n\ Constructor\ for\ objects\ of\ class\ Cd\n
-comment1.params=
-comment1.target=java.lang.String\ getInfos()
-comment1.text=\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\n\ \n\ @param\ \ y\ \ \ a\ sample\ parameter\ for\ a\ method\n\ @return\ \ \ \ \ the\ sum\ of\ x\ and\ y\ \n
-numComments=2
+comment0.target=CD
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cd\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=titre\ artiste\ Nbtitres
+comment1.target=CD(java.lang.String,\ java.lang.String,\ int)
+comment2.params=
+comment2.target=java.lang.String\ getArtiste()
+comment3.params=
+comment3.target=int\ getNbTitres()
+comment4.params=
+comment4.target=java.lang.String\ getInfos()
+numComments=5

@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Systeme
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ Fichier\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=nom
+comment1.target=Systeme(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=java.lang.String\ toString()
+comment4.params=file
+comment4.target=boolean\ find(Systeme)
+comment5.params=
+comment5.target=int\ getSize()
+numComments=6

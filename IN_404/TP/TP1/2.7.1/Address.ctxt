@@ -1,11 +1,13 @@
 #BlueJ class context
-comment0.params=street\ town\ postCode
-comment0.target=Address(java.lang.String,\ java.lang.String,\ java.lang.String)
-comment0.text=\n\ Construct\ an\ Address\ without\ country\n
-comment1.params=street\ town\ postCode\ country
-comment1.target=Address(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
-comment1.text=\n\ Construct\ an\ Address\ with\ full\ details\n
-comment2.params=
-comment2.target=java.lang.String\ toString()
-comment2.text=\n\ Return\ a\ string\ representation\ of\ this\ object.\n
-numComments=3
+comment0.target=Address
+comment0.text=\r\n\ Class\ Address\ -\ used\ to\ store\ address\ details\ for\ a\ post\ address\r\n\ \r\n\ @author\ \ Michael\ K\u00F6lling\r\n\ @version\ 1.0,\ January\ 1999\r\n
+comment1.params=street\ town\ postCode
+comment1.target=Address(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Construct\ an\ Address\ without\ country\r\n
+comment2.params=street\ town\ postCode\ country
+comment2.target=Address(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.text=\r\n\ Construct\ an\ Address\ with\ full\ details\r\n
+comment3.params=
+comment3.target=java.lang.String\ toString()
+comment3.text=\r\n\ Return\ a\ string\ representation\ of\ this\ object.\r\n
+numComments=4

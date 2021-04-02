@@ -1,37 +1,29 @@
-
 /**
  * Write a description of class Cd here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Cd extends Document
-{
-    // instance variables - replace the example below with your own
+public class CD extends Document{
     private String artiste;
-    private int titres;
+    private int Nbtitres;
 
-    /**
-     * Constructor for objects of class Cd
-     */
-    public Cd(String titre,String artiste,int titres)
-    {
+    public CD(String titre,String artiste,int Nbtitres){
         super(titre);
-        this.artiste=artiste;
-        this.titres=titres;
+        this.artiste = artiste;
+        this.Nbtitres = Nbtitres;
+    }
+    
+    public String getArtiste(){
+        return this.artiste;
+    }
+    
+    public int getNbTitres(){
+        return this.Nbtitres;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    @Override
-    public String getInfos()
-    {
-        String s=super.getInfos()+this.artiste+this.titres;
-        
-        return s;
+    public String getInfos(){
+        return super.getInfos()+ ", " + "Artiste: " + 
+        getArtiste() + ", " + "Nombre de titres: " + getNbTitres();
     }
 }
