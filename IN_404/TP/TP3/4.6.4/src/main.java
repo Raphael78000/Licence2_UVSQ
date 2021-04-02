@@ -19,8 +19,6 @@ public class main{
 
     //Ajout du sous répertoire srep au répertoire Rep
     rep.add(srep);
-
-    System.out.println(rep.getSize());
-    System.out.println(rep.getName());
+    System.out.println("Taille de " + rep.getName() + " est: " + rep.getSize());
   }
 }
