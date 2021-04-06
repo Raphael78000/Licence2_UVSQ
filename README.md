@@ -8,4 +8,14 @@ IN_303: Structure de données et algorithmique
 
 IN_310: Mathématiques pour l'informatique
 
-Culture générale: Musculation et renforcement musculaire 
+IN_403: Algorithme des graphes
+
+IN_404: Programmation orientée objet
+
+IN_405: Système d'exploitation
+
+IN_406: Théorie des langages
+
+MA_430: Probabilités et statistiques élèmentaires 
+
+Culture générale: Musculation et renforcement musculaire
