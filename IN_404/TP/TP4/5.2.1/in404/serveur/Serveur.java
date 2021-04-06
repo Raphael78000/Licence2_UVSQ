@@ -1,3 +1,6 @@
+package in404.serveur;
+
+import in404.client.Client;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -9,26 +12,28 @@ import java.util.List;
 public class Serveur
 {
     // instance variables - replace the example below with your own
-    private ArrayList <Client> listeClients;
-
+    //private int x;
+    //public String nomServeur;
+    public ArrayList <Client> listeClients;
     /**
      * Constructor for objects of class Serveur
      */
     public Serveur()
     {
-        // initialise instance variables
-        this.listeClients=new ArrayList <Client> ();
+        this.listeClients= new ArrayList<Client>();
     }
 
-    public ArrayList getListeClients(){
-        return this.listeClients;
-    }
-    
-    public boolean connecter(Client c){
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+    public boolean connecter(Client client){
         for(int i=0;i<this.listeClients.size();i++){
-            if(this.listeClients.get(i)==c) return false;
+            if(this.listeClients.get(i)==client) return false;
         }
-        this.listeClients.add(c);
+        listeClients.add(client);
         return true;
     }
     

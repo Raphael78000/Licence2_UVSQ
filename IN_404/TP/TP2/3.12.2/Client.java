@@ -1,51 +1,62 @@
+import java.io.*;
 
-/**
- * Write a description of class Client here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Client
-{
-    // instance variables - replace the example below with your own
-    private String nom;
-    private Serveur serveur;
+public class Client{
+  private String name;
+  private int errors;
 
-    /**
-     * Constructor for objects of class Client
-     */
-    public Client(String nom)
-    {
-        this.nom=nom;
-        this.serveur=null;
-    }
+  public Client(){
+    My_random rand = new My_random();
 
-    public String getNom(){
-        return this.nom;
+    this.name = rand.get_rand_string();
+    this.errors = rand.get_rand_int();
+  }
+
+  public String get_user_name(){
+    return name;
+  }
+
+  public int get_errors(){
+    return errors;
+  }
+
+  public void set_user_name(String u_name){
+    System.out.println("User name is change.");
+    name = u_name;
+  }
+
+  public boolean sign_in(Server s){
+
+    if (s.get_opening()){
+
+      if (s.sign(this)){
+        System.out.println(this.name + ": Connected.");
+        s.add_client(this);
+
+        return true;
+      }
+      else {
+        return false;
+      }
     }
-    
-    public Serveur getServeur(){
-        return this.serveur;
-    }
-    
-    public boolean seConnecter(Serveur s){
-        if(s.connecter(this)==true){
-            this.serveur=s;
-            return true;
-        }
-        else{
-            this.serveur=null;
-            return false;
-        }
-    }
-    
-    public void envoyer(String s){
-        if(this.serveur!=null){
-            this.serveur.diffuser(s);
-        }
-    }
-    
-    public String recevoir(String s){
-        return s;
-    }
+    return false;
+  }
+
+  public boolean is_equal(Client other){
+    if ((this.name.compareTo(other.get_user_name()) == 0) && (this.errors == other.errors))
+      return true;
+    return false;
+  }
+
+  public void send_msg(String msg, Server s){
+    System.out.println("\nClient '" + name + "' send a new message for everyone.");
+    s.broadcast(msg, this);
+  }
+
+  public void receive_msg(String msg){
+    System.out.println("\nClient: '" + name + "' receive a new message :\n" + msg + ".");
+  }
+
+  public String to_String(){
+    return "\nName user is: " + name + ". Number(s) of error(s) is: " + errors + ".";
+  }
 }
