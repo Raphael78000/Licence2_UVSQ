@@ -6,24 +6,24 @@
 #include <unistd.h>
 
 int main (int argc, char ** argv){
-	struct tms buf;
+	struct tms buf;																																//stocke les durées statistiques du processus
 	char cmd [1024] = "\0";
 
 	if (argc != 2){
-		printf("Usage : %s rep.\n", argv [0]);
+		printf("Usage : %s rep.\n",argv[0]);
 		return -1;
 	}
 
 	strcat(cmd,"ls -R ");
-	strcat(cmd,argv [1]);
+	strcat(cmd,argv[1]);
 
-	if (! fork()){
-		system(cmd);
+	if (!fork()){
+		system(cmd);																																//execute a shell command
 		exit(0);
 	}
 
 	wait(NULL);
-	times(&buf);
+	times(&buf);																																	//get process times
 
 	printf("Temps d'exécution de la commande : %f\n",
 		((float) buf.tms_cutime) / sysconf(_SC_CLK_TCK)
