@@ -5,11 +5,11 @@
 #define HOME_DIR "/home/user"
 
 void Q1(){
-	execlp("ps","ps",NULL);
+	execlp("ps","ps",NULL);																												//execute a file - liste les processus courants
 }
 
 void Q2(){
-	execlp("ls","ls",HOME_DIR,NULL);
+	execlp("ls","ls",HOME_DIR,NULL);																							//execute a file - liste les fichiers contenus dans le répertoire
 }
 
 void Q3(const int first){
@@ -31,10 +31,10 @@ void main(){
 		Q2();
 	wait(NULL);
 
-	for (i = 0;i < 2; ++i)
+	for (i = 0;i < 2;++i)
 		if (!fork())
 			Q3(!i);
 
-	for (i = 0;i < 2; ++i)
+	for (i = 0;i < 2;++i)
 		wait(NULL);
 }
