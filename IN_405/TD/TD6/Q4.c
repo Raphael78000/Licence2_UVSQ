@@ -6,7 +6,9 @@
 #include <stdlib.h>
 
 int counter = 1;
-
+/*
+* SIGUSR = Signal utilisateur
+*/
 void pere(const pid_t a){
 	sleep(3);
 	kill(a,SIGUSR1);
@@ -17,21 +19,21 @@ void pere(const pid_t a){
 }
 
 void handler(int a){
-	printf("debug: %d\n", counter);
+	printf("debug: %d\n",counter);
 }
 
 void fils(){
-	struct sigaction act;
+	struct sigaction act;																													//examiner et modifier l'action associée à un signal
 
 	act.sa_handler = handler;
 	// Empêcher l'execution du comportement par défaut de SIGUSR1 -> SIGTERM
 	act.sa_flags = SA_ONSTACK;
 
-	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR1,&act,NULL);																									//examine and change a signal action
 
 	while (counter < 12){
 		sleep(1);
-		printf("Attente à %dsec.\n", counter);
+		printf("Attente à %dsec.\n",counter);
 		++counter;
 	}
 

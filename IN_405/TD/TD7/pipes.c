@@ -14,12 +14,12 @@ void q1Anonymous(){
 	int pipefd[2];
 	char buf[BUFFER_SIZE];
 
-	pipe(pipefd);
+	pipe(pipefd);																																	//create pipe
 
 	if (fork()){
 		strcpy(buf,"Hello world!");
 
-		write(pipefd[1],buf,BUFFER_SIZE);
+		write(pipefd[1],buf,BUFFER_SIZE);																						//lecture sur pipefd[0] et écriture su pipefd[1]
 
 		close(pipefd[0]);
 		close(pipefd[1]);
@@ -27,7 +27,7 @@ void q1Anonymous(){
 		wait(NULL);
 	}
 
-	else{
+	else{																																					//fils qui lie le contenu du pipefd
 		read(pipefd[0],buf,BUFFER_SIZE);
 
 		printf("%s\n",buf);
@@ -43,14 +43,14 @@ void q1Named(){
 	int fd;
 	char buf[BUFFER_SIZE];
 
-	mkfifo("/tmp/tube",0600);
+	mkfifo("/tmp/tube",0600);																											//make FIFOs (named pipes)
 
 	if (fork()){
-		fd = open("/tmp/tube",O_WRONLY);
+		fd = open("/tmp/tube",O_WRONLY);																						//ouverture du tube FIFO
 
 		strcpy(buf,"Here is Brian!");
 
-		write(fd,buf,BUFFER_SIZE);
+		write(fd,buf,BUFFER_SIZE);																									//écriture dans le tube FIFO
 
 		close(fd);
 
@@ -59,7 +59,7 @@ void q1Named(){
 	else{
 		fd = open("/tmp/tube",O_RDONLY);
 
-		read(fd,buf,BUFFER_SIZE);
+		read(fd,buf,BUFFER_SIZE);																										//lecture du tube FIFO
 
 		printf("%s\n",buf);
 
@@ -68,7 +68,7 @@ void q1Named(){
 		exit(0);
 	}
 
-	unlink("/tmp/tube");
+	unlink("/tmp/tube");																													//call the unlink function to remove the specified file
 }
 
 void q2Anonymous(){
@@ -136,7 +136,7 @@ void q2Named(){
 	unlink("/tmp/tube");
 }
 
-int main(int argc,char ** argv){
+int main(int argc,char** argv){
 	srand(time(NULL));
 
 	q1Anonymous();
