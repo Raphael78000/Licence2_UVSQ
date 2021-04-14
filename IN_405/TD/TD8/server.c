@@ -20,10 +20,11 @@ struct dictionary_item{
 
 /* operators of a dictionary */
 enum command_op{
-    OP_ADD,     /* add an entry */
-    OP_REMOVE,  /* remove an entry */
-    OP_ASK,     /* ask about an entry */
-    OP_EXIT     /* terminate server */
+  OP_NONE,    /* no command*/
+  OP_ADD,     /* add an entry */
+  OP_REMOVE,  /* remove an entry */
+  OP_ASK,     /* ask about an entry */
+  OP_EXIT     /* terminate server */
 };
 
 /* command extracted from the input pipe */
@@ -122,7 +123,7 @@ void destroy_pipes(const char* dict_name){
 }
 
 /* open a pipe for the given dictionary, input or output side */
-int open_pipe(const char* dict_name,bool dict_input){
+int open_pipe(const char* dict_name,bool dict_input,int offset){
   char buf[256];
   int fd;
 
@@ -145,7 +146,7 @@ void close_pipe(int fd){
 }
 
 /* receive a command from the input pipe */
-int receive_command(int fd,struct command* cmd){
+int receive_command(int fd,struct command* cmd,int* offset){
   char buf[256];
   char value[64];
   int index,index2,state,size,rc;
@@ -189,7 +190,7 @@ int receive_command(int fd,struct command* cmd){
           break;
 
           case 2:
-          cmd->value = strod(value,NULL);
+          cmd->value = strtod(value,NULL);
           break;
 
           default:
@@ -245,7 +246,7 @@ int dict_add(struct dictionary_item* dict,size_t* dict_count,size_t dict_max_siz
 
   //check that key is not already int doctionary
   for (index = 0;index < count;index++){
-    if (strcmp(dic[index.name],cmd.name,DICT_NAME_MAX) == 0){
+    if (strncmp(dict[index].name,cmd.name,DICT_NAME_MAX) == 0){
       break;
     }
   }
@@ -280,7 +281,7 @@ int dict_remove(struct dictionary_item* dict,size_t* dict_count,struct command c
   if (index < count){
     for (index2 = 0;index2 < count-1;index2++){
       //copy case n+1 into n
-      memcpy(&dict[index2],&dict[index2 + 1],sizeof(struct doctionary_item));
+      memcpy(&dict[index2],&dict[index2 + 1],sizeof(struct dictionary_item));
     }
     count--;
   }
@@ -336,6 +337,7 @@ int main(int argc,char** argv){
     bool done = false;
     int fd[2] = {-1,-1};
     int rc;
+    int offset = 0;
 
     if (argc != 3){
         fprintf(stderr,
@@ -348,24 +350,26 @@ int main(int argc,char** argv){
     }
 
     rc = create_dict(argv[2],&dict,&dict_max_size);
-    if (rc)
-        goto err_exit;
+    if (rc){
+      goto err_exit;
+    }
 
     rc = create_pipes(argv[1]);
-    if (rc)
-        goto err_dict;
+    if (rc){
+      goto err_dict;
+    }
 
     do{
       struct command cmd;
       int rc2;
 
-      fd[0] = open_pipe(argv[1],true);
+      fd[0] = open_pipe(argv[1],true,offset);
       if (fd[0] < 0){
         rc = 1;
         goto err_pipe;
       }
 
-      rc = receive_command(fd[0], &cmd);
+      rc = receive_command(fd[0],&cmd,&offset);
       if (rc)
           break;
 
@@ -380,7 +384,7 @@ int main(int argc,char** argv){
 
         case OP_ASK:
         rc2 = dict_ask(dict, dict_count, &cmd);
-        fd[1] = open_pipe(argv[1], false);
+        fd[1] = open_pipe(argv[1], false,0);
         if (fd[1] < 0){
           rc = 1;
           goto err_pipe;

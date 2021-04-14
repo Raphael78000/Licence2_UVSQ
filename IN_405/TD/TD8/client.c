@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <errno.h>
 
 #define DICT_PATH_PREFIX "/tmp"
 
@@ -31,7 +32,7 @@ int open_pipe(const char* dict_name,bool dict_input){
   return open(buf, dict_input ? O_WRONLY : O_RDONLY);
 }
 
-/* TODO: send add command to the server */
+/* send add command to the server */
 int dict_add(const char* dict_name,const char* value_name,double value){
   char buf[256];
   int rc,fd;
@@ -43,8 +44,10 @@ int dict_add(const char* dict_name,const char* value_name,double value){
     return 1;
   }
   else{
+
     //construct request
     sprintf(buf,"+;%s;%f;",value_name,value);
+
     //send request
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
@@ -52,7 +55,7 @@ int dict_add(const char* dict_name,const char* value_name,double value){
       return 1;
     }
 
-    /*close pipe*/
+    //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
@@ -62,27 +65,29 @@ int dict_add(const char* dict_name,const char* value_name,double value){
   return 0;
 }
 
-/* TODO: send remove commant to the server */
+/* send remove commant to the server */
 int dict_remove(const char* dict_name,const char* value_name){
   char buf[256];
   int rc,fd;
 
-  /*open write pipe*/
+  //open write pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
     return 1;
   }
   else{
-    /*constructor request*/
+
+    //constructor request
     sprintf(buf,"-;%s;",value_name);
-    /*send request*/
+
+    //send request
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
-      fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
-      return 1;
+      fprintf(stderr,"[ERR] on request sending, constant doesn't exist\n");
     }
-    /*close pipe*/
+
+    //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
@@ -92,7 +97,7 @@ int dict_remove(const char* dict_name,const char* value_name){
   return 0;
 }
 
-/* TODO: send ask command to the server */
+/* send ask command to the server */
 int dict_ask(const char* dict_name,const char* value_name){
   char buf[256];
   char value[64];
@@ -101,39 +106,42 @@ int dict_ask(const char* dict_name,const char* value_name){
 
   count = 0;offset = 0;wait = 1;state = 0;index = 0;value_decoded = 0;
 
-  /*open write pipe*/
+  //open write pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
     return 1;
   }
 
-  /*if pipe is open*/
+  //if pipe is open
   if (fd >= 0){
-    /*constructor request*/
+
+    //constructor request
     sprintf(buf,"?;%s;",value_name);
-    /*send request*/
+
+    //send request
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
       fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
       return 1;
     }
 
-    /*close pipe*/
+    //close pipe
     rc = close(fd);
     if (rc){
-      fprintf(stderr,"[ERR] on pipe closing of file descriptor: %s\n",fd,strerror(errno));
+      fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
       return 1;
     }
 
-    /*open read pipe*/
+    //open read pipe
     fd = open_pipe(dict_name,false);
     if (fd == -1){
       fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
       return 1;
     }
     else{
-      /*try to read input pipe to set offset at end of the file*/
+
+      //try to read input pipe to set offset at end of the file
       do{
         count = read(fd,&dummy,1);
         if (count > 0){
@@ -141,7 +149,7 @@ int dict_ask(const char* dict_name,const char* value_name){
         }
       }
       while (count > 0);
-      lseek(buf,0,sizeof(buf));
+      lseek(fd,offset,SEEK_SET);
       memset(buf,0,sizeof(buf));
       offset = 0;
       do{
@@ -153,14 +161,14 @@ int dict_ask(const char* dict_name,const char* value_name){
       }
       while((count > 0) || (wait ==1));
 
-      /*close read pipe*/
+      //close read pipe
       rc = close(fd);
       if (rc){
-        fprintf(stderr,"[ERR] on pipe closing of file descriptor: %s\n",fd,strerror(errno));
+        fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
         return 1;
       }
 
-      /*interpret data*/
+      //interpret data
       count = 0;
       do{
         if (buf[count] == ';'){
@@ -193,7 +201,7 @@ int dict_ask(const char* dict_name,const char* value_name){
   return 0;
 }
 
-/* TODO: send exit command to the server */
+/* send exit command to the server */
 int dict_exit(const char* dict_name){
   char buf[256];
   int rc,fd;
@@ -205,6 +213,7 @@ int dict_exit(const char* dict_name){
     return 1;
   }
   else{
+
     //constructor request
     sprintf(buf,"!;");
 
@@ -228,30 +237,24 @@ int dict_exit(const char* dict_name){
 /* client main function, literally parse the program args
  * and then send the command to the desired server */
 int main(int argc,char** argv){
-    if (argc < 3)
-        return usage(argv[0]);
 
-    if (strcmp(argv[2], "+") == 0){
-        if (argc != 5)
-            return usage(argv[0]);
+  if (argc < 3) return usage(argv[0]);
 
-        return dict_add(argv[1],argv[3],strtod(argv[4],NULL));
-    } else if (strcmp(argv[2],"-") == 0){
-        if (argc != 4)
-            return usage(argv[0]);
+  if (strcmp(argv[2], "+") == 0){
+      if (argc != 5) return usage(argv[0]);
+      return dict_add(argv[1],argv[3],strtod(argv[4],NULL));
 
-        return dict_remove(argv[1],argv[3]);
-    } else if (strcmp(argv[2],"?") == 0){
-        if (argc != 4)
-            return usage(argv[0]);
+  } else if (strcmp(argv[2],"-") == 0){
+      if (argc != 4) return usage(argv[0]);
+      return dict_remove(argv[1],argv[3]);
 
-        return dict_ask(argv[1],argv[3]);
-    } else if (strcmp(argv[2],"!") == 0){
-        if (argc != 3)
-            return usage(argv[0]);
+  } else if (strcmp(argv[2],"?") == 0){
+      if (argc != 4) return usage(argv[0]);
+      return dict_ask(argv[1],argv[3]);
 
-        return dict_exit(argv[1]);
+  } else if (strcmp(argv[2],"!") == 0){
+      if (argc != 3) return usage(argv[0]);
+      return dict_exit(argv[1]);
     }
-
     return usage(argv[0]);
 }
