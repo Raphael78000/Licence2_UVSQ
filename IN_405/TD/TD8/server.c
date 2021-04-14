@@ -42,7 +42,7 @@ int create_dict(const char *size_string, struct dictionary_item **dict,size_t *d
   *dict_max_size = atoi(size_string);
 
   //allocate memory for dictionary_item
-  *dict = malloc(sizeof(struct dictionary_item));
+  *dict = malloc(sizeof(struct dictionary_item) * (*dict_max_size));
 
   //initialise dictionary
   memset(*dict,0,sizeof(struct dictionary_item) * *dict_max_size);
@@ -68,19 +68,20 @@ void destroy_dict(struct dictionary_item* dict){
 int create_pipes(const char* dict_name){
   char buf[256];
   int fd,rc;
+  int rc2 = 0;
 
   //create & open file for output commands then close it
   sprintf(buf,"%s/dict_%s_out",DICT_PATH_PREFIX,dict_name);
   fd = open(buf,O_CREAT,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
-    return 1;
+    rc2 = 1;
   }
   else{
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
   }
 
@@ -89,16 +90,16 @@ int create_pipes(const char* dict_name){
   fd = open(buf,O_CREAT,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
-    return 1;
+    rc2 = 1;
   }
   else{
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* destroy the pipe files used by the server */
@@ -150,6 +151,7 @@ int receive_command(int fd,struct command* cmd,int* offset){
   char buf[256];
   char value[64];
   int index,index2,state,size,rc;
+  int rc2 = 0;
 
   size = 0;index = 0;
 
@@ -166,7 +168,7 @@ int receive_command(int fd,struct command* cmd,int* offset){
 
   if (rc < 0){
     fprintf(stderr,"[ERR] on file reading descriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;
   }
   else{
     *offset = *offset + size;
@@ -214,9 +216,8 @@ int receive_command(int fd,struct command* cmd,int* offset){
           else if (buf[index] == '!'){
             cmd->op = OP_EXIT;
           }
-          else{
-            break;
-        }
+          //else do nothing
+          break;
 
           case 1:
           cmd->name[index2] = buf[index];
@@ -229,18 +230,20 @@ int receive_command(int fd,struct command* cmd,int* offset){
           break;
 
           default:
+          //potential remaining data is ignored
           break;
         }
       }
       index++;
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* add an entry to the dictionary */
 int dict_add(struct dictionary_item* dict,size_t* dict_count,size_t dict_max_size,struct command cmd){
   int count,index;
+  int rc = 0;
 
   count = *dict_count;
 
@@ -257,17 +260,18 @@ int dict_add(struct dictionary_item* dict,size_t* dict_count,size_t dict_max_siz
     count++;
   }
   else{
-    return 1;
+    rc = 1;
   }
 
   *dict_count = count;
 
-  return 0;
+  return rc;
 }
 
 /* remove an entry from the dictionary */
 int dict_remove(struct dictionary_item* dict,size_t* dict_count,struct command cmd){
   int index,index2,count;
+  int rc = 0;
 
   count = *dict_count;
 
@@ -279,23 +283,24 @@ int dict_remove(struct dictionary_item* dict,size_t* dict_count,struct command c
   }
 
   if (index < count){
-    for (index2 = 0;index2 < count-1;index2++){
+    for (index2 = index;index2 < (count - 1);index2++){
       //copy case n+1 into n
       memcpy(&dict[index2],&dict[index2 + 1],sizeof(struct dictionary_item));
     }
     count--;
   }
   else{
-    return 1;
+    rc = 1;
   }
   *dict_count = count;
 
-  return 0;
+  return rc;
 }
 
 /* ask the value of a dictionary entry, if exists */
 int dict_ask(struct dictionary_item* dict,size_t dict_count,struct command* cmd){
   int index,index2;
+  int rc = 0;
 
   //search index of the key
   for (index = 0;index < dict_count;index++){
@@ -309,24 +314,25 @@ int dict_ask(struct dictionary_item* dict,size_t dict_count,struct command* cmd)
     cmd->value = dict[index].value;
   }
   else{
-    return 1;
+    rc = 1;
   }
-  return 0;
+  return rc;
 }
 
 /* send the response of an ask request */
 int send_response(int fd,int error,double value){
   char buf[256];
   int rc;
+  int rc2 = 0;
 
   //construct response
   sprintf(buf,"%d;%f;",error,value);
   rc = write(fd,buf,strlen(buf));
   if (rc != strlen(buf)){
     fprintf(stderr,"[ERR] on file writing of file descriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;
   }
-  return 0;
+  return rc2;
 }
 
 /* main function, contains the server loop */
@@ -375,39 +381,63 @@ int main(int argc,char** argv){
 
       switch(cmd.op){
         case OP_ADD:
-        rc2 = dict_add(dict, &dict_count, dict_max_size, cmd);
+        rc2 = dict_add(dict,&dict_count,dict_max_size,cmd);
+        if (rc2){
+          fprintf(stderr,"[ERR] Add request received but dictionary is allready full or key allready in dictionnary.\n\n");
+        }
+        else{
+          fprintf(stderr,"[INF] Add request received:\n Name: %s\n Value: %f\n",cmd.name,cmd.value);
+        }
         break;
 
         case OP_REMOVE:
         rc2 = dict_remove(dict, &dict_count, cmd);
+        if (rc2){
+          fprintf(stderr,"[ERR] Remove request received but key not found into doctionary.\n\n");
+        }
+        else{
+          fprintf(stderr,"[INF] Remove request received:\n Name: %s\n",cmd.name);
+        }
         break;
 
         case OP_ASK:
-        rc2 = dict_ask(dict, dict_count, &cmd);
-        fd[1] = open_pipe(argv[1], false,0);
+        rc2 = dict_ask(dict,dict_count,&cmd);
+        if (rc2){
+          fprintf(stderr,"[ERR] Ask request received but key not found into dictionary.\n\n");
+        }
+        else{
+          fprintf(stderr,"[INF] Ask request received:\n Name: %s\n Value: %f\n\n",cmd.name,cmd.value);
+        }
+        fd[1] = open_pipe(argv[1],false,0);
         if (fd[1] < 0){
           rc = 1;
           goto err_pipe;
         }
 
-        rc = send_response(fd[1], rc2, cmd.value);
+        rc = send_response(fd[1],rc2,cmd.value);
         close_pipe(fd[1]);
         break;
 
         case OP_EXIT:
-        fprintf(stderr, "[INF] will quit\n");
+        fprintf(stderr,"[INF] will quit\n");
         done = true;
         };
 
-        if (rc)
-          break;
+        if (rc) break;
 
         close_pipe(fd[0]);
     }
     while(!done);
 
+    //in case of no error, not required to close the read err_pipe
+    if (rc == 0){
+      goto destroy_pipe;
+    }
+
     err_pipe:
     close_pipe(fd[0]);
+
+    destroy_pipe:
     destroy_pipes(argv[1]);
 
     err_dict:

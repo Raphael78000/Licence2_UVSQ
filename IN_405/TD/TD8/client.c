@@ -28,20 +28,22 @@ int open_pipe(const char* dict_name,bool dict_input){
   char buf[256];
   int fd;
 
-  sprintf(buf, "%s/dict_%s_%s",DICT_PATH_PREFIX,dict_name,dict_input ? "in" : "out");
-  return open(buf, dict_input ? O_WRONLY : O_RDONLY);
+  sprintf(buf,"%s/dict_%s_%s",DICT_PATH_PREFIX,dict_name,dict_input ? "in" : "out");
+  return open(buf,dict_input ? O_WRONLY | O_APPEND : O_RDONLY);
 }
 
 /* send add command to the server */
 int dict_add(const char* dict_name,const char* value_name,double value){
   char buf[256];
   int rc,fd;
+  int rc2 = 0;
+
 
   //open write pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;
   }
   else{
 
@@ -52,29 +54,30 @@ int dict_add(const char* dict_name,const char* value_name,double value){
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
       fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
 
     //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* send remove commant to the server */
 int dict_remove(const char* dict_name,const char* value_name){
   char buf[256];
   int rc,fd;
+  int rc2 = 0;
 
   //open write pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;
   }
   else{
 
@@ -84,17 +87,18 @@ int dict_remove(const char* dict_name,const char* value_name){
     //send request
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
-      fprintf(stderr,"[ERR] on request sending, constant doesn't exist\n");
+      fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
+      rc2 = 1;
     }
 
     //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* send ask command to the server */
@@ -103,6 +107,7 @@ int dict_ask(const char* dict_name,const char* value_name){
   char value[64];
   int rc,count,offset,dummy,wait,fd,error,state,index;
   double value_decoded;
+  int rc2 = 0;
 
   count = 0;offset = 0;wait = 1;state = 0;index = 0;value_decoded = 0;
 
@@ -110,7 +115,7 @@ int dict_ask(const char* dict_name,const char* value_name){
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;
   }
 
   //if pipe is open
@@ -123,21 +128,21 @@ int dict_ask(const char* dict_name,const char* value_name){
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
       fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
 
     //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
-      return 1;
+      rc2 = 1;
     }
 
     //open read pipe
     fd = open_pipe(dict_name,false);
     if (fd == -1){
       fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-      return 1;
+      rc2 = 1;
     }
     else{
 
@@ -149,7 +154,10 @@ int dict_ask(const char* dict_name,const char* value_name){
         }
       }
       while (count > 0);
+
       lseek(fd,offset,SEEK_SET);
+
+      //read pipe for response
       memset(buf,0,sizeof(buf));
       offset = 0;
       do{
@@ -159,13 +167,13 @@ int dict_ask(const char* dict_name,const char* value_name){
           wait = 0;
         }
       }
-      while((count > 0) || (wait ==1));
+      while((count > 0) || (wait == 1));
 
       //close read pipe
       rc = close(fd);
       if (rc){
         fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
-        return 1;
+        rc2 = 1;
       }
 
       //interpret data
@@ -178,6 +186,19 @@ int dict_ask(const char* dict_name,const char* value_name){
             index = 0;
             memset(value,0,sizeof(value));
             state++;
+            break;
+
+            case 1:
+            value_decoded = strtod(value,NULL);
+            state++;
+            break;
+          }
+        }
+        else{
+          switch(state){
+            case 0:
+            value[index] = buf[count];
+            index++;
             break;
 
             case 1:
@@ -198,19 +219,20 @@ int dict_ask(const char* dict_name,const char* value_name){
       }
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* send exit command to the server */
 int dict_exit(const char* dict_name){
   char buf[256];
   int rc,fd;
+  int rc2 = 0;
 
   //open pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file decriptor %d: %s\n",fd,strerror(errno));
-    return 1;
+    rc2 = 1;;
   }
   else{
 
@@ -221,17 +243,17 @@ int dict_exit(const char* dict_name){
     rc = write(fd,buf,strlen(buf));
     if (rc == -1){
       fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
 
     //close pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      return 1;
+      rc2 = 1;
     }
   }
-  return 0;
+  return rc2;
 }
 
 /* client main function, literally parse the program args
