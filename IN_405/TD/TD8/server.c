@@ -247,10 +247,11 @@ int dict_add(struct dictionary_item* dict,size_t* dict_count,size_t dict_max_siz
 
   count = *dict_count;
 
-  //check that key is not already int doctionary
+  //check that key is not already in doctionary
   for (index = 0;index < count;index++){
     if (strncmp(dict[index].name,cmd.name,DICT_NAME_MAX) == 0){
-      break;
+      strncpy(dict[index].name,cmd.name,DICT_NAME_MAX);
+      dict[index].value = cmd.value;
     }
   }
 
@@ -383,7 +384,7 @@ int main(int argc,char** argv){
         case OP_ADD:
         rc2 = dict_add(dict,&dict_count,dict_max_size,cmd);
         if (rc2){
-          fprintf(stderr,"[ERR] Add request received but dictionary is allready full or key allready in dictionnary.\n\n");
+          fprintf(stderr,"[ERR] Add request received but dictionary is allready full.\n\n");
         }
         else{
           fprintf(stderr,"[INF] Add request received:\n Name: %s\n Value: %f\n",cmd.name,cmd.value);
@@ -393,7 +394,7 @@ int main(int argc,char** argv){
         case OP_REMOVE:
         rc2 = dict_remove(dict, &dict_count, cmd);
         if (rc2){
-          fprintf(stderr,"[ERR] Remove request received but key not found into doctionary.\n\n");
+          fprintf(stderr,"[INF] Remove request received but key not found into dictionary.\n\n");
         }
         else{
           fprintf(stderr,"[INF] Remove request received:\n Name: %s\n",cmd.name);

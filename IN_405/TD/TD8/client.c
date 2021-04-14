@@ -213,6 +213,7 @@ int dict_ask(const char* dict_name,const char* value_name){
 
       if (error){
         fprintf(stderr,"[ERR] Server was not able to provide data for this key.\n");
+        rc2 = 1;
       }
       else{
         fprintf(stderr,"[INF] Response for data %s: %f\n\n",value_name,value_decoded);
