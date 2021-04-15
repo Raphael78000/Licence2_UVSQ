@@ -1,74 +1,53 @@
 % IN405 TD8 -- Systèmes d'exploitation
 % Dictionnaire Pascal
-
-# Modalités de soumission
-Ce TD est à faire en monôme, et à rendre au plus tard le 25 avril 2021,
-23:59 (France métropolitaine) sur moodle, dans l'espace dédié. Il est à
-rendre dans une archive .tar, contenant les fichiers source à rendre, le
-matériel de compilation et un fichier 'README.md' dans lequel vous mettrez
-votre nom, prénom et numéro d'étudiant. Plus d'informations dans la section
-"Rendu et notation du TD noté".
+% Raphael LAZZARI-ARMOUR 21920123 TD04B
 
 # Contenu de l'archive
 Cette archive est constituée des fichiers suivants :
 
 - le fichier 'README.md', que vous êtes en train de lire ;
-- le fichier 'client_template.c', fichier source pouvant servir de base pour
-  l'implémentation du côté client : seules les fonctions de communication
-  manquent ;
-- le fichier 'server_template.c', fichier source pouvant servir de base pour
-  l'implémentation du côté serveur : seules les structures de données, la
-  fonction main() et les prototypes de fonctions sont implémentés.
+- le fichier 'client.c', fichier source contenant l'implémentation des fonctions côté client 
+- le fichier 'server.c', fichier source contenant l'implémentation des fonctions côté serveur 
+- le Makefile qui permet la compilation des fichiers, le nettoyage des exécutables ainsi que la compression des fichiers demandés en archive .tar 
 
 # Utilisation
 La compilation des fichiers doit se faire simplement à l'aide des commandes
 ci-dessous :
 
 ```bash
-$ gcc -o server server.c
-$ gcc -o client client.c
+$ make client 
+$ make server 
+```
+
+ou bien de la commande suivante qui permet de compiler les deux fichiers : 
+
+```bash
+$ make all
 ```
 
 L'utilisation, comme décrite dans l'énoncé du TD ainsi que dans les 'usage()'
-des fichiers source 'client_template.c' et 'server_template.c', se fait comme
-ci-dessous :
+des fichiers source 'client.c' et 'server.c', se fait comme ci-dessous :
 
 ```bash
+création du serveur nommé 'math'
 $ ./server math 4 &
+ajout de la constante 'pi' avec pour valeur '3.14'
 $ ./client math + pi 3.14
+demande de valeur pour la constante 'pi'
 $ ./client math ? pi
+extinction du serveur 'math' qui va engendrer la suppression des tubes utilisés
 $ ./client math !
 ```
 
+Il est possible de modifier la localisation des tubes en remplaçant "/tmp" par la destination du répertoire souhaité dans chaque fichier à la ligne '#define DICT_PATH_PREFIX "/tmp"
+
 # Quelques informations
-- les fichiers sources 'xyz_template.c' vous sont proposés, mais libre à vous
-  de les utiliser ou non : aucun test unitaire ne sera fait sur les fonctions ;
-- les noms des tubes créés par le serveur doivent avoir comme chemin
-  `/tmp/dict_NAME_{in/out}`, avec `NAME` le nom du dictionnaire que vous donnez
-  en argument des programmes et `in` ou `out` en fonction du sens de lecteur,
-  ils sont correctement utilisés côté client dans le fichier 'client.c'.
+Dans l'implémentation je me suis permis de rajouter quelques informations supplémentaires. Tout d'abord le serveur renvoie des informations sur chaque requête qu'il reçoit de la part du client, qu'elle soit fructueuse ou non.
 
-# Rendu et notation du TD noté
-Le rendu consistera en une simple archive ne contenant qu'un fichier
-'README.md' ainsi que les fichiers source 'server.c' et 'client.c' que vous
-aurez implémenté. Théoriquement, le code devrait être assez court (moins de 400
-lignes par fichier), et ne nécessite donc pas de plus le découper que comme
-proposé. Si jamais vous souhaitez tout de même le faire, veuillez ajouter un
-Makefile permettant de compiler le client et le serveur avec les commandes
-respectives `make client` et `make server`.
+J'ai également utilisé des fonctions non vus en cours mais qui ont été utiles dans la réalisation de ce TD. Les voici énoncés ci-dessous avec une rapide description de leur fonctionnement: 
 
-La notation va se faire par le biais de divers scripts d'intégration, qui vont
-donc tester le comportement global du serveur en utilisant diverses commandes
-du client.
-
-Une passe d'analyse statique du code, et optionnellement dynamique, viendront
-s'ajouter à la note.
-
-Tout comme pour le premier TD noté, une passe de similitude sera effectuée
-entre chaque rendu, et la note sera impactée si le coefficient de similitude
-est trop important.
-
-# Remontée de bugs
-N'hésitez pas à remonter tout problème d'implémentation majeur (soupçon
-d'erreur dans un prototype, erreur dans la documentation, matériel de
-compilation bugué, etc.) à l'adresse pro.seb.gougeaud@gmail.com
+- void* memset(void* pointer,int value,size_t count) -> "Cette fonction permet de remplir une zone mémoire, identifiée par son adresse et sa taille, avec une valeur précise." 
+- double strtod(const char* theString,char** end) -> "Cette fonction, signifiant string to double, permet de transformer une chaîne de caractères, contenant la représentation textuelle d'un nombre flottant en une donnée typée double". 
+- (const char* str1,const char* str2,size_t n) -> "Compare les n premiers bbites de str1 et str2, la fonction renvoie une valeur négative si les n premiers bites de str1 sont plus petits que str2, renvoie 0 si les n premiers bites de str1 et str2 sont égaux et renvoie une valeur positive si les n premiers bites de str2 sont plus petits que str1"
+- char* strncpy(char* destination,const char* source,size_t length) -> "Cette fonction permet de copier le contenu d'une chaîne de caractère dans une autre, dans la limite de 'length' caractères."
+- void* memcpy(void* destination,const void* source,size_t size) -> "Cette fonction permet de copier un bloc de mémoire spécifié par le paramètre source, et dont la taille est spécifiée via le paramètre size, dans un nouvel emplacement désigné par le paramètre destination."
