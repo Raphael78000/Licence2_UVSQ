@@ -8,7 +8,7 @@
 
 - IN_310: Mathématiques pour l'informatique
 
-IN_403: Algorithme des graphes
+- IN_403: Algorithme des graphes
 
 - IN_404: Programmation orientée objet
 
