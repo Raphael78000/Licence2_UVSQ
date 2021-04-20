@@ -89,7 +89,7 @@ int create_pipes(const char* dict_name){
   sprintf(buf,"%s/dict_%s_in",DICT_PATH_PREFIX,dict_name);
   fd = open(buf,O_CREAT,FILE_PERMISSIONS);
   if (fd == -1){
-    fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
+    fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
     rc2 = 1;
   }
   else{
