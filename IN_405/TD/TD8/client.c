@@ -38,7 +38,6 @@ int dict_add(const char* dict_name,const char* value_name,double value){
   int rc,fd;
   int rc2 = 0;
 
-
   //open write pipe
   fd = open_pipe(dict_name,true);
   if (fd == -1){
@@ -105,11 +104,11 @@ int dict_remove(const char* dict_name,const char* value_name){
 int dict_ask(const char* dict_name,const char* value_name){
   char buf[256];
   char value[64];
-  int rc,count,offset,dummy,wait,fd,error,state,index;
+  int rc,count,offset,dummy,fd,error,state,index;
   double value_decoded;
   int rc2 = 0;
 
-  count = 0;offset = 0;wait = 1;state = 0;index = 0;value_decoded = 0;
+  count = 0;offset = 0;state = 0;index = 0;value_decoded = 0;
 
   //open write pipe
   fd = open_pipe(dict_name,true);
@@ -131,7 +130,7 @@ int dict_ask(const char* dict_name,const char* value_name){
       rc2 = 1;
     }
 
-    //close pipe
+    //close write pipe
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
@@ -146,28 +145,14 @@ int dict_ask(const char* dict_name,const char* value_name){
     }
     else{
 
-      //try to read input pipe to set offset at end of the file
-      do{
-        count = read(fd,&dummy,1);
-        if (count > 0){
-          offset++;
-        }
-      }
-      while (count > 0);
-
-      lseek(fd,offset,SEEK_SET);
-
       //read pipe for response
       memset(buf,0,sizeof(buf));
       offset = 0;
       do{
         count = read(fd,&buf[offset],1);
-        if (count > 0){
           offset++;
-          wait = 0;
-        }
       }
-      while((count > 0) || (wait == 1));
+      while(count > 0);
 
       //close read pipe
       rc = close(fd);
@@ -216,7 +201,7 @@ int dict_ask(const char* dict_name,const char* value_name){
         rc2 = 1;
       }
       else{
-        fprintf(stderr,"[INF] Response for data %s: %f\n\n",value_name,value_decoded);
+        fprintf(stderr,"[INF] Response for data %s: %f\n",value_name,value_decoded);
       }
     }
   }

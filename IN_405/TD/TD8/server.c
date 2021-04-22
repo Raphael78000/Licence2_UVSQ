@@ -35,7 +35,7 @@ struct command{
 };
 
 /* allocate the dictionary structure */
-int create_dict(const char *size_string, struct dictionary_item **dict,size_t *dict_max_size){
+int create_dict(const char* size_string, struct dictionary_item** dict,size_t* dict_max_size){
   int size_dict;
 
   //convert size in string into int
@@ -48,7 +48,7 @@ int create_dict(const char *size_string, struct dictionary_item **dict,size_t *d
   memset(*dict,0,sizeof(struct dictionary_item) * *dict_max_size);
 
   //creation of dictionary was successfull
-  if (dict != NULL){
+  if (*dict != NULL){
     return 0;
   }
 
@@ -72,32 +72,18 @@ int create_pipes(const char* dict_name){
 
   //create & open file for output commands then close it
   sprintf(buf,"%s/dict_%s_out",DICT_PATH_PREFIX,dict_name);
-  fd = open(buf,O_CREAT,FILE_PERMISSIONS);
+  fd = mkfifo(buf,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
     rc2 = 1;
-  }
-  else{
-    rc = close(fd);
-    if (rc){
-      fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
-      rc2 = 1;
-    }
   }
 
   //create & open file for input commands then close it
   sprintf(buf,"%s/dict_%s_in",DICT_PATH_PREFIX,dict_name);
-  fd = open(buf,O_CREAT,FILE_PERMISSIONS);
+  fd = mkfifo(buf,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
     rc2 = 1;
-  }
-  else{
-    rc = close(fd);
-    if (rc){
-      fprintf(stderr,"[ERR] on file closing: %s\n",strerror(errno));
-      rc2 = 1;
-    }
   }
   return rc2;
 }
@@ -384,7 +370,7 @@ int main(int argc,char** argv){
         case OP_ADD:
         rc2 = dict_add(dict,&dict_count,dict_max_size,cmd);
         if (rc2){
-          fprintf(stderr,"[ERR] Add request received but dictionary is allready full.\n\n");
+          fprintf(stderr,"[ERR] Add request received but dictionary is allready full.\n");
         }
         else{
           fprintf(stderr,"[INF] Add request received:\n Name: %s\n Value: %f\n",cmd.name,cmd.value);
@@ -394,7 +380,7 @@ int main(int argc,char** argv){
         case OP_REMOVE:
         rc2 = dict_remove(dict, &dict_count, cmd);
         if (rc2){
-          fprintf(stderr,"[INF] Remove request received but key not found into dictionary.\n\n");
+          fprintf(stderr,"[INF] Remove request received but key not found into dictionary.\n");
         }
         else{
           fprintf(stderr,"[INF] Remove request received:\n Name: %s\n",cmd.name);
@@ -404,10 +390,10 @@ int main(int argc,char** argv){
         case OP_ASK:
         rc2 = dict_ask(dict,dict_count,&cmd);
         if (rc2){
-          fprintf(stderr,"[ERR] Ask request received but key not found into dictionary.\n\n");
+          fprintf(stderr,"[ERR] Ask request received but key not found into dictionary.\n");
         }
         else{
-          fprintf(stderr,"[INF] Ask request received:\n Name: %s\n Value: %f\n\n",cmd.name,cmd.value);
+          fprintf(stderr,"[INF] Ask request received:\n Name: %s\n Value: %f\n",cmd.name,cmd.value);
         }
         fd[1] = open_pipe(argv[1],false,0);
         if (fd[1] < 0){
