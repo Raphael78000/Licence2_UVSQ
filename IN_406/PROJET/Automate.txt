@@ -1,11 +1,12 @@
 Question 2:  
 
-Pour cette question je propose un automate reconnaissant le langage par état final et par pile vide. 
-Je propose une pile qui empile '(' et dépile ')'.
+Pour cette question, nous proposant un automate reconnaissant le langage par état final et par pile vide. 
+Une pile qui empile '(' et dépile ')'.
 
 Règle sur les constantes '0' et '1': Doit contenir un opérateur binaire, unaire ou '(' avant mais pas une autre constante. Peut être suivi par un opérateur binaire ou ')' mais pas par une constante. 
 
 Règle sur les opérateurs binaires '+' , '.' et '=>' et '<=>':  Doit contenir une constante ou ')' avant et doit contenir une constante ou '(' après. Exception pour l'opérateur '<=>' qui doit contenir une expression booléenne complète avant. On doit donc vérifier que la pile est vide. 
 
-
 Règle sur l'opérateur unaire 'NON' et '(': Ne peut pas contenir une constante avant. L'opérateur 'NON' doit être suivi par une constante ou par l'opérateur '('. Il ne peut ainsi pas être suivi par un opérateur binaire ou par ')'.  
+
+Après étude de ces règles, on peut définir l'automate suivant. La transition "..." est seulement possible si la pile est vide. 

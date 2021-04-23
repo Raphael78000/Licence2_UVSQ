@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define allocate(a) a = malloc(sizeof(struct token));
+#define allocate(A) A = malloc(sizeof(struct token));
 
 enum type{
   CONSTANT,
@@ -39,6 +39,7 @@ int check(TokenList A){
   }
 }
 
+/*Ajouter un élèment à la liste*/
 TokenList add_list(TokenList A,TokenList B){
   TokenList last;
 
@@ -50,6 +51,7 @@ TokenList add_list(TokenList A,TokenList B){
   return A;
 }
 
+/*Convertir une chaîne de caractère en une liste*/
 TokenList string_to_token(char* string){
   TokenList A = NULL;
   TokenList B = NULL;
@@ -105,8 +107,9 @@ TokenList string_to_token(char* string){
       A->attribute.OpBinary = EQUIVALENCE;
     }
 
-    else fprintf(stderr,"Character is not valid\n"); exit(EXIT_FAILURE);
-
+    else{
+      fprintf(stderr,"Character is not valid\n"); exit(EXIT_FAILURE);
+    }
     B = add_list(B,A);
     string++;
   }
