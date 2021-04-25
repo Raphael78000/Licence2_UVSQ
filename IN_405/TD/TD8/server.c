@@ -1,3 +1,10 @@
+/**
+* Raphael LAZZARI-ARMOUR
+* 21920123
+* TD04B
+* Module IN405 - TD 08
+*/
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -20,7 +27,6 @@ struct dictionary_item{
 
 /* operators of a dictionary */
 enum command_op{
-  OP_NONE,    /* no command*/
   OP_ADD,     /* add an entry */
   OP_REMOVE,  /* remove an entry */
   OP_ASK,     /* ask about an entry */
@@ -36,7 +42,6 @@ struct command{
 
 /* allocate the dictionary structure */
 int create_dict(const char* size_string, struct dictionary_item** dict,size_t* dict_max_size){
-  int size_dict;
 
   //convert size in string into int
   *dict_max_size = atoi(size_string);
@@ -60,6 +65,7 @@ int create_dict(const char* size_string, struct dictionary_item** dict,size_t* d
 
 /* free the dictionary structure */
 void destroy_dict(struct dictionary_item* dict){
+
   //free allocated memory for dictionary
   free(dict);
 }
@@ -67,15 +73,14 @@ void destroy_dict(struct dictionary_item* dict){
 /* create the pipe files used by the server */
 int create_pipes(const char* dict_name){
   char buf[256];
-  int fd,rc;
-  int rc2 = 0;
+  int fd;
 
   //create & open file for output commands then close it
   sprintf(buf,"%s/dict_%s_out",DICT_PATH_PREFIX,dict_name);
   fd = mkfifo(buf,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
-    rc2 = 1;
+    return 1;
   }
 
   //create & open file for input commands then close it
@@ -83,9 +88,9 @@ int create_pipes(const char* dict_name){
   fd = mkfifo(buf,FILE_PERMISSIONS);
   if (fd == -1){
     fprintf(stderr,"[ERR] on file creation: %s\n",strerror(errno));
-    rc2 = 1;
+    return 1;
   }
-  return rc2;
+  return 0;
 }
 
 /* destroy the pipe files used by the server */
@@ -96,7 +101,7 @@ void destroy_pipes(const char* dict_name){
   //remove file for output commands
   sprintf(buf,"%s/dict_%s_out",DICT_PATH_PREFIX,dict_name);
   rc = unlink(buf);
-  if (rc){
+  if (rc == -1){
     fprintf(stderr,"[ERR] on file removing: %s\n",strerror(errno));
   }
 
@@ -104,22 +109,18 @@ void destroy_pipes(const char* dict_name){
   sprintf(buf,"%s/dict_%s_in",DICT_PATH_PREFIX,dict_name);
 
   rc = unlink(buf);
-  if (rc){
+  if (rc == -1){
     fprintf(stderr,"[ERR] on file removing: %s\n",strerror(errno));
   }
 }
 
 /* open a pipe for the given dictionary, input or output side */
-int open_pipe(const char* dict_name,bool dict_input,int offset){
+int open_pipe(const char* dict_name,bool dict_input){
   char buf[256];
-  int fd;
 
   sprintf(buf,"%s/dict_%s_%s",DICT_PATH_PREFIX,dict_name,dict_input ? "in" : "out");
-  fd = open(buf,dict_input ? O_RDONLY : (O_WRONLY | O_APPEND));
-  if ((fd >= 0) && (dict_input)){
-    lseek(fd,offset,SEEK_SET);
-  }
-  return fd;
+  return open(buf,dict_input ? O_RDONLY : (O_WRONLY | O_APPEND));
+
 }
 
 /* close a pipe */
@@ -127,21 +128,19 @@ void close_pipe(int fd){
   int rc;
 
   rc = close(fd);
-  if (rc){
+  if (rc == -1){
     fprintf(stderr,"[ERR] on file closing of file descriptor %d: %s\n",fd,strerror(errno));
   }
 }
 
 /* receive a command from the input pipe */
-int receive_command(int fd,struct command* cmd,int* offset){
+int receive_command(int fd,struct command* cmd){
   char buf[256];
   char value[64];
   int index,index2,state,size,rc;
   int rc2 = 0;
 
   size = 0;index = 0;
-
-  cmd->op = OP_NONE;
 
   //read file byte per byte until end is reached
   do{
@@ -156,8 +155,8 @@ int receive_command(int fd,struct command* cmd,int* offset){
     fprintf(stderr,"[ERR] on file reading descriptor %d: %s\n",fd,strerror(errno));
     rc2 = 1;
   }
+
   else{
-    *offset = *offset + size;
     index = 0;
     index2 = 0;
     state = 0;
@@ -286,7 +285,7 @@ int dict_remove(struct dictionary_item* dict,size_t* dict_count,struct command c
 
 /* ask the value of a dictionary entry, if exists */
 int dict_ask(struct dictionary_item* dict,size_t dict_count,struct command* cmd){
-  int index,index2;
+  int index;
   int rc = 0;
 
   //search index of the key
@@ -310,16 +309,15 @@ int dict_ask(struct dictionary_item* dict,size_t dict_count,struct command* cmd)
 int send_response(int fd,int error,double value){
   char buf[256];
   int rc;
-  int rc2 = 0;
 
   //construct response
   sprintf(buf,"%d;%f;",error,value);
   rc = write(fd,buf,strlen(buf));
   if (rc != strlen(buf)){
     fprintf(stderr,"[ERR] on file writing of file descriptor %d: %s\n",fd,strerror(errno));
-    rc2 = 1;
+    return 1;
   }
-  return rc2;
+  return 0;
 }
 
 /* main function, contains the server loop */
@@ -330,7 +328,6 @@ int main(int argc,char** argv){
     bool done = false;
     int fd[2] = {-1,-1};
     int rc;
-    int offset = 0;
 
     if (argc != 3){
         fprintf(stderr,
@@ -356,13 +353,13 @@ int main(int argc,char** argv){
       struct command cmd;
       int rc2;
 
-      fd[0] = open_pipe(argv[1],true,offset);
+      fd[0] = open_pipe(argv[1],true);
       if (fd[0] < 0){
         rc = 1;
         goto err_pipe;
       }
 
-      rc = receive_command(fd[0],&cmd,&offset);
+      rc = receive_command(fd[0],&cmd);
       if (rc)
           break;
 
@@ -395,7 +392,7 @@ int main(int argc,char** argv){
         else{
           fprintf(stderr,"[INF] Ask request received:\n Name: %s\n Value: %f\n",cmd.name,cmd.value);
         }
-        fd[1] = open_pipe(argv[1],false,0);
+        fd[1] = open_pipe(argv[1],false);
         if (fd[1] < 0){
           rc = 1;
           goto err_pipe;

@@ -1,88 +1,74 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ea.h"
-/*
- * allocation de sizeof(struct Noeud) pour V;
- * affectation : op_ou_val = 0;
- * 				 val = val;
- * 				 op = NULL;
- * 				 Noeuds = NULL;
- * retourner la variable locale de type EA
- */
-EA ea_creer_valeur (float val)
-{
-	EA V;
-	V = malloc(sizeof(struct Noeud));
-	V->op_ou_val = 1;
-	V->op = '\0';
-	V->val = val;
-	V->sag = NULL;
-	V->sad = NULL;
-	printf("%f\n", V->val);
-	return V;
+
+EA ea_creer_valeur (float val) {
+	EA e;
+	e = malloc(sizeof(struct noeud));
+	if (e==NULL) exit(11);
+	e->op_ou_val = EST_VAL;
+	e->op  = NO_OP;
+	e->val = val;
+	e->opg = NULL;
+	e->opd = NULL;
+	return e;
 }
-/*
- * allocation sizeof(struct Noeud) pour O;
- * affectation : op_ou_val = 1;
- * 				 val = 0;
- * 		 		 op = op;
- * 				 Noeud droit = sad;
- * 			     Noeud gauche = sag;
- * retourner la variable locale de type EA
- */
-EA ea_creer_operation (char op, EA sag, EA sad)
-{
-	EA O;
-	O = malloc(sizeof(struct Noeud));
-	O->op_ou_val = 0;
-	O->val = 0;
-	O->op = op;
-	O->sag = sag;
-	O->sad = sad;
-	printf("%c\n", O->op);
-	return O;
+
+int op_correct(char op) {
+	if (op=='+') return 1;
+	if (op=='-') return 1;
+	if (op=='*') return 1;
+	if (op=='/') return 1;
+	return 0;
 }
-/*
- * ea_evaluer peut être utilisé récursivement. La condition de récursivité est si la fonction rencontre
- * un noeud contenant un opérateur (op_ou_val = 1). Cette récursivité nous permet de parcourir l'arbre
- * entièrement ( seulement les feuilles sont des floats ).
- */
-float ea_evaluer (EA e)
-{
-	if ( e->op_ou_val == 0 )
-	{
-		printf("%c\n", e->op);
-		switch (e->op)
-		{
-			case '+' : return ea_evaluer(e->sag)+ea_evaluer(e->sad);
-					   break;
-			case '-' : return ea_evaluer(e->sag)-ea_evaluer(e->sad);
-					   break;
-			case '*' : return ea_evaluer(e->sag)*ea_evaluer(e->sad);
-					   break;
-			case '/' : return ea_evaluer(e->sag)/ea_evaluer(e->sad);
-					   break;
-			case '(' :
-			case ')' : printf("parenthèses dans l'arbre\n");
-						return -999.99;
-					   break;
-			default : printf("Erreur de symbole\n");
-					  return -999.99;
-					   break;
-		}
+
+
+EA ea_creer_operation (char op, EA opg, EA opd) {
+	if (op_correct(op) == 0) {
+		fprintf(stderr,"Operateur '%c' non reconnu\n",op);
+		exit(12);
 	}
-	else return e->val;
+	EA e;
+	e = malloc(sizeof(struct noeud));
+	if (e==NULL) exit(13);
+	e->op_ou_val = EST_OP;
+	e->op  = op;
+	e->val = NO_VAL;
+	e->opg = opg;
+	e->opd = opd;
+	return e;
 }
 
-void ea_liberer ( EA f )
-{
-	free(f);
+float ea_evaluer(EA e) {
+	if (e==NULL) return 0.0;
+	if (e->op_ou_val == EST_VAL) return e->val;
+
+	float valg = ea_evaluer(e->opg);
+	float vald = ea_evaluer(e->opd);
+	if (e->op == '+') return valg + vald;
+	if (e->op == '-') return valg - vald;
+	if (e->op == '*') return valg * vald;
+
+	if ((e->op == '/') && (vald  == 0.0)) {
+		fprintf(stderr,"PB division par zéro\n");
+		exit(14);
+	}
+	if (e->op == '/') return valg / vald;
+
+	fprintf(stderr,"Normalement on n'arrive pas ici\n");
+	exit(15);
+	return 0;
 }
 
-void afficher_arbre (EA e)
-{
-	if ( e->sag != NULL ) afficher_arbre(e->sag);
-	if ( e->op_ou_val == 1 ) printf("%f\n", e->val);
-	else printf("%c\n", e->op);
-	if ( e->sad != NULL ) afficher_arbre(e->sad);
+void ea_afficher(EA e){
+	if (e==NULL) return;
+	if (e->op_ou_val == EST_VAL) printf("%.2f",e->val);
+	else {
+		printf("(");
+		ea_afficher(e->opg);
+		printf(" %c ",e->op);
+		ea_afficher(e->opd);
+		printf(")");
+		}
 }
+

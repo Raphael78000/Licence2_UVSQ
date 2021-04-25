@@ -1,3 +1,10 @@
+/**
+* Raphael LAZZARI-ARMOUR
+* 21920123
+* TD04B
+* Module IN405 - TD 08
+*/
+
 #include <fcntl.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -26,7 +33,6 @@ int usage(const char* prog){
 /* open a pipe for the given dictionary, input or output side */
 int open_pipe(const char* dict_name,bool dict_input){
   char buf[256];
-  int fd;
 
   sprintf(buf,"%s/dict_%s_%s",DICT_PATH_PREFIX,dict_name,dict_input ? "in" : "out");
   return open(buf,dict_input ? O_WRONLY | O_APPEND : O_RDONLY);
@@ -42,8 +48,9 @@ int dict_add(const char* dict_name,const char* value_name,double value){
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-    rc2 = 1;
+    return 1;
   }
+
   else{
 
     //construct request
@@ -58,9 +65,9 @@ int dict_add(const char* dict_name,const char* value_name,double value){
 
     //close pipe
     rc = close(fd);
-    if (rc){
+    if (rc == -1){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      rc2 = 1;
+      return 1;
     }
   }
   return rc2;
@@ -76,7 +83,7 @@ int dict_remove(const char* dict_name,const char* value_name){
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-    rc2 = 1;
+    return 1;
   }
   else{
 
@@ -92,9 +99,9 @@ int dict_remove(const char* dict_name,const char* value_name){
 
     //close pipe
     rc = close(fd);
-    if (rc){
+    if (rc == -1){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      rc2 = 1;
+      return 1;
     }
   }
   return rc2;
@@ -104,7 +111,7 @@ int dict_remove(const char* dict_name,const char* value_name){
 int dict_ask(const char* dict_name,const char* value_name){
   char buf[256];
   char value[64];
-  int rc,count,offset,dummy,fd,error,state,index;
+  int rc,count,offset,fd,error,state,index;
   double value_decoded;
   int rc2 = 0;
 
@@ -114,96 +121,89 @@ int dict_ask(const char* dict_name,const char* value_name){
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
+    return 1;
+  }
+
+  //constructor request
+  sprintf(buf,"?;%s;",value_name);
+
+  //send request
+  rc = write(fd,buf,strlen(buf));
+  if (rc == -1){
+    fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
     rc2 = 1;
   }
 
-  //if pipe is open
-  if (fd >= 0){
-
-    //constructor request
-    sprintf(buf,"?;%s;",value_name);
-
-    //send request
-    rc = write(fd,buf,strlen(buf));
-    if (rc == -1){
-      fprintf(stderr,"[ERR] on request sending: %s\n",strerror(errno));
-      rc2 = 1;
-    }
-
-    //close write pipe
-    rc = close(fd);
-    if (rc){
+  //close write pipe
+  rc = close(fd);
+  if (rc == -1){
       fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
-      rc2 = 1;
+      return 1;
     }
 
-    //open read pipe
-    fd = open_pipe(dict_name,false);
-    if (fd == -1){
-      fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
-      rc2 = 1;
+  //open read pipe
+  fd = open_pipe(dict_name,false);
+  if (fd == -1){
+    fprintf(stderr,"[ERR] on pipe openning of file descriptor %d: %s\n",fd,strerror(errno));
+    return 1;
+  }
+
+  do{
+    count = read(fd,&buf[offset],1);
+    offset++;
+  }
+  while(count > 0);
+
+  //close read pipe
+  rc = close(fd);
+  if (rc == -1){
+      fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
+      return 1;
     }
+
+  //interpret data
+  count = 0;
+  do{
+    if (buf[count] == ';'){
+      switch(state){
+        case 0:
+        error = atoi(value);
+        index = 0;
+        memset(value,0,sizeof(value));
+        state++;
+        break;
+
+        case 1:
+        value_decoded = strtod(value,NULL);
+        state++;
+        break;
+      }
+    }
+
     else{
+      switch(state){
+        case 0:
+        value[index] = buf[count];
+        index++;
+        break;
 
-      //read pipe for response
-      memset(buf,0,sizeof(buf));
-      offset = 0;
-      do{
-        count = read(fd,&buf[offset],1);
-          offset++;
-      }
-      while(count > 0);
-
-      //close read pipe
-      rc = close(fd);
-      if (rc){
-        fprintf(stderr,"[ERR] on pipe closing of file descriptor %d: %s\n",fd,strerror(errno));
-        rc2 = 1;
-      }
-
-      //interpret data
-      count = 0;
-      do{
-        if (buf[count] == ';'){
-          switch(state){
-            case 0:
-            error = atoi(value);
-            index = 0;
-            memset(value,0,sizeof(value));
-            state++;
-            break;
-
-            case 1:
-            value_decoded = strtod(value,NULL);
-            state++;
-            break;
-          }
-        }
-        else{
-          switch(state){
-            case 0:
-            value[index] = buf[count];
-            index++;
-            break;
-
-            case 1:
-            value[index] = buf[count];
-            index++;
-            break;
-          }
-        }
-        count++;
-      }
-      while (count < offset);
-
-      if (error){
-        fprintf(stderr,"[ERR] Server was not able to provide data for this key.\n");
-        rc2 = 1;
-      }
-      else{
-        fprintf(stderr,"[INF] Response for data %s: %f\n",value_name,value_decoded);
+        case 1:
+        value[index] = buf[count];
+        index++;
+        break;
       }
     }
+    count++;
+  }
+  while (count < offset);
+
+  if (error){
+    fprintf(stderr,"[ERR] Server was not able to provide data for this key.\n");
+    return 1;
+  }
+
+  else{
+    fprintf(stderr,"[INF] Response for data %s: %f\n",value_name,value_decoded);
   }
   return rc2;
 }
@@ -218,8 +218,9 @@ int dict_exit(const char* dict_name){
   fd = open_pipe(dict_name,true);
   if (fd == -1){
     fprintf(stderr,"[ERR] on pipe openning of file decriptor %d: %s\n",fd,strerror(errno));
-    rc2 = 1;;
+    return 1;
   }
+
   else{
 
     //constructor request
@@ -236,7 +237,7 @@ int dict_exit(const char* dict_name){
     rc = close(fd);
     if (rc){
       fprintf(stderr,"[ERR] on pipe closing: %s\n",strerror(errno));
-      rc2 = 1;
+      return 1;
     }
   }
   return rc2;

@@ -1,12 +1,18 @@
+#
+# Raphael LAZZARI-ARMOUR
+# 21920123
+# TD04B
+# Module IN405 - TD 08
+#
 
 .PHONY: all
 all: client server
 
 server: server.c
-	gcc -o $@ $^
+	gcc -o $@ $^ -Wall
 
 client: client.c
-	gcc -o $@ $^
+	gcc -o $@ $^ -Wall
 	
 .PHONY: clean
 clean: 
