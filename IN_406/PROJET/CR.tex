@@ -16,7 +16,7 @@
 
 \maketitle
 
-\section{Question 1}
+\section*{Question 1}
 \textit{
 \textcolor{blue}{
 \underline{Question:}
@@ -42,12 +42,13 @@ typedef struct token* TokenList;
 
 L'appel de la fonction \textit{TokenList $string\_to\_token(char* string)$} dans le main nous permet de convertir la chaîne de caractère entrée par l'utilisateur en une liste de token. Cette fonction prends en paramètre une chaîne de caractères et retourne une liste de tokens. 
 
-\section{Question 2}
+\section*{Question 2}
 \textit{
 \textcolor{blue}{
 \underline{Question:} 
 Donner un automate à pile reconnaissant le langage dont les mots sont les expressions
 booléennes.
+}
 }
 \newline\newline
 Pour cette question, nous proposant un automate reconnaissant le langage par état final et par pile vide. 
@@ -57,13 +58,12 @@ Une pile qui empile '(' et dépile ')'.
 Doit contenir un opérateur binaire, unaire ou '(' avant mais pas une autre constante. Peut être suivi par un opérateur binaire ou ')' mais pas par une constante. 
 \newline\newline
 \underline{Règle sur les opérateurs binaires '+' , '.' , '$\Rightarrow$' et '$\Leftrightarrow$' :}
-Doit contenir une constante ou ')' avant et doit contenir une constante ou '(' après. Exception pour l'opérateur '<=>' qui doit contenir une expression booléenne complète avant. On doit donc vérifier que la pile est vide. 
+Doit contenir une constante ou ')' avant et doit contenir une constante ou '(' après. Exception pour l'opérateur ' $\Leftrightarrow$' qui doit contenir une expression booléenne complète avant. On doit donc vérifier que la pile est vide. 
 \newline\newline
 \underline{Règle sur l'opérateur unaire 'NON' et '(':}
 Ne peut pas contenir une constante avant. L'opérateur 'NON' doit être suivi par une constante ou par l'opérateur '('. Il ne peut ainsi pas être suivi par un opérateur binaire ou par ')'. 
 \newline\newline
 Après étude de ces règles, on peut définir l'automate suivant. La transition $\delta$ , $\Leftrightarrow$ , $\delta$ est seulement possible si la pile est vide.
-}
 \newline
 \begin{figure}[!h]
 \begin{center}
@@ -92,7 +92,7 @@ Après étude de ces règles, on peut définir l'automate suivant. La transition
 \end{center}
 \end{figure}
 
-\section{Question 3}
+\section*{Question 3}
 \textit{
 \textcolor{blue}{
 \underline{Question:}
@@ -100,7 +100,7 @@ Après étude de ces règles, on peut définir l'automate suivant. La transition
 }
 }
 
-\section{Question 4}
+\section*{Question 4}
 \textit{
 \textcolor{blue}{
 \underline{Question:}
@@ -108,7 +108,7 @@ Après étude de ces règles, on peut définir l'automate suivant. La transition
 }
 }
 
-\section{Question 5}
+\section*{Question 5}
 \textit{
 \textcolor{blue}{
 \underline{Question:}

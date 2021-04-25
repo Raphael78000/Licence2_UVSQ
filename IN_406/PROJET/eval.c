@@ -310,7 +310,7 @@ int main(int argc,char ** argv){
   noeud B;
 
   A = string_to_token(EXPRESSION);
-  show_list_token(A);
+  //show_list_token(A);
 
   B = Token_to_Note(A);
 
