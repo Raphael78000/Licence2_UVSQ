@@ -30,7 +30,7 @@ struct token{
     op_binary OpBinary;     //if TYPE is a BINARY_OP, value depends on enum op_binary
   }attribute;
 };
-typedef struct token* TokenList;
+typedef struct token* liste_token;
 
 struct noeud{
   struct noeud* sag;
@@ -43,12 +43,12 @@ struct noeud{
     op_binary OpBinary;     //if TYPE is a BINARY_OP, value depends on enum op_binary
   }attribute;
 };
-typedef struct noeud* noeud;
+typedef struct noeud* arbre_token;
 
 /************************************ ancillary functions ************************************/
 
-TokenList add_list(TokenList A,TokenList B){
-TokenList last;
+liste_token add_list(liste_token A,liste_token B){
+liste_token last;
 
 if (!A) return B;
 
@@ -58,8 +58,8 @@ A->next = B;
 return last;
 }
 
-TokenList bracket_token(char c){
-TokenList B;
+liste_token bracket_token(char c){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -76,8 +76,8 @@ else{
 return B;
 }
 
-TokenList constant_token(char c){
-TokenList B;
+liste_token constant_token(char c){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -89,8 +89,8 @@ else B->attribute.value = false;
 return B;
 }
 
-TokenList OP_binary_token(char c){
-TokenList B;
+liste_token OP_binary_token(char c){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -102,8 +102,8 @@ else B->attribute.OpBinary = AND;
 return B;
 }
 
-TokenList unary_token(){
-TokenList B;
+liste_token unary_token(){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -114,8 +114,8 @@ B->attribute.unary = true;
 return B;
 }
 
-TokenList involvement_token(){
-TokenList B;
+liste_token involvement_token(){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -126,8 +126,8 @@ B->attribute.OpBinary = INVOLVEMENT;
 return B;
 }
 
-TokenList equivalence_token(){
-TokenList B;
+liste_token equivalence_token(){
+liste_token B;
 B = malloc(sizeof(struct token));
 if (!B){
   fprintf(stderr,"[ERR] token allocation in string_to_token function\n");
@@ -138,8 +138,8 @@ B->attribute.OpBinary = EQUIVALENCE;
 return B;
 }
 
-TokenList infixe_to_postfixe(TokenList actual){
-TokenList A,B,C,D;
+liste_token infix_to_postfix(liste_token actual){
+liste_token A,B,C,D;
 
 A = bracket_token('(');
 C = bracket_token('(');
@@ -193,22 +193,22 @@ free(actual);
 return A;
 }
 
-void show_list_token(TokenList A){
-TokenList B = A;
+void show_list_token(liste_token A){
+liste_token B = A;
 
-while (B != NULL){
-  if (B->TYPE == CONSTANT)  printf("CONSTANT: %d\n",B->attribute.value);
-  if (B->TYPE == BINARY_OP) printf("BINARY_OP: %d\n",B->attribute.OpBinary);
-  if (B->TYPE == UNARY_OP)  printf("UNARY_OP: %d\n",B->attribute.unary);
-  if (B->TYPE == BRACKET_C) printf("BRACKET_C: %d\n",B->attribute.bracket);
-  if (B->TYPE == BRACKET_O) printf("BRACKET_O: %d\n",B->attribute.bracket);
-  B = B->next;
-}
-printf("\n");
+  while (B != NULL){
+    if (B->TYPE == CONSTANT)  printf("CONSTANT: %d\n",B->attribute.value);
+    if (B->TYPE == BINARY_OP) printf("BINARY_OP: %d\n",B->attribute.OpBinary);
+    if (B->TYPE == UNARY_OP)  printf("UNARY_OP: %d\n",B->attribute.unary);
+    if (B->TYPE == BRACKET_C) printf("BRACKET_C: %d\n",B->attribute.bracket);
+    if (B->TYPE == BRACKET_O) printf("BRACKET_O: %d\n",B->attribute.bracket);
+    B = B->next;
+  }
+  printf("\n");
 }
 
-noeud create_note(TokenList A){
-    noeud B = malloc(sizeof(struct noeud));
+arbre_token create_note(liste_token A){
+    arbre_token B = malloc(sizeof(struct noeud));
 
     B->TYPE = A->TYPE;
 
@@ -217,26 +217,35 @@ noeud create_note(TokenList A){
     else if (B->TYPE == UNARY_OP)   B->attribute.unary = A->attribute.unary;
     else if (B->TYPE == BRACKET_O)  B->attribute.bracket = A->attribute.bracket;
     else if (B->TYPE == BRACKET_C)  B->attribute.bracket = A->attribute.bracket;
-    //free(A);
+    B->sad = B->sag = NULL;
     return B;
   }
 
-int height_tree(TokenList A){
-    int size = 0;
+void free_tree(arbre_token A){
+  arbre_token B = A;
 
-    while (A != NULL){
-      if (A->TYPE == BINARY_OP) size++;
-      else if (A->TYPE == UNARY_OP) size++;
-      A = A->next;
-    }
-    return size;
-  }
+  if (B == NULL) return;
+
+  if (B->sad != NULL) free_tree(B->sad);
+
+  if (B->sag != NULL) free_tree(B->sag);
+
+  free(B);
+}
+
+void free_list(liste_token liste){
+    liste_token tmp;
+    if(liste == NULL) return;
+    tmp = liste->next;
+    free(liste);
+    free_list(tmp);
+}
 
 /************************************ project functions ************************************/
 
-TokenList string_to_token(char* string){
-TokenList A = NULL;
-TokenList B = NULL;
+liste_token string_to_token(char* string){
+liste_token A = NULL;
+liste_token B = NULL;
 
 while (*string != '\0'){
 
@@ -275,9 +284,9 @@ while (*string != '\0'){
 return B;
 }
 
-noeud	create_tree(TokenList A){
-  noeud B;
-  noeud* tree = malloc(sizeof(struct noeud) * height_tree(A) + 1);
+arbre_token	create_tree(liste_token A){
+  arbre_token B;
+  arbre_token* tree = malloc(sizeof(struct noeud));
   int position = 0;
 
   while (A != NULL){
@@ -295,14 +304,14 @@ noeud	create_tree(TokenList A){
       B->sad = tree[position - 1];
       B->sag = tree[--position - 1];
     }
-
+    tree = realloc(tree,sizeof(struct noeud) * position);
     tree[position - 1] = B;
     A = A->next;
   }
   return tree[0];
 }
 
-bool tree_evaluation(noeud A){
+bool tree_evaluation(arbre_token A){
   bool a,b;
   if (A != NULL){
 
@@ -336,24 +345,103 @@ bool tree_evaluation(noeud A){
   exit(EXIT_FAILURE);
 }
 
+bool recognize_language(liste_token A){
+  int count = 0;
+
+	if(!A){
+    fprintf(stderr,"liste_token is empty in recognize_language function\n");
+    exit(EXIT_FAILURE);
+  }
+
+	bool T[2];
+
+  T[0] = true; //T[0] représente l'état q0
+  T[1] = false; //T[1] représente l'état q1
+
+	while(A != NULL){
+
+		if (A->TYPE == BRACKET_O || A->TYPE == UNARY_OP){
+
+      if (!T[0]){
+        fprintf(stderr,"Language not recognized by automate\n");
+        return false;
+      }
+      else if (A->TYPE == BRACKET_O) count++;
+		}
+
+		else if (A->TYPE == BRACKET_C){
+
+      if (!T[1]){
+        fprintf(stderr,"Language not recognized by automate\n");
+        return false;
+      }
+      count--;
+    }
+
+		else if (A->TYPE == CONSTANT){
+
+      if (!T[0]){
+        fprintf(stderr,"Language not recognized by automate\n");
+        return false;
+      }
+      T[1] = true;
+      T[0] = false;
+    }
+
+    else if (A->TYPE == BINARY_OP){
+
+      if (!T[1]){
+        fprintf(stderr,"Language not recognized by automate\n");
+        return false;
+      }
+
+      if (A->attribute.OpBinary == EQUIVALENCE && !count){
+        fprintf(stderr,"Language not recognized by automate\n");
+        return false;
+      }
+      T[0] = true;
+      T[1] = false;
+    }
+    A = A->next;
+	}
+
+	if( !T[0] && T[1] && !count ){
+    fprintf(stdout,"Language is recognized by automate\n");
+    return true;
+  }
+	else{
+    fprintf(stdout,"Language not recognize by automate\n");
+    return false;
+  }
+}
+
 /************************************ main function ************************************/
 
 int main(int argc,char ** argv){
-  TokenList A,C;
-  noeud tree;
+  liste_token A,C;
+  arbre_token tree;
   bool result;
 
   //Question 1
   A = string_to_token(argv[1]);
 
-  //Question 4
-  C = infixe_to_postfixe(A);
-  tree = create_tree(C);
+  //Question 3
+  result = recognize_language(A);
 
-  //Question 5
-  result = tree_evaluation(tree);
+  if (result){
 
-  printf("\nBoolean expression %s is worth : %d\n\n",argv[1],result);
+    //Question 4
+    C = infix_to_postfix(A);
+    tree = create_tree(C);
+    free_list(C);
+
+    //Question 5
+    result = tree_evaluation(tree);
+    free_tree(tree);
+
+    printf("\nBoolean expression %s is worth : %d\n\n",argv[1],result);
+  }
+  else printf("\n");
 
   exit(EXIT_SUCCESS);
 }
