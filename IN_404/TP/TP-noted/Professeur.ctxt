@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Professeur
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ Professeur\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=prenom\ nom\ adresse_email\ bureau\ extension_de_bureau\ departement
+comment1.target=Professeur(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ incrementerAnnee()
+comment3.params=
+comment3.target=java.lang.String\ getBureau()
+comment4.params=
+comment4.target=java.lang.String\ getExtension_de_Bureau()
+comment5.params=
+comment5.target=java.lang.String\ getDepartement()
+comment6.params=extension_de_bureau
+comment6.target=void\ setExtension_de_Bureau(java.lang.String)
+comment7.params=departement
+comment7.target=void\ setDepartement(java.lang.String)
+comment8.params=
+comment8.target=java.lang.String\ toString()
+numComments=9

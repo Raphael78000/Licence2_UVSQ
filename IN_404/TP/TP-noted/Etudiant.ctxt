@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Etudiant
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ etudiant\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=prenom\ nom\ adresse_email\ p_O_Box\ status\ classe
+comment1.target=Etudiant(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ incrementerAnnee()
+comment3.params=
+comment3.target=java.lang.String\ getP_O_Box()
+comment4.params=
+comment4.target=java.lang.String\ getStatus()
+comment5.params=
+comment5.target=java.lang.String\ getClasse()
+comment6.params=P_O_Box
+comment6.target=void\ setP_O_Box(java.lang.String)
+comment7.params=status
+comment7.target=void\ setStatus(java.lang.String)
+comment8.params=classe
+comment8.target=void\ setClasse(java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10

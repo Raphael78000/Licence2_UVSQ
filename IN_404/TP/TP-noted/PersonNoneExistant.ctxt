@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=PersonNoneExistant
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ PersonNoneExistant\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=nom\ prenom
+comment1.target=PersonNoneExistant(java.lang.String,\ java.lang.String)
+comment2.params=nom
+comment2.target=PersonNoneExistant(java.lang.String)
+numComments=3

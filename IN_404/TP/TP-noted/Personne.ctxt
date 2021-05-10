@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Personne
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ personne\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=prenom\ nom\ adresse_email
+comment1.target=Personne(java.lang.String,\ java.lang.String,\ java.lang.String)
+comment10.params=
+comment10.target=java.lang.String\ toString()
+comment11.params=p1\ p2
+comment11.target=int\ compareTo(Personne,\ Personne)
+comment2.params=
+comment2.target=java.lang.String\ getPrenom()
+comment3.params=
+comment3.target=java.lang.String\ getNom()
+comment4.params=
+comment4.target=java.lang.String\ getAdresse_email()
+comment5.params=
+comment5.target=int\ getAnnee_universite()
+comment6.params=prenom
+comment6.target=void\ setPrenom(java.lang.String)
+comment7.params=nom
+comment7.target=void\ setNom(java.lang.String)
+comment8.params=adresse_email
+comment8.target=void\ setAdresse_email(java.lang.String)
+comment9.params=annee_a_universite
+comment9.target=void\ setAnnee_universite(int)
+numComments=12

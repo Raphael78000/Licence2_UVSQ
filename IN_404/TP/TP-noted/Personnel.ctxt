@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Personnel
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ Personnel\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=prenom\ nom\ adresse_email\ bureau\ extension_de_bureau\ status
+comment1.target=Personnel(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ incrementerAnnee()
+comment3.params=
+comment3.target=java.lang.String\ getBureau()
+comment4.params=
+comment4.target=java.lang.String\ getExtension_de_bureau()
+comment5.params=
+comment5.target=java.lang.String\ getStatus()
+comment6.params=bureau
+comment6.target=void\ setBureau(java.lang.String)
+comment7.params=extension_de_bureau
+comment7.target=void\ setExtension_de_bureau(java.lang.String)
+comment8.params=status
+comment8.target=void\ setStatus(java.lang.String)
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10
