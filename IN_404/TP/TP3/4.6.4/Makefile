@@ -1,7 +1,7 @@
 run: Filesystem.jar
 	java -jar $< Main
 
-Filesystem.jar: src/*.java classes/*.class
+Filesystem.jar: src/*.java
 	javac -g src/*.java
 	mv src/*.class classes
 	jar -cfe $@ main -C classes .
