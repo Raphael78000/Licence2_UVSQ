@@ -1,31 +1,42 @@
 import java.util.Arrays;
 import java.lang.Exception;
 /**
- * Décrivez votre classe Annuaire ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
+ *  A Annuaire class for "noted exercise TD" in objected-oriented programming course.
+ * 
+ * @author Raphael LAZZARI-ARMOUR
+ * @version 11/05/2021
+ */ 
 public class Annuaire{
     private int maxSize;
     private Personne[] tableau_personne;
     private int currentSize;
 
+    /**
+     * Constructor of class Annuaire
+     */
     public Annuaire(final int maxSize){
         this.maxSize = maxSize;
         this.currentSize = 0;
         this.tableau_personne = new Personne[maxSize];
     }
 
+    /**
+     * Add a personne to the annuaire
+     */
     public void ajouterPersonne(Personne p) throws NullPointerException,Person_Exist{
-      if (p == null) throw new NullPointerException("Personne souhaitant etre ajoute existe pas");
-
+        if (p == null){
+          throw new NullPointerException("La Personne souhaitant etre ajoutee n'existe pas");
+        }
+        
+        for (int i = 0;i < maxSize;i++){
+            if (this.tableau_personne[i].equals(p)){
+                throw new Person_Exist("La Personne est deja presente dans annuaire");
+            }
+        }
+        
         if (currentSize >= maxSize){
             Personne[] temp = new Personne[2 * maxSize];
             for (int i = 0;i < maxSize;i++){
-              if (this.tableau_personne[i].equals(p)){
-                throw new Person_Exist("Personne deja presente dans annuaire");
-              }
                 temp[i] = this.tableau_personne[i];
             }
             this.tableau_personne = temp;
@@ -35,9 +46,12 @@ public class Annuaire{
         this.currentSize = this.currentSize + 1;
     }
 
+    /**
+     * Delete a personne of the annuaire
+     */
     public void deletePersonne(String nom,String prenom) throws NullPointerException,PersonNoneExistant{
         if (this.currentSize == 0){
-            throw new NullPointerException("Le tableau est vide");
+            throw new NullPointerException("L Annuaire est vide");
         }
  
         for (int i = 0;i < this.currentSize;i++){
@@ -53,9 +67,12 @@ public class Annuaire{
         throw new PersonNoneExistant(nom,prenom);
     }
 
+    /**
+     * Get a personne if that one exist in annuaire
+     */
     public Personne getPersonne(String nom) throws NullPointerException,PersonNoneExistant{
       if (this.currentSize == 0){
-          throw new NullPointerException("Le tableau est vide");
+          throw new NullPointerException("L Annuaire est vide");
       }
         for (int i = 0;i < currentSize;i++){
             if (tableau_personne[i].getNom().equals(nom)){
@@ -65,6 +82,9 @@ public class Annuaire{
         throw new PersonNoneExistant(nom);
     }
 
+    /**
+     * Increment of 'annee' year each personne of the annuaire
+     */
     public void maj_annee(int annee){
         for (int j = 0;j < annee;j++){
             for (int i = 0;i < currentSize;i++){
@@ -81,6 +101,9 @@ public class Annuaire{
         }
     }
 
+    /**
+     * Return annuaire informations under a string 
+     */
     @Override
     public String toString(){
         Personne[] tab_personne = new Personne[currentSize];
@@ -88,7 +111,7 @@ public class Annuaire{
         Arrays.sort(tab_personne,Personne::compareTo);
         String res = null;
         for (int i = 0;i < currentSize;i++){
-            res = res + "\n---------\n" + tab_personne[i].toString();
+            res = res + "\n   ---   \n" + tab_personne[i].toString();
         }
         return res;
     }

@@ -1,16 +1,22 @@
 #BlueJ class context
 comment0.target=Annuaire
-comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ Annuaire\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment0.text=\r\n\ \ A\ Annuaire\ class\ for\ "noted\ exercise\ TD"\ in\ objected-oriented\ programming\ course.\r\n\ \r\n\ @author\ Raphael\ LAZZARI-ARMOUR\r\n\ @version\ 11/05/2021\r\n
 comment1.params=maxSize
 comment1.target=Annuaire(int)
+comment1.text=\r\n\ Constructor\ of\ class\ Annuaire\r\n
 comment2.params=p
 comment2.target=void\ ajouterPersonne(Personne)
+comment2.text=\r\n\ Add\ a\ personne\ to\ the\ annuaire\r\n
 comment3.params=nom\ prenom
 comment3.target=void\ deletePersonne(java.lang.String,\ java.lang.String)
+comment3.text=\r\n\ Delete\ a\ personne\ of\ the\ annuaire\r\n
 comment4.params=nom
 comment4.target=Personne\ getPersonne(java.lang.String)
+comment4.text=\r\n\ Get\ a\ personne\ if\ that\ one\ exist\ in\ annuaire\r\n
 comment5.params=annee
 comment5.target=void\ maj_annee(int)
+comment5.text=\r\n\ Increment\ of\ 'annee'\ year\ each\ personne\ of\ the\ annuaire\r\n
 comment6.params=
 comment6.target=java.lang.String\ toString()
+comment6.text=\r\n\ Return\ annuaire\ informations\ under\ a\ string\ \r\n
 numComments=7

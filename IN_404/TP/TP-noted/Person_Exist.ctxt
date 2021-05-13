@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Person_Exist
-comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ Person_Exist\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment0.text=\r\n\ \ A\ Person\ allready\ exist\ Exception\ class\ for\ "noted\ exercise\ TD"\ in\ objected-oriented\ programming\ course.\r\n\ \r\n\ @author\ Raphael\ LAZZARI-ARMOUR\r\n\ @version\ 11/05/2021\r\n
 comment1.params=message
 comment1.target=Person_Exist(java.lang.String)
 numComments=2
