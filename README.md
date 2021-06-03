@@ -12,10 +12,10 @@
 
 - IN_404: Programmation orientée objet
 
-- IN_405: Système d'exploitation
+- IN_405: Systèmes d'exploitation
 
 - IN_406: Théorie des langages
 
-- MA_430: Probabilités et statistiques élèmentaires 
+- MA_430: Probabilités et statistiques élèmentaires
 
 - Culture générale: Musculation et renforcement musculaire
